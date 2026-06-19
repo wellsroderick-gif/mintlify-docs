@@ -1,0 +1,133 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "WR-Games Help Center",
+  "description": "Documentation, feature guides, and support for WR-Games — the board game community platform.",
+  "colors": {
+    "primary": "#2563EB",
+    "light": "#3B82F6",
+    "dark": "#1D4ED8"
+  },
+  "favicon": "/favicon.ico",
+  "icons": {
+    "library": "lucide"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "contextual": {
+    "options": ["copy", "view", "assistant"]
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "account-setup"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/groups",
+              "concepts/events",
+              "concepts/trust-and-reputation"
+            ]
+          },
+          {
+            "group": "Plans & Billing",
+            "pages": [
+              "billing/plans",
+              "billing/event-credits",
+              "billing/manage-subscription"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Features",
+        "groups": [
+          {
+            "group": "Events",
+            "pages": [
+              "features/event-types",
+              "features/creating-events",
+              "features/rsvp-and-waitlist",
+              "features/roll-call",
+              "features/on-the-table"
+            ]
+          },
+          {
+            "group": "Groups",
+            "pages": [
+              "features/managing-groups",
+              "features/roles-and-permissions",
+              "features/group-privacy",
+              "features/group-announcements"
+            ]
+          },
+          {
+            "group": "Player Tools",
+            "pages": [
+              "features/discovering-events",
+              "features/play-logging",
+              "features/bgg-sync",
+              "features/game-collection"
+            ]
+          },
+          {
+            "group": "Organizer Tools",
+            "pages": [
+              "features/predictive-attendance",
+              "features/recurring-series",
+              "features/bringing-list",
+              "features/import-meetup"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Help & FAQ",
+        "groups": [
+          {
+            "group": "Account & Profile",
+            "pages": [
+              "help/profile-settings",
+              "help/notifications",
+              "help/privacy-settings"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "help/common-issues",
+              "help/contact"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "wr-games.com",
+        "href": "https://wr-games.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Join WR-Games",
+      "href": "https://wr-games.com"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "projectType": "saas",
+  "projectName": "WR-Games",
+  "projectDescription": "WR-Games is a board game community platform that helps players find local groups and events, and gives organizers real tools to run their communities — featuring Roll Call, Trust Scores, BGG integration, and flexible privacy controls.",
+  "theme": "almond",
+  "primaryColor": "#2563EB",
+  "lightColor": null,
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "account-setup"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/groups",
+              "concepts/events",
+              "concepts/trust-and-reputation"
+            ]
+          },
+          {
+            "group": "Plans & Billing",
+            "pages": [
+              "billing/plans",
+              "billing/event-credits",
+              "billing/manage-subscription"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Features",
+        "groups": [
+          {
+            "group": "Events",
+            "pages": [
+              "features/event-types",
+              "features/creating-events",
+              "features/rsvp-and-waitlist",
+              "features/roll-call",
+              "features/on-the-table"
+            ]
+          },
+          {
+            "group": "Groups",
+            "pages": [
+              "features/managing-groups",
+              "features/roles-and-permissions",
+              "features/group-privacy",
+              "features/group-announcements"
+            ]
+          },
+          {
+            "group": "Player Tools",
+            "pages": [
+              "features/discovering-events",
+              "features/play-logging",
+              "features/bgg-sync",
+              "features/game-collection"
+            ]
+          },
+          {
+            "group": "Organizer Tools",
+            "pages": [
+              "features/predictive-attendance",
+              "features/recurring-series",
+              "features/bringing-list",
+              "features/import-meetup"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Help & FAQ",
+        "groups": [
+          {
+            "group": "Account & Profile",
+            "pages": [
+              "help/profile-settings",
+              "help/notifications",
+              "help/privacy-settings"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "help/common-issues",
+              "help/contact"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Roll Call — automatic pre-event attendance reconfirmation via in-app and SMS",
+    "Predictive Attendance — smart estimate of who will actually show up",
+    "Trust Score — member reliability rating based on real attendance history",
+    "On The Table — coordinate which games members are bringing to events",
+    "Three event types: Game Session, Open Game Night, and Custom Event",
+    "BGG (BoardGameGeek) collection sync and game search",
+    "Flexible group privacy: public, private, and hidden groups with invite links",
+    "RSVP and automatic waitlist management",
+    "Recurring event series with capacity controls",
+    "BG Stats import for play history",
+    "Real-time group chat and forum",
+    "Reputation system with kudos and achievements",
+    "Free tier available; organizer plans starting at $10/month"
+  ],
+  "publicApiSurface": [
+    "GET /events — browse public events",
+    "GET /groups — browse public groups",
+    "GET /games — browse the game catalog",
+    "GET /venues — browse venues",
+    "GET /users/:slug — public user profiles",
+    "RSVP to events (upsert_my_event_rsvp RPC)",
+    "BGG collection sync (bgg-sync Edge Function)",
+    "BG Stats import wizard (bgstats-process Edge Function)",
+    "Stripe Checkout for plan upgrades (create-checkout-session Edge Function)",
+    "Meetup import (import-meetup Edge Function)",
+    "Roll Call confirmation flow",
+    "Group invite link flow (/invite/:token)",
+    "Event invite flow (/event-invite/:token)"
+  ]
+}
