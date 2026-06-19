@@ -1,3 +1,16 @@
+/* homepage hero: diagonal WR blue gradient band (first viewport) */
+.homepage-hero-band {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  width: 100%;
+}
+
+.homepage-hero-band .homepage-hero-search:hover,
+.homepage-hero-band .homepage-hero-assistant:hover {
+  box-shadow:
+    0 10px 25px -5px rgb(29 78 216 / 0.35),
+    0 4px 6px -4px rgb(29 78 216 / 0.2);
+}
+
 /* table of contents: chevron next to the active (deepest) section */
 toc-item > a {
   position: relative;
