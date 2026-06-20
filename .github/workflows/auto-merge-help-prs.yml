@@ -1,0 +1,54 @@
+name: Auto-merge help PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+concurrency:
+  group: help-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate-and-merge:
+    if: startsWith(github.head_ref, 'mintlify-mcp/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Unpinned npx mintlify — always latest CLI on each run.
+      # Tradeoff: reproducibility vs picking up Mintlify fixes without bumping a pin.
+      # Pin to a specific version here only if CI becomes flaky across releases.
+      - name: Mintlify validate
+        run: npx mintlify validate
+
+      # Same unpinned tradeoff as validate above.
+      - name: Mintlify broken-links
+        run: npx mintlify broken-links
+
+      - name: Check frontmatter
+        run: node scripts/ci/check-frontmatter.mjs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+
+      - name: Check nav membership
+        run: node scripts/ci/check-nav-membership.mjs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+
+      - name: Squash merge
+        if: success() && vars.AUTO_MERGE_ENABLED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge ${{ github.event.pull_request.number }} --squash --delete-branch
