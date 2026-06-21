@@ -1,10 +1,14 @@
 ---
-title: "Sync Your BoardGameGeek Collection with WR-Games"
+title: "Sync Your BoardGameGeek (BGG) Collection with WR-Games"
 sidebarTitle: "BGG Sync"
-description: "Connect your BoardGameGeek account to import your game collection into WR-Games and get notified when your games appear in upcoming local events."
+description: "Connect your BGG account to import your game collection into WR-Games and get notified when your games appear in upcoming local events."
 ---
 
-If your game collection already lives on BoardGameGeek (BGG), there is no need to rebuild it from scratch on WR-Games. Connecting your BGG account pulls in your shelves automatically, organises them in your WR-Games collection, and unlocks notifications that fire whenever a game you own — or want to play — shows up in an upcoming event near you.
+If your game collection already lives on BGG, there is no need to rebuild it from scratch on WR-Games. Connecting your BGG account pulls in your collections automatically, organises them in your WR-Games collection, and unlocks notifications that fire whenever a game you want to play shows up in an upcoming event near you.
+
+<Note>
+  WR-Games only reads your BGG collection data. It never writes back to BGG or modifies your BGG profile, ratings, or collections in any way.
+</Note>
 
 ## How to Connect Your BGG Account
 
@@ -13,10 +17,14 @@ If your game collection already lives on BoardGameGeek (BGG), there is no need t
     Go to **Settings → Integrations**.
   </Step>
   <Step title="Enter Your BGG Username">
-    Type your BGG username into the **BGG Username** field. You do not need your BGG password — WR-Games only reads your public collection data.
+    Type your username into the **BGG Username** field.
   </Step>
   <Step title="Choose Which Collections to Import">
-    WR-Games shows a list of your BGG shelf categories. **Owned** and **Want to Play** are checked by default — these are the most useful shelves for finding and attending local events. Toggle any of the other six shelves on or off to match what you care about.
+    WR-Games shows a list of your BGG collection categories. **Owned** and **Want to Play** are checked by default — these are the most useful for finding and attending local events. Toggle any of the other collections on or off to match what you care about.
+
+    <Note>
+      WR-Games plans to use your collection data to power more features over time — for example, games in your **Want to Buy** or **Preordered** collections may be used to surface alerts and recommendations in the future.
+    </Note>
   </Step>
   <Step title="Start Sync">
     Click **Start sync**. WR-Games begins fetching your collection from BGG.
@@ -27,42 +35,65 @@ If your game collection already lives on BoardGameGeek (BGG), there is no need t
 </Steps>
 
 <Tip>
-  Use the **Select All** and **Clear All** buttons above the category list to configure your shelves quickly without toggling each one individually.
+  Use the **Select All** and **Clear All** buttons above the category list to configure your collections quickly without toggling each one individually.
 </Tip>
 
 <Note>
-  **Want to Play** games import into their own folder. When you open your Collection page, it defaults to showing your **Owned** games — switch to the Want to Play tab to see that shelf.
+  **Want to Play** games import into their own folder. When you open your Collection page, it defaults to showing your **Owned** games — switch to the Want to Play tab to see that collection.
 </Note>
 
 ## What Gets Synced
 
-WR-Games reads up to 8 BGG shelf categories. You choose which ones to include:
+WR-Games reads up to 7 BGG collection categories. You choose which ones to include:
 
-<Accordion title="Which BGG shelves can sync?">
-  - **Owned** — Games you have marked as owned on BGG
-  - **Want to Play** — Games on your Want to Play list
-  - **Wishlist** — Games you want to acquire
-  - **For Trade** — Games you are willing to trade away
-  - **Want to Buy** — Games you are actively looking to purchase
-  - **Preordered** — Games you have on preorder
-  - **Previously Owned** — Games you owned in the past
-  - **Favorites** — Games you have rated 8 or higher on BGG
-</Accordion>
+| Collection | What it includes |
+| :-- | :-- |
+| **Want to Play** | Games on your BGG Want to Play list |
+| **Owned** | Games you have marked as owned |
+| **Wishlist** | Games you want to acquire |
+| **For Trade** | Games you are willing to trade away |
+| **Want to Buy** | Games you are actively looking to purchase |
+| **Preordered** | Games you have on preorder |
+| **Previously Owned** | Games you owned in the past |
+
+<Note>
+  Your **Want to Play** list and your **WR-Games Favorites** are the two that trigger event notifications — save a game to either and you'll hear about local events featuring it near you.
+</Note>
 
 ## After Syncing
 
-Once the sync completes, your games appear in your **Collection** tab, organised by the shelf categories you enabled. From there you can browse by shelf, search within your collection, and view each game's detail page.
-
-WR-Games also uses your synced collection to send you event notifications. When an upcoming event near you lists a game from your Owned or Want to Play shelf, you will receive a notification so you never miss a chance to play something you care about.
+Once the sync completes, your games appear in your **Collection** tab, organised by the collection categories you enabled. From there you can browse by collection, search within your collection, and view each game's detail page.
 
 ## Re-Syncing
 
-Your BGG collection does not update automatically on a set schedule. After your first sync, the Integrations card switches to a **Save & Re-Sync** view — return here any time to add or remove shelves, or to pull in recent BGG changes like newly acquired games and updated shelf assignments.
+Your BGG collection does not update automatically on a set schedule. After your first sync, the Integrations card switches to a **Save & Re-Sync** view — return here any time to add or remove collections, or to pull in recent BGG changes like newly acquired games and updated collection assignments.
+
+<Note>
+  **Auto-sync is coming soon.** We're working on automatic BGG collection updates so you don't have to re-sync manually.
+</Note>
+
+## Resetting or Wiping Your Collection
+
+The **Danger Zone** in **Settings → Integrations** gives you two options for clearing your synced data. Neither action affects your BGG account.
+
+<Warning>
+  **Reset BGG sync** removes all BGG-synced games from your WR-Games collection and clears the last-synced time. It is recoverable — go back to Integrations and re-sync anytime to pull your games back in.
+</Warning>
+
+<Danger>
+  **Wipe collection** permanently removes your entire WR-Games collection and disconnects BGG. This cannot be undone. To start over, reconnect your BGG account and re-sync from scratch.
+</Danger>
 
 ## Adding Your Board Game Arena Username
 
 In the same **Settings → Integrations** section, you can enter your **Board Game Arena (BGA) username**. This links your BGA profile to your WR-Games identity for display purposes, letting other players find and recognise you across platforms.
 
-<Note>
-  WR-Games only reads your BGG collection data. It never writes back to BGG or modifies your BGG profile, ratings, or shelves in any way.
-</Note>
+<Columns cols={2}>
+  <Card title="How Events Work" icon="calendar" href="/concepts/events">
+    Find events near you, RSVP, and see which games are on the table.
+  </Card>
+
+  <Card title="Manage Notifications" icon="bell" href="/help/notifications">
+    Control which events and updates send you a notification.
+  </Card>
+</Columns>
