@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   validate-and-merge:
-    if: startsWith(github.head_ref, 'mintlify-mcp/')
+    if: startsWith(github.head_ref, 'mintlify-mcp/') || startsWith(github.head_ref, 'admin-mcp/')
     runs-on: ubuntu-latest
     permissions:
       contents: write
