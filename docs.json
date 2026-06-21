@@ -76,8 +76,16 @@
             "pages": [
               "features/discovering-events",
               "features/play-logging",
-              "features/bgg-sync",
               "features/game-collection"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "features/integrations",
+              "features/bgg-sync",
+              "features/bga",
+              "features/bg-stats"
             ]
           },
           {
@@ -129,5 +137,12 @@
       "label": "Join WR-Games",
       "href": "https://wr-games.com"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/features/bgg-sync#adding-your-board-game-arena-username",
+      "destination": "/features/bga",
+      "permanent": true
+    }
+  ]
 }
