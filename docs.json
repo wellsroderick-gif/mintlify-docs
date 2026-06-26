@@ -85,6 +85,7 @@
             "pages": [
               "features/integrations",
               "features/bgg-sync",
+              "features/bgg-collection",
               "features/bga",
               "features/bg-stats"
             ]

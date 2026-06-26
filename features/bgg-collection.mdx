@@ -1,0 +1,85 @@
+---
+title: "How BGG Sync and Your Collection Work"
+description: "How BGG sync shapes your WR-Games collection — what each status becomes, how folders work, and how manually added games fit in."
+sidebarTitle: "BGG & Your Collection"
+---
+
+When you sync your BGG account, WR-Games doesn't just import a flat list of games — it creates a folder for each BGG status category and organises your library around them. This article explains that folder model, which folders appear by default, and how games you add manually live alongside your synced ones.
+
+## How BGG Statuses Become Folders
+
+Each BGG status you have games in gets its own folder in WR-Games. Two of them — **Want to Play** and **Wishlist** — appear automatically once they have matching games. The other five start hidden and can be shown whenever you need them.
+
+| BGG Status | WR-Games Folder | Visible by default |
+| :-- | :-- | :-- |
+| Owned | All Games (your default library) | Always |
+| Want to Play | Want to Play | Yes, when populated |
+| Wishlist | Wishlist | Yes, when populated |
+| For Trade | For Trade | Hidden |
+| Want | Want | Hidden |
+| Want to Buy | Want to Buy | Hidden |
+| Preordered | Preordered | Hidden |
+| Previously Owned | Previously Owned | Hidden |
+
+<Note>
+  **Owned Games isn't a separate folder.** Your full library is **All Games** — every game in your collection, regardless of status. The **Owned** tab is a filtered view showing only games marked as owned from your BGG sync. They're the same games; one view just narrows the list.
+</Note>
+
+## Showing and Hiding Folders
+
+The five less-common folders stay out of your folder bar by default to keep things clean. You can bring any of them in at any time — and tuck them away again just as easily.
+
+**To show a hidden folder:**
+
+<Steps>
+  <Step title="Go to your Collection page">
+    Look for the folder pill bar near the top.
+  </Step>
+  <Step title="Click + Additional Folders">
+    A dashed pill appears whenever at least one BGG folder is hidden. Clicking it opens a list of all your hidden folders.
+  </Step>
+  <Step title="Pick the folder to show">
+    Click a folder name and it appears in your bar immediately.
+  </Step>
+</Steps>
+
+**To hide a visible folder:**
+
+Open the folder, then either tap **⋮ → Hide folder** or open **Collection Settings** (the gear icon) → **Hide folder**. A confirmation dialog appears — confirm and the folder moves back to the **\+ Additional Folders** list.
+
+<Tip>
+  Navigating here from another part of the app? The link `/collection?manage=folders` jumps straight to your folder bar and highlights it briefly.
+</Tip>
+
+## Sync Settings vs Folder Visibility
+
+These are two separate controls that are easy to mix up:
+
+- **Settings → Integrations → BGG** — controls which status categories sync and which games land in each folder
+- **Collection page → \+ Additional Folders / Hide folder** — controls which folders appear in your bar
+
+<Note>
+  Deselecting a BGG status category in Settings stops those games from syncing, and they'll be removed from that folder on your next re-sync. But the folder itself stays wherever you left it — visible or hidden — until you change it from the Collection page.
+</Note>
+
+## Manually Added Games
+
+Games you add from the WR-Games directory live in the same library and folders as your BGG-synced games. A few things work differently:
+
+- They land in **All Games** right away, but without an owned status — they won't appear in the **Owned** view until you mark them owned from the game card's folder menu.
+- There's no badge or label on the card distinguishing a manually added game from a BGG-synced one.
+- BGG re-syncs never remove manually added games — sync reconcile only touches games that originally came from BGG.
+
+## Auto-Contribute to Groups
+
+If you've linked a collection folder to a group with auto-contribute on, games in that folder — both synced and manually added — appear in the group's library automatically. If you run into a blocked-removal dialog when trying to take a game off a group, see [Why Can't I Remove a Game from My Group?](/groups/why-cant-i-remove-a-game).
+
+<Columns cols={2}>
+  <Card title="BGG Sync" icon="refresh-cw" href="/features/bgg-sync">
+    Connect your BGG account and choose which statuses to import.
+  </Card>
+
+  <Card title="Game Collection" icon="library" href="/features/game-collection">
+    Browse your collection, Favorites, and event notifications.
+  </Card>
+</Columns>
