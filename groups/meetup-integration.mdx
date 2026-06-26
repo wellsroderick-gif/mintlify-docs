@@ -13,12 +13,16 @@ If your group runs on Meetup, the WR-Games Meetup integration keeps your events 
     Go to your group, tap **Manage**, then select the **Integrations** tab.
   </Step>
   <Step title="Enter your Meetup group URL">
-    Paste your Meetup group’s URL (e.g. `meetup.com/your-group-name`). WR-Games validates the slug and begins the initial sync.
+    Paste your Meetup group's URL (e.g. `meetup.com/your-group-name`). WR-Games validates the slug and begins the initial sync.
   </Step>
   <Step title="Choose your RSVP mode">
     Pick **Link-out** or **Side-by-side** (see below). You can change this later.
   </Step>
 </Steps>
+
+<Note>
+  **Private Meetup groups:** During the link flow you'll have the option to provide a signed RSVP feed URL. This is what populates the "Attending via Meetup" list on your mirrors. Skipping it means Meetup attendees won't appear on WR-Games — you can reconnect the integration later to add the feed.
+</Note>
 
 ## RSVP Modes
 
@@ -27,19 +31,19 @@ The mode you choose determines where RSVPs live and what attendees see.
 |  | Link-out | Side-by-side |
 | :-- | :-- | :-- |
 | Where RSVPs live | Meetup only | WR-Games \+ Meetup independently |
-| CTA on future/published events | “RSVP on Meetup” | Native WR-Games RSVP |
-| CTA on past/cancelled events | “View on Meetup” | “View on Meetup” |
-| Attendee surface on event page | “Attending via Meetup” list only | Native list \+ “Attending via Meetup” list |
+| CTA on future/published events | "RSVP on Meetup" | Native WR-Games RSVP |
+| CTA on past/cancelled events | "View on Meetup" | "View on Meetup" |
+| Attendee surface on event page | "Attending via Meetup" list only | Native list \+ "Attending via Meetup" list |
 | The two lists reconcile? | N/A | No |
 
 <Note>
-  **“Attending via Meetup” appears in both modes.** In link-out, it is the only attendee surface — the native WR-Games attendees panel is hidden. In side-by-side, it shows read-only alongside the native list. Either way, the two lists never merge.
+  **"Attending via Meetup" appears in both modes.** In link-out, it is the only attendee surface — the native WR-Games attendees panel is hidden. In side-by-side, it shows read-only alongside the native list. Either way, the two lists never merge.
 </Note>
 
 **Which mode to choose:**
 
-- **Link-out** if Meetup is your authoritative RSVP source and you don’t want headcount split across two platforms.
-- **Side-by-side** if you want to capture WR-Games-native RSVPs from people who aren’t on Meetup, while still showing Meetup attendance alongside.
+- **Link-out** if Meetup is your authoritative RSVP source and you don't want headcount split across two platforms.
+- **Side-by-side** if you want to capture WR-Games-native RSVPs from people who aren't on Meetup, while still showing Meetup attendance alongside.
 
 ## Sync Cadence
 
@@ -47,10 +51,10 @@ Mirrored events update automatically about every **15 minutes** — cover images
 
 ## Refresh from Meetup
 
-The **Refresh from Meetup** button on the Integrations card re-polls the Meetup feed immediately and re-enriches mirrors from the Meetup event page. Use it when you’ve updated something on Meetup and don’t want to wait for the next automatic sync.
+The **Refresh from Meetup** button on the Integrations card re-polls the Meetup feed immediately and re-enriches mirrors from the Meetup event page. Use it when you've updated something on Meetup and don't want to wait for the next automatic sync.
 
 - **Cooldown:** 60 seconds between refreshes.
-- **Cover image:** Overwrites a Meetup-sourced cover with whatever is current on Meetup. If you’ve uploaded your own cover through WR-Games, it is never overwritten.
+- **Cover image:** Overwrites a Meetup-sourced cover with whatever is current on Meetup. If you've uploaded your own cover through WR-Games, it is never overwritten.
 - **Venue, map, and cancel status** always refresh regardless of how they were last set.
 
 ## Sync Health
@@ -68,28 +72,34 @@ Other error states may appear if the feed is temporarily unreachable. Waiting fo
 ## Unlinking
 
 <Warning>
-  Unlinking stops all future syncing. Before you confirm, WR-Games asks what to do with **upcoming** mirrored events — you can cancel them or leave them frozen as-is. Cancelling notifies native WR-Games RSVPs; Meetup attendees on the “Attending via Meetup” list are not emailed. Past mirrors are always retained.
+  Unlinking stops all future syncing. Before you confirm, WR-Games asks what to do with **upcoming** mirrored events — you can cancel them or leave them frozen as-is. Cancelling notifies native WR-Games RSVPs; Meetup attendees on the "Attending via Meetup" list are not emailed. Past mirrors are always retained.
 </Warning>
 
 Go to **Group Manage → Integrations** → **Disconnect Meetup** to unlink.
 
 ## What Members See
 
-Members don’t configure anything — here’s how mirrored events appear to them.
+Members don't configure anything — here's how mirrored events appear to them.
 
-**“via Meetup” badge** — shown on event cards and detail pages so it’s clear the event originated on Meetup.
+**"via Meetup" badge** — shown on event cards and detail pages so it's clear the event originated on Meetup.
 
 **RSVPs and CTAs** depend on mode and event status:
 
-- Future/published event in **link-out** → “RSVP on Meetup” opens Meetup directly.
+- Future/published event in **link-out** → "RSVP on Meetup" opens Meetup directly.
 - Future/published event in **side-by-side** → native WR-Games RSVP as normal.
-- Past or cancelled event in either mode → “View on Meetup.”
+- Past or cancelled event in either mode → "View on Meetup."
 
-**“Attending via Meetup” list** — shown on every mirror in both modes. It includes a last-synced timestamp and a note that guest counts may be understated (Meetup’s API doesn’t always surface full guest totals).
+**"Attending via Meetup" list** — whether this appears depends on your group type and setup:
 
-**Auto-cancel:** A mirror is cancelled automatically only when Meetup’s feed positively reports a cancellation. A failed or blocked fetch never triggers an auto-cancel.
+- **Public groups** → shows automatically on every mirror.
+- **Private groups, RSVP feed connected** → shows on every mirror.
+- **Private groups, RSVP feed skipped during setup** → no list appears. This is a setup choice, not a bug — reconnect the integration to add the feed.
 
-**Sync note:** Mirror detail pages display “Event details sync automatically from Meetup.” so members know edits happen on the Meetup side.
+When the feed is connected but no one has RSVP'd yet, the list reads "No Meetup RSVPs yet" — it populates after the first sync (about 15 minutes). When it does appear, it includes a last-synced timestamp and a note that guest counts may be understated (Meetup's API doesn't always surface full guest totals).
+
+**Auto-cancel:** A mirror is cancelled automatically only when Meetup's feed positively reports a cancellation. A failed or blocked fetch never triggers an auto-cancel.
+
+**Sync note:** Mirror detail pages display "Event details sync automatically from Meetup." so members know edits happen on the Meetup side.
 
 <Columns cols={2}>
   <Card title="All Integrations" icon="grid" href="/features/integrations">
