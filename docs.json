@@ -70,7 +70,8 @@
               "features/group-privacy",
               "features/group-announcements",
               "groups/why-cant-i-remove-a-game",
-              "groups/meetup-integration"
+              "groups/meetup-integration",
+              "groups/group-calendar-custom-entries"
             ]
           },
           {
