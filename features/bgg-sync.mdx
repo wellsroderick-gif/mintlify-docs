@@ -74,15 +74,35 @@ Your BGG collection does not update automatically on a set schedule. After your 
 
 ## Resetting or Wiping Your Collection
 
-The **Danger Zone** in **Settings → Integrations** gives you two options for clearing your synced data. Neither action affects your BGG account.
+The **Danger Zone** in **Settings → Integrations** gives you two options for clearing your synced data. Both are destructive — but with very different blast radii. Read before you act.
+
+|  | Reset BGG Sync | Wipe Collection |
+| :-- | :-- | :-- |
+| BGG-synced games | Removed | Removed |
+| Sync history & status | Cleared | Cleared |
+| Manual games | Kept | Removed |
+| Custom folders | Kept | Removed |
+| Favorites | Kept | Removed |
+| BGG username | Kept | Cleared |
+| Board Game Arena (BGA) username | Kept | Kept |
+| Auto-contribute setting | Kept on | Cleared |
+| Recovery | Re-sync anytime | Reconnect from scratch |
 
 <Warning>
-  **Reset BGG sync** removes all BGG-synced games from your WR-Games collection and clears the last-synced time. It is recoverable — go back to Integrations and re-sync anytime to pull your games back in.
+  **Reset BGG sync** clears your synced library and sync history — but nothing you've built manually is touched. Your manual games, custom folders, Favorites, BGG username, and any games you've contributed to groups by hand all stay. Auto-contribute stays on, so the next sync rebuilds your collection based on what you currently own.
+
+  Use Reset when your sync is in a bad state and you want a clean re-pull — or to clear out games you no longer own.
 </Warning>
 
 <Danger>
-  **Wipe collection** permanently removes your entire WR-Games collection and disconnects BGG. This cannot be undone. To start over, reconnect your BGG account and re-sync from scratch.
+  **Wipe collection** goes further. It removes everything Reset removes, and also clears your BGG username and disconnects the integration entirely. This cannot be undone — reconnecting and re-syncing from scratch is the only way back.
+
+  Use Wipe only if you want to completely cut ties with your current BGG link and start over from zero.
 </Danger>
+
+<Note>
+  Neither option affects your BGG account or your Board Game Arena (BGA) username. Everything stays exactly as it is on those platforms.
+</Note>
 
 <Columns cols={2}>
   <Card title="All Integrations" icon="grid" href="/features/integrations">
