@@ -69,7 +69,8 @@
               "features/roles-and-permissions",
               "features/group-privacy",
               "features/group-announcements",
-              "groups/why-cant-i-remove-a-game"
+              "groups/why-cant-i-remove-a-game",
+              "groups/meetup-integration"
             ]
           },
           {
