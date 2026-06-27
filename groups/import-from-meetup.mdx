@@ -1,0 +1,77 @@
+---
+title: "Import Your Meetup Group to WR-Games"
+description: "Create a WR-Games group by importing from Meetup — paste your group URL, review the details, and go."
+sidebarTitle: "Import from Meetup"
+---
+
+<Note>
+  Meetup group import is currently available to early access users only. If you don't see the import option, your account may not yet have access.
+</Note>
+
+The Meetup import wizard creates a new WR-Games group from your existing Meetup group — bringing your group details and event feed over automatically so you're not starting from scratch.
+
+## Before You Start
+
+- You need an active Meetup account.
+- You must be an **organizer** of the Meetup group you're importing.
+
+## Where to Find It
+
+The import wizard is available from two places:
+
+- **Create a Group page** — look for the import banner above the new-group form.
+- **Onboarding Wizard** — the group setup step includes an option to import from Meetup.
+
+## How to Import
+
+<Steps>
+  <Step title="Open the import wizard">
+    Start from either entry point above. The wizard opens as a modal.
+  </Step>
+  <Step title="Paste your Meetup group URL">
+    Enter the URL of your Meetup group (e.g. `meetup.com/your-group-name`). WR-Games fetches your group details from Meetup and pre-fills the next step.
+  </Step>
+  <Step title="Review and adjust the details">
+    Check the pre-filled information before creating the group:
+
+    - **Group name, city, and description** — pulled from Meetup; edit freely.
+    - **Cover image** — imported from your Meetup group; you can replace it after.
+    - **Event display mode** — choose **Side-by-side** (native WR-Games RSVPs alongside Meetup attendance) or **Link-out** (RSVPs stay on Meetup). See [Meetup Integration](/groups/meetup-integration) for a full breakdown.
+    - **Auto-assign me as host** — optionally have yourself set as host on newly synced events automatically.
+  </Step>
+  <Step title="Create the group">
+    Confirm and the group is created. Your Meetup events begin syncing automatically.
+  </Step>
+</Steps>
+
+## After the Import
+
+- Your new WR-Games group is live immediately.
+- Meetup events start syncing — mirrors appear within the first sync cycle (about 15 minutes).
+- **Existing Meetup members are not automatically added.** They'll need to create a WR-Games account and join your group independently. Share your group invite link to get them in.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I import more than one Meetup group?">
+    Yes — each import creates a separate WR-Games group. Run the wizard once per Meetup group, subject to your plan's group limit.
+  </Accordion>
+
+  <Accordion title="What if I'm already at my group limit?">
+    Import counts as creating a new group. If you're at your plan's limit, you'll need to upgrade or remove an existing group first.
+  </Accordion>
+
+  <Accordion title="What's the difference between import and attach?">
+    **Import** creates a brand-new WR-Games group from a Meetup group. **Attach** connects an existing WR-Games group to Meetup for ongoing sync. If your WR-Games group already exists, see [Meetup Integration](/groups/meetup-integration) to attach it instead.
+  </Accordion>
+</AccordionGroup>
+
+<Columns cols={2}>
+  <Card title="Meetup Integration" icon="link" href="/groups/meetup-integration">
+    Manage sync modes, refresh behavior, and unlinking after import.
+  </Card>
+
+  <Card title="Managing Groups" icon="settings" href="/features/managing-groups">
+    Configure your new group's settings, privacy, and roles.
+  </Card>
+</Columns>
