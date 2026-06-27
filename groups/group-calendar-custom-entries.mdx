@@ -1,0 +1,83 @@
+---
+title: "Group Calendar Custom Entries"
+description: "Add birthdays, reminders, and custom occasions to your group calendar — they persist, can repeat yearly, and sync with your calendar app."
+sidebarTitle: "Custom Calendar Entries"
+---
+
+Group calendar custom entries let members add non-event occasions to the shared calendar — birthdays, reminders, social plans, or anything else worth noting. They persist between sessions (no longer disappear on refresh), show up in the group's webcal feed, and can repeat every year for annual occasions.
+
+## Adding an Entry
+
+<Steps>
+  <Step title="Open your group's Calendar tab">
+    Navigate to your group and select the **Calendar** tab. The calendar must be enabled for your group.
+  </Step>
+  <Step title="Click + Add to Calendar">
+    The **\+ Add to Calendar** button sits in the top-right corner above the month grid. It's only visible to members who have the **Add calendar entries** permission.
+  </Step>
+  <Step title="Fill in the details">
+    The **Add Calendar Entry** dialog has four fields:
+
+    - **Title** — what the entry is (e.g. "Ben's Birthday")
+    - **Date** — when it falls
+    - **Type** — Birthday 🎂, Reminder 🔔, Social 👥, or Custom 🏷️
+    - **Repeats yearly** — tick this for annual occasions
+
+    Click **Add Entry** to save. Title and date are both required.
+  </Step>
+</Steps>
+
+## Entry Types
+
+| Type | When to use |
+| :-- | :-- |
+| 🎂 Birthday | A member's or contact's birthday |
+| 🔔 Reminder | A date worth flagging — deadline, follow-up, anything time-sensitive |
+| 👥 Social | An informal hangout or social plan outside of scheduled events |
+| 🏷️ Custom | Anything that doesn't fit the above |
+
+The default type when opening the dialog is **Custom**.
+
+## Annual Recurrence
+
+Any entry type can repeat yearly — tick **Repeats yearly** in the form and the entry reappears on the same date every year. This works for all four types, not just birthdays.
+
+<Note>
+  Selecting **Birthday** automatically pre-checks **Repeats yearly**. You can still uncheck it if needed.
+</Note>
+
+## Removing Entries
+
+Custom entries appear as chips in the month grid. If you're allowed to remove one, an **✕** button appears on the right side of the chip. Clicking it removes the entry immediately with no confirmation dialog — a "Entry removed" toast confirms it.
+
+|  | Can remove |
+| :-- | :-- |
+| Organizer / co-organizer | Any custom entry |
+| Other members | Only entries they added themselves |
+
+Hovering a chip shows a tooltip with the title, whether it repeats yearly, and who added it.
+
+## Who Can Add Entries
+
+Any signed-in group member with the **Add calendar entries** permission can add custom entries. By default this includes members, moderators, event planners, co-organizers, and organizers.
+
+<Note>
+  On **Standard and Pro plans**, you can restrict this permission to specific roles via **Group Manage → Roles**. Members can always remove entries they added, as long as they still hold the permission.
+</Note>
+
+## Calendar Export and Subscribe
+
+Custom entries appear in the group's exported calendar alongside regular events. The export and subscribe options are in the **calendar footer**:
+
+- **.ics download** — exports the calendar as a file you can import into any calendar app.
+- **Webcal subscribe** — generates a secure link for subscribing your calendar app to the group's live feed. The link is gated; the token is no longer exposed in group settings.
+
+<Columns cols={2}>
+  <Card title="Group Roles & Permissions" icon="shield" href="/features/roles-and-permissions">
+    Customize which roles can add calendar entries and more.
+  </Card>
+
+  <Card title="Managing Groups" icon="settings" href="/features/managing-groups">
+    Enable the group calendar and configure other group settings.
+  </Card>
+</Columns>
