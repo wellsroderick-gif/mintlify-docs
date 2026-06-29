@@ -43,7 +43,7 @@ The mode you choose determines where RSVPs live and what attendees see.
 
 ## Sync Cadence
 
-Mirrored events update automatically about every **15 minutes** — an event's title, time, description, and capacity stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
+Mirrored events update automatically about every **15 minutes** — an event's title, time, and description stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
 
 ## Refresh from Meetup
 
@@ -52,6 +52,22 @@ The **Refresh from Meetup** button on the Integrations card re-polls the Meetup 
 - **Cooldown:** 60 seconds between refreshes.
 - **Cover image:** Overwrites a Meetup-sourced cover with whatever is current on Meetup. If you’ve uploaded your own cover through WR-Games, it is never overwritten.
 - **Venue, map, and cancel status** always refresh regardless of how they were last set.
+
+## What You Can Edit on a Mirror
+
+Meetup controls certain fields on mirrored events — changes you make on WR-Games to those fields get overwritten on the next sync. Other fields are yours to set directly.
+
+| Field | Who controls it |
+| :-- | :-- |
+| Title | **Meetup** — syncs automatically every cycle |
+| Date and time | **Meetup** — syncs automatically every cycle |
+| Description | **Meetup** — syncs automatically every cycle |
+| Location / venue | **Meetup** — re-enriched on every Refresh from Meetup |
+| Cover image | **You** — an upload through WR-Games is never overwritten by sync |
+| Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
+| RSVP settings | **You** (side-by-side mode only; in link-out, RSVP lives on Meetup) |
+| Hosts | **You** |
+| Games / On The Table | **You** |
 
 ## Sync Health
 
