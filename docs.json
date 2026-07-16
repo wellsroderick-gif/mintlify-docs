@@ -59,7 +59,8 @@
               "features/creating-events",
               "features/rsvp-and-waitlist",
               "features/roll-call",
-              "features/on-the-table"
+              "features/on-the-table",
+              "features/transit"
             ]
           },
           {

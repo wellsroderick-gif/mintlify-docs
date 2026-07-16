@@ -1,0 +1,106 @@
+---
+title: "Transit Options on Event Pages"
+sidebarTitle: "Transit Options"
+description: "How WR-Games shows DC-area attendees nearest transit, walking time, live train and bus arrivals, and directions on in-person event pages."
+---
+
+WR-Games shows transit info on in-person event pages in the DC area — a **Getting there** card that helps attendees reach the venue by train or bus, with live arrival times on the day of the event. It's public, so even people who aren't logged in can see how to get there.
+
+<Info>
+  Transit details currently cover the **Washington, DC metro area (WMATA)** only. Events elsewhere won't show a transit card yet — though every in-person event still gets a **Directions** link (see below).
+</Info>
+
+## When you'll see the card
+
+The **Getting there** card appears on in-person events with a supported WMATA stop within walking range — a nearby Metro station or bus stop. It covers **both rail and bus**, so an event near a bus stop still gets a card even when there's no train station close by. If there's no supported stop in walking range, the card simply doesn't appear.
+
+## What the card shows
+
+Whatever the day, the card always shows the essentials for reaching the venue:
+
+- **Nearest station or stop**, with walking time — e.g. _Nearest station · 6 min walk_, or _Nearest bus stop · 4 min walk_.
+- **Lines or routes served.** For rail, each line is a colored badge with its Metro code:
+
+| Badge | Line |
+| :-- | :-- |
+| RD | Red |
+| OR | Orange |
+| SV | Silver |
+| BL | Blue |
+| YL | Yellow |
+| GR | Green |
+
+For bus, each route shows as a pill with its route number (`70`, `S2`, and so on).
+
+- **A Directions button** that opens the route in Google Maps, in transit mode.
+
+<Note>
+  There are actually **two** Directions links on an event page. The one _inside_ the Getting there card shows only when the transit card appears. A second **Directions** link sits in the event's location block — just under the address — and appears on **every** in-person event with a location, even when there's no transit card.
+</Note>
+
+## On the day of your event
+
+On the event's day, the card becomes a live board with a **Live** indicator:
+
+- **Live arrivals** — real-time WMATA predictions. For a rail station this is a **Next trains** board; for a bus stop, **Next buses**. Times count down in minutes, or show `ARR` / `BRD` when a train is arriving or boarding (rail also notes car count).
+- **First & last** — the first and last departures of the day, so you can tell at a glance whether you'll still be able to get home after the event. (Rail only in v1 — buses don't show a first/last board yet.)
+
+Outside the event day, or before the live window opens, the card falls back to the static version above.
+
+<Info>
+  When WMATA reports a disruption affecting your line on the day of the event, a **service alert** banner appears in the main column of the event page (alongside any weather alert). Tap it to read the full details.
+</Info>
+
+## Switching between rail and bus
+
+When an event has **both** a Metro station and a bus stop within range, a **Rail | Bus** toggle lets you flip between them — it opens on **Rail** by default. If only one is nearby, the card just shows that one, with no toggle.
+
+## Hiding the transit card
+
+Prefer not to see transit on event pages? You can turn it off for your account:
+
+<Steps>
+  <Step title="Open your settings">
+    Go to **Settings** and choose the **Privacy & Visibility** tab.
+  </Step>
+  <Step title="Find Event Page Modules">
+    Scroll to the **Event Page Modules** section.
+  </Step>
+  <Step title="Turn off transit">
+    Switch off **Show transit on event pages**. The card — and its live lookups — stop appearing on event pages for you.
+  </Step>
+</Steps>
+
+<Note>
+  This is a personal, site-wide setting — it changes only what _you_ see, on every event page. It doesn't affect the standalone Directions link in the location block.
+</Note>
+
+## Frequently asked
+
+<AccordionGroup>
+  <Accordion title="Why don't I see a Getting there card on this event?">
+    A few reasons: the event isn't in-person, there's no supported WMATA stop within walking range, it's in the past or cancelled, its location is too imprecise to place, or you've turned transit off in your settings. Events outside the DC metro area don't show a card yet either.
+  </Accordion>
+
+  <Accordion title="Do I need an account to see it?">
+    No — the Getting there card is public, so anyone viewing an in-person event page can use it, logged in or not.
+  </Accordion>
+
+  <Accordion title="Which cities are supported?">
+    Just the Washington, DC area (WMATA) for now. Support for other metros may come later.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="On The Table" icon="dice" href="/features/on-the-table">
+    See which games are coming to an event and form tables before you arrive.
+  </Card>
+
+  <Card title="RSVP & Waitlist" icon="ticket" href="/features/rsvp-and-waitlist">
+    How RSVPs, capacity, and automatic waitlists work.
+  </Card>
+</Columns>
+
+Still need help? [Contact us](https://help.wr-games.com/contact) and we'll point you in the right direction.
