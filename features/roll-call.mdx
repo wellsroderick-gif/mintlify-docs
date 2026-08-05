@@ -22,7 +22,7 @@ WR-Games offers two Roll Call modes depending on your plan:
 Standard Roll Call covers members who have the app open or push notifications enabled. Advanced Roll Call adds an SMS fallback so the prompt reaches attendees even if they haven't opened the app recently — significantly improving your confirmation rate.
 
 <Note>
-  Roll Call goes out automatically 4 hours before each event. You cannot trigger it early or send it manually — the timing is fixed to keep the reconfirmation as relevant as possible.
+  Roll Call goes out automatically 4 hours before each event. You cannot trigger it early or send it manually — the timing is fixed to keep the reconfirmation as relevant as possible. The one exception is a big schedule change — moving an event by 24 hours or more re-opens Roll Call automatically.
 </Note>
 
 ## For Attendees: How to Confirm Your Attendance
@@ -60,6 +60,20 @@ Once Roll Call goes out, your event dashboard shows a live breakdown of response
 </Columns>
 
 Use the confirmed list to finalise table assignments in [On The Table](/features/on-the-table), arrange seating, and decide how many copies of a game you'll need in play at once. The list updates live, so you can check it right up until doors open.
+
+## When an event is rescheduled
+
+If a host moves an event by **24 hours or more** — earlier or later — Roll Call starts over. WR-Games treats the new date as a brand-new event for reconfirmation purposes:
+
+- **Every previous confirmation is cleared.** Anyone who already tapped Confirm loses that checkmark and gets asked again. This is deliberate — a confirmation for last Tuesday tells a host nothing about next Saturday.
+- **Hosts listed on the event are auto-confirmed** on the new date, so you don't need to reconfirm your own event.
+- **A fresh Roll Call goes out** 4 hours before the new start time, exactly as it would for any other event.
+
+Moves of **less than 24 hours** change nothing. Nudging a start time from 7:00 to 7:30 leaves every existing confirmation intact and sends no new prompt.
+
+<Note>
+  If a reschedule lands the event inside the 4-hour Roll Call window — a move that puts the new start only a couple of hours out — the fresh prompt still goes out, but on the next scheduled pass rather than the instant you save. Give it a few minutes before assuming it didn't fire.
+</Note>
 
 ## Roll Call and Your Trust Score
 

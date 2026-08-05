@@ -30,9 +30,11 @@ At any point, your RSVP is in one of three states:
 
 ## Capacity and the waitlist
 
-Hosts can set a maximum attendee count when creating or editing an event. Once the event reaches that limit, every new RSVP goes to the **waitlist** automatically — you don't need to do anything differently. You'll see a **Waitlisted** status on the event page confirming your position in the queue.
+Hosts can set a maximum attendee count when creating or editing an event. Once the event reaches that limit, every new RSVP goes to the **waitlist** automatically — you don't need to do anything differently. You'll see a **Waitlisted** status on the event page confirming your position in the queue. You'll also get a confirmation in your notification bell and by email, so there's a record of where you stand even if you close the page.
 
-When an attendee changes their RSVP to **Not Going**, the next person on the waitlist is promoted to **Going** instantly and receives a notification. Promotion is automatic and happens in queue order — first in, first promoted.
+When an attendee changes their RSVP to **Not Going**, WR-Games scans the whole waitlist in order and promotes everyone who fits in the freed space. Promotion is automatic and runs first in, first promoted — but a party larger than the opening is **skipped rather than split**, and the scan moves on to the next person who does fit. The skipped party keeps its place in the queue for the next opening.
+
+Everyone promoted is notified immediately.
 
 <Accordion title="What if there's no capacity set?">
   If a host hasn't set a capacity limit, the event has no upper bound on attendees and no waitlist is created. Anyone who RSVPs goes straight to **Going**.
@@ -40,7 +42,7 @@ When an attendee changes their RSVP to **Not Going**, the next person on the wai
 
 ## Changing your RSVP
 
-You can switch from **Going** to **Not Going** at any time before the event starts, as long as no RSVP deadline has been set (or the deadline hasn't passed yet). To change your RSVP, open the event page and select your new status. If you cancel a **Going** RSVP on an event with a waitlist, your spot is released immediately and the next person in the queue is promoted.
+You can switch from **Going** to **Not Going** at any time before the event starts, as long as no RSVP deadline has been set (or the deadline hasn't passed yet). To change your RSVP, open the event page and select your new status. If you cancel a **Going** RSVP on an event with a waitlist, your spot is released immediately and the queue is scanned for whoever fits.
 
 ## Roll Call
 
