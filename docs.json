@@ -99,8 +99,7 @@
             "pages": [
               "features/predictive-attendance",
               "features/recurring-series",
-              "features/bringing-list",
-              "features/import-meetup"
+              "features/bringing-list"
             ]
           }
         ]
@@ -154,6 +153,11 @@
     {
       "source": "/features/bgg-sync#adding-your-board-game-arena-username",
       "destination": "/features/bga",
+      "permanent": true
+    },
+    {
+      "source": "/features/import-meetup",
+      "destination": "/groups/import-from-meetup",
       "permanent": true
     }
   ]
