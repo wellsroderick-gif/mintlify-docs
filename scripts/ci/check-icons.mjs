@@ -30,6 +30,14 @@ const dataDir = path.join(repoRoot, "scripts/ci/data");
 const isRegen = process.argv.includes("--regen");
 
 /**
+ * docs.json nav icon extractor — line scan, deliberately NOT the recursive walk used by
+ * check-nav-membership.mjs's collectPageSlugs.
+ *
+ * Reason: JSON.parse discards line numbers, and this check must report path:line.
+ * Cost: an "icon" key whose value sits on a different line than the key is not matched.
+ * Acceptable because docs.json is machine-formatted single-line-per-key.
+ * Do not "fix" this into a recursive walk without solving line attribution first.
+ *
  * @returns {Array<{ path: string, line: number, value: string }>}
  */
 function extractNavIconsFromDocsJson() {
@@ -112,7 +120,8 @@ function extractFromMdx(filePath) {
     const line = lines[i];
     const lineNo = i + 1;
 
-    if (!frontmatterEnded && line.trim() === "---") {
+    // Open frontmatter only on line 1 — body `---` thematic breaks must not start a phantom block.
+    if (!frontmatterEnded && line.trim() === "---" && (inFrontmatter || i === 0)) {
       if (!inFrontmatter) {
         inFrontmatter = true;
         continue;
