@@ -1,211 +1,323 @@
 ---
 title: WR-Games Help Center
-description: Find answers about groups, events, Roll Call, Trust Scores, billing, and more—all in one place.
+description: Find answers about groups, events, Roll Call, Trust Scores, billing, and more, all in one place.
 mode: custom
 ---
 
-<div className="mx-auto flex w-full max-w-5xl flex-col gap-14 px-4 py-12 lg:py-16">
-  <div className="flex flex-col items-center gap-12">
-    <div className="flex w-full max-w-lg flex-col gap-1">
-      <h1 className="text-center text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
-        How can we help?
-      </h1>
-      <p className="text-center text-balance text-base text-gray-600 dark:text-gray-400 mt-2">
-        Search the WR-Games Help Center for setup guides, feature how-tos, billing info, and troubleshooting—all in one place.
-      </p>
-    </div>
-
-    <div className="flex w-full max-w-lg flex-col gap-4">
-      <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-stretch">
-        <div className="kb-search-entry min-w-0 w-full flex-1">
-          <button
-            type="button"
-            data-search-trigger
-            className="pointer-events-auto flex h-11 w-full cursor-pointer items-center justify-between gap-2 truncate rounded-full bg-gray-50 pl-4 pr-3 text-left text-sm font-normal leading-6 text-gray-500 shadow-none hover:text-gray-500 ring-1 ring-gray-100 hover:ring-gray-200 dark:bg-white/[0.04] dark:text-white/50 dark:hover:text-white/50 dark:ring-1 dark:ring-white/[0.08] dark:hover:ring-white/15"
-          >
-            <div className="flex min-w-0 flex-1 items-center gap-2">
-              <Icon
-                icon="search"
-                size={14}
-                className="shrink-0 text-gray-700 dark:text-gray-400"
-              />
-              <div className="min-w-0 truncate font-normal text-gray-500 hover:text-gray-500 dark:text-white/50 dark:hover:text-white/50">
-                Search for articles
-              </div>
-            </div>
-            <span className="flex-none text-xs font-semibold text-gray-500 hover:text-gray-500 dark:text-white/50 dark:hover:text-white/50">
-              ⌘K
-            </span>
-          </button>
+<div className="wr-home">
+  <div className="wr-band">
+    <div className="wr-bandinner">
+      <div>
+        <p className="wr-kicker">WR-Games help center</p>
+        <h1>How can we help?</h1>
+        <p className="wr-lede">Help here is arranged the way an event actually happens. Pick the phase you're in, or search everything: setup guides, feature how-tos, billing, and troubleshooting.</p>
+        <div className="wr-roleswitch" role="group" aria-label="Who you are tonight">
+          <button type="button" data-role-set="host" aria-pressed="true">I'm Hosting</button>
+          <button type="button" data-role-set="guest" aria-pressed="false">I'm Attending</button>
         </div>
 
-        <button
-          type="button"
-          id="custom-homepage-assistant-entry"
-          data-assistant-trigger
-          aria-label="Ask AI"
-          className="group/ai flex pointer-events-auto h-11 w-full shrink-0 cursor-pointer flex-row items-center justify-center gap-1.5 rounded-full bg-gray-50 px-4 text-sm font-normal leading-6 text-gray-500 shadow-none ring-1 ring-gray-100 hover:text-gray-600 hover:ring-gray-200 dark:bg-white/[0.04] dark:text-white/50 dark:ring-1 dark:ring-white/[0.08] dark:hover:text-white/70 dark:hover:ring-white/15 sm:w-auto"
-        >
-          <Icon
-            icon="sparkles"
-            size={16}
-            className="shrink-0 text-gray-700 group-hover/ai:text-gray-800 dark:text-gray-400 dark:group-hover/ai:text-gray-200"
-          />
-          <span className="whitespace-nowrap text-gray-500 dark:text-white/50">Ask AI</span>
-        </button>
+        <div className="wr-bandtools">
+          <button type="button" data-search-trigger><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Search for articles</span><kbd>⌘K</kbd></button>
+          <div id="custom-homepage-assistant-entry">
+            <button type="button" data-assistant-trigger><span>Ask AI</span></button>
+          </div>
+        </div>
+        <div className="wr-popbar">
+          <span className="wr-plabel">Popular searches</span>
+          <button type="button" data-popular-search data-term="roll call">roll call</button>
+          <button type="button" data-popular-search data-term="waitlist">waitlist</button>
+          <button type="button" data-popular-search data-term="bgg sync">bgg sync</button>
+          <button type="button" data-popular-search data-term="refund">refund</button>
+        </div>
       </div>
-
-      <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-gray-500 dark:text-gray-400">
-        <span>Popular searches</span>
-        <div className="flex flex-wrap justify-center gap-1">
-          {['roll call', 'billing', 'groups'].map((term) => (
-            <button
-              key={term}
-              type="button"
-              data-popular-search
-              data-term={term}
-              className="rounded-md bg-gray-100 px-1.5 py-1 font-mono text-xs font-bold uppercase tracking-tight text-gray-600 transition hover:bg-gray-200 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-white/15"
-            >
-              {term.toUpperCase()}
-            </button>
-          ))}
-        </div>
+      <div className="wr-bandshot" style={{ margin: '0' }}>
+        <img src="/images/band-01-event-night-roll-call-960x640.jpg" alt="A phone lying face up on a wooden table during a board game night, with players seated around the board behind it." style={{ display: 'block', width: '100%', aspectRatio: '3 / 2', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,.18)' }} />
+        <div className="wr-cap">See you at the table</div>
       </div>
     </div>
   </div>
 
-  <Card horizontal icon="sparkles" iconType="light" title="What's New" href="/changelog" cta="See the latest" arrow>
-    The latest features, improvements, and fixes on WR-Games.
-  </Card>
+  <section className="wr-whatsnew" aria-label="What's New">
+    <div className="wr-wnhead">
+      <p className="wr-wnlabel">What's New <span className="wr-wnpill">August 2026</span></p>
+      <a className="wr-wnlink" href="/changelog">See the full changelog <span aria-hidden="true">→</span></a>
+    </div>
+    <h2 className="wr-wntitle">Rescheduling an event now re-notifies attendees</h2>
+    <p className="wr-wnbody">Move an event and attendees hear about it. A change of 24 hours or more re-opens Roll Call for the new date, so your confirmed list reflects the time people actually committed to.</p>
+  </section>
 
-  <div className="flex flex-col gap-4">
-    <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">Featured guides</h3>
-    <Columns cols={3}>
-      <Card
-        horizontal
-        icon="rocket"
-        iconType="light"
-        title="Getting Started"
-        href="/introduction"
-      >
-        Create your account, join groups, and attend your first event
-      </Card>
-      <Card horizontal icon="book-open" iconType="light" title="Feature Guides" href="/features/event-types">
-        Events, groups, Roll Call, Trust Score, and player tools
-      </Card>
-      <Card horizontal icon="life-buoy" iconType="light" title="Help & FAQ" href="/help/common-issues">
-        Troubleshooting, account settings, and contact support
-      </Card>
-    </Columns>
+  <section className="wr-guides" aria-label="Featured guides">
+    <p className="wr-eyebrow">Featured guides</p>
+    <div className="wr-guidegrid">
+      <a className="wr-guide" href="/quickstart">
+        <span className="wr-gnum">01</span>
+        <span className="wr-gtitle">Getting Started</span>
+        <span className="wr-gdesc">Create your account, join groups, and attend your first event</span>
+      </a>
+      <a className="wr-guide" href="/concepts/events">
+        <span className="wr-gnum">02</span>
+        <span className="wr-gtitle">Feature Guides</span>
+        <span className="wr-gdesc">Events, groups, Roll Call, Trust Score, and player tools</span>
+      </a>
+      <a className="wr-guide" href="/help/common-issues">
+        <span className="wr-gnum">03</span>
+        <span className="wr-gtitle">Help & FAQ</span>
+        <span className="wr-gdesc">Troubleshooting, account settings, and contact support</span>
+      </a>
+    </div>
+  </section>
+
+  <div className="wr-rail" role="tablist" aria-label="Event lifecycle">
+    <button type="button" className="wr-phase" id="wr-tab-1" role="tab" aria-selected="true" aria-controls="wr-panel-1"><span className="wr-pn">Phase 01</span><span className="wr-dot"></span><span className="wr-pt">Plan</span><span className="wr-pd">You are deciding what to run and when</span></button>
+    <button type="button" className="wr-phase" id="wr-tab-2" role="tab" aria-selected="false" aria-controls="wr-panel-2"><span className="wr-pn">Phase 02</span><span className="wr-dot"></span><span className="wr-pt">Invite</span><span className="wr-pd">The event exists and people need to find it</span></button>
+    <button type="button" className="wr-phase" id="wr-tab-3" role="tab" aria-selected="false" aria-controls="wr-panel-3"><span className="wr-pn">Phase 03</span><span className="wr-dot"></span><span className="wr-pt">Confirm</span><span className="wr-pd">Seats are filling and you need a real headcount</span></button>
+    <button type="button" className="wr-phase" id="wr-tab-4" role="tab" aria-selected="false" aria-controls="wr-panel-4"><span className="wr-pn">Phase 04</span><span className="wr-dot"></span><span className="wr-pt">Play</span><span className="wr-pd">It is tonight and you are in the room</span></button>
+    <button type="button" className="wr-phase" id="wr-tab-5" role="tab" aria-selected="false" aria-controls="wr-panel-5"><span className="wr-pn">Phase 05</span><span className="wr-dot"></span><span className="wr-pt">Wrap</span><span className="wr-pd">It is over and it should count for something</span></button>
   </div>
 
-  ---
+  <div data-role-view="host">
 
-  <div className="flex flex-col gap-4">
-    <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">All guides</h3>
-    <Columns cols={3}>
-    <Card
-      title="Events"
-      icon="calendar"
-      iconType="light"
-      href="/features/event-types"
-      cta="5 articles"
-    >
-      Event types, creating events, RSVP, Roll Call, and On The Table
-    </Card>
-    <Card
-      title="Groups"
-      icon="users"
-      iconType="light"
-      href="/features/managing-groups"
-      cta="4 articles"
-    >
-      Manage members, roles, permissions, privacy, and announcements
-    </Card>
-    <Card
-      title="Plans & Billing"
-      icon="credit-card"
-      iconType="light"
-      href="/billing/plans"
-      cta="3 articles"
-    >
-      Compare plans, event credits, and manage your subscription
-    </Card>
-    <Card
-      title="Player Tools"
-      icon="dice-5"
-      iconType="light"
-      href="/features/discovering-events"
-      cta="4 articles"
-    >
-      Discover events, log plays, sync your BGG collection
-    </Card>
-    <Card
-      title="Organizer Tools"
-      icon="settings"
-      iconType="light"
-      href="/features/predictive-attendance"
-      cta="4 articles"
-    >
-      Predictive attendance, recurring series, bringing lists, and Meetup import
-    </Card>
-    <Card
-      title="Account & Privacy"
-      icon="shield"
-      iconType="light"
-      href="/help/profile-settings"
-      cta="3 articles"
-    >
-      Profile, notifications, and privacy settings
-    </Card>
-    </Columns>
+  <section className="wr-panel" id="wr-panel-1" role="tabpanel" aria-labelledby="wr-tab-1">
+    <div>
+      <h2>Planning an event</h2>
+      <p className="wr-pintro">Most of the decisions that determine whether anyone turns up are made before the event is published: cadence, seat count, and how findable it is.</p>
+      <div className="wr-links">
+        <a href="/concepts/events"><span>How events work end to end</span></a>
+        <a href="/features/creating-events"><span>Creating an event</span></a>
+        <a href="/features/event-types"><span>Choosing an event type</span></a>
+        <a href="/features/recurring-series"><span>Setting up a recurring series</span></a>
+        <a href="/features/transit"><span>Venue, transit and meeting points</span></a>
+        <a href="/features/predictive-attendance"><span>Reading the attendance forecast</span></a>
+        <a href="/groups/group-calendar-custom-entries"><span>Custom calendar entries</span></a>
+      </div>
+      <div className="wr-breaks">
+        <p>What goes wrong here</p>
+        <a href="/features/recurring-series">Choosing "this and all future" overwrites every date after it</a>
+        <a href="/billing/event-credits">A Game Session never costs a credit, but Custom Events and Open Game Nights do</a>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-02-create-event-form-1200x900.jpg" alt="Three scenes side by side: a board game laid out on a table, a crowded hall of people playing at long tables, and a living room gathering with drinks." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Three event types: Game Session, Open Game Night, and Custom Event.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-panel-2" role="tabpanel" aria-labelledby="wr-tab-2" hidden>
+    <div>
+      <h2>Getting people to see it</h2>
+      <p className="wr-pintro">An event that nobody finds is an event that does not happen. Discovery, announcements and cross-posting all live here.</p>
+      <div className="wr-links">
+        <a href="/features/discovering-events"><span>How discovery ranks events</span></a>
+        <a href="/features/group-announcements"><span>Announcements that do not get muted</span></a>
+        <a href="/features/group-privacy"><span>Privacy, and who can see the event</span></a>
+        <a href="/groups/meetup-integration"><span>Cross-posting to Meetup</span></a>
+        <a href="/features/managing-groups"><span>Growing a group</span></a>
+        <a href="/concepts/groups"><span>How group membership works</span></a>
+        <a href="/groups/import-from-meetup"><span>Bringing a Meetup group across</span></a>
+      </div>
+      <div className="wr-breaks">
+        <p>What goes wrong here</p>
+        <a href="/features/group-privacy">Events in private and hidden groups stay invisible to non-members, even with the direct link</a>
+        <a href="/groups/meetup-integration">Title, time, description and venue belong to Meetup, so your edits here get overwritten on the next sync</a>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-03-discovery-feed-nearby-1200x900.jpg" alt="A row of upcoming event cards showing dates, titles, hosts and attendee counts, floating over a blurred game shop interior." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Events near you, sorted by what's coming up next.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-panel-3" role="tabpanel" aria-labelledby="wr-tab-3" hidden>
+    <div>
+      <h2>Getting a real headcount</h2>
+      <p className="wr-pintro">RSVPs are optimistic. Roll Call exists because of the gap between who said yes and who arrives.</p>
+      <div className="wr-links">
+        <a href="/features/rsvp-and-waitlist"><span>RSVP, waitlist and promotion</span></a>
+        <a href="/features/roll-call"><span>How Roll Call works</span></a>
+        <a href="/features/predictive-attendance"><span>Forecast versus confirmed count</span></a>
+        <a href="/features/bringing-list"><span>Bringing lists</span></a>
+        <a href="/help/notifications"><span>Which reminders go out, and when</span></a>
+        <a href="/concepts/trust-and-reputation"><span>No-shows and reputation</span></a>
+      </div>
+      <div className="wr-breaks">
+        <p>What goes wrong here</p>
+        <a href="/features/roll-call">Moving the event 24 hours or more clears every confirmation and starts Roll Call over</a>
+        <a href="/features/rsvp-and-waitlist">A party larger than the opening is skipped rather than split, and keeps its place</a>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-04-roll-call-confirm-sheet-1200x900.jpg" alt="Two hands holding a phone in a dim room, with a notification card reading Still coming tonight floating above the screen." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">The Roll Call prompt arrives four hours before the event starts.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-panel-4" role="tabpanel" aria-labelledby="wr-tab-4" hidden>
+    <div>
+      <h2>On the night</h2>
+      <p className="wr-pintro">The in-room features. All of these are used one-handed, standing up, with a game half set up.</p>
+      <div className="wr-links">
+        <a href="/features/on-the-table"><span>Marking what is on the table</span></a>
+        <a href="/features/game-collection"><span>Pulling from your collection</span></a>
+        <a href="/features/roll-call"><span>Checking people in</span></a>
+        <a href="/features/transit"><span>Sharing the exact meeting point</span></a>
+        <a href="/features/roles-and-permissions"><span>Letting a co-organizer run it</span></a>
+        <a href="/features/bga"><span>Playing a table on Board Game Arena</span></a>
+      </div>
+      <div className="wr-breaks">
+        <p>What goes wrong here</p>
+        <a href="/groups/meetup-integration">The native and "Attending via Meetup" attendee lists never reconcile</a>
+        <a href="/groups/why-cant-i-remove-a-game">A game you cannot remove from the group library is being auto-contributed from a linked folder</a>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-05-on-the-table-live-1200x900.jpg" alt="Four players around a wooden table under a hanging lamp, holding cards over a large board covered in pieces and dice." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Game night in progress.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-panel-5" role="tabpanel" aria-labelledby="wr-tab-5" hidden>
+    <div>
+      <h2>After it is over</h2>
+      <p className="wr-pintro">Logging is the part everyone skips, and the part that makes the next forecast better.</p>
+      <div className="wr-links">
+        <a href="/features/play-logging"><span>Logging a play</span></a>
+        <a href="/features/bg-stats"><span>Pushing plays to BG Stats</span></a>
+        <a href="/features/bgg-sync"><span>Keeping BGG in sync</span></a>
+        <a href="/concepts/trust-and-reputation"><span>Attendance history</span></a>
+        <a href="/billing/event-credits"><span>How credits are consumed</span></a>
+        <a href="/changelog"><span>What changed recently</span></a>
+      </div>
+      <div className="wr-breaks">
+        <p>What goes wrong here</p>
+        <a href="/features/roll-call">Confirming Roll Call and then not showing costs more Trust than never confirming</a>
+        <a href="/billing/event-credits">Cancelling after creation does not refund the credit</a>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-06-play-log-summary-1200x900.jpg" alt="A small illustrated round table set with a board game, and a card above it confirming that a play was logged." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Logging the play once the night wraps up.</div>
+    </div>
+  </section>
+  </div>
+  <div data-role-view="guest" hidden>
+
+  <section className="wr-panel" id="wr-gpanel-1" role="tabpanel" aria-labelledby="wr-tab-1">
+    <div>
+      <h2>Finding one to go to</h2>
+      <p className="wr-pintro">The half of the clock that is yours starts before the event does: with whether you can see it at all.</p>
+      <div className="wr-links">
+        <a href="/features/discovering-events"><span>How the nearby feed ranks events</span></a>
+        <a href="/concepts/groups"><span>Joining a group</span></a>
+        <a href="/features/group-privacy"><span>Why some groups do not appear</span></a>
+        <a href="/help/notifications"><span>Getting told when a seat opens</span></a>
+      </div>
+      <div className="wr-qa">
+        <p className="wr-qalab">What goes wrong here</p>
+        <p className="wr-q">Someone sent you an event link and it will not open.</p>
+        <p className="wr-a">Events in private and hidden groups are members-only. Non-members cannot see them even with the direct URL. You need to join the group first. <a href="/features/group-privacy">Privacy, and who can see the event</a></p>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-03-discovery-feed-nearby-1200x900.jpg" alt="A row of upcoming event cards showing dates, titles, hosts and attendee counts, floating over a blurred game shop interior." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Events near you, sorted by what's coming up next.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-gpanel-2" role="tabpanel" aria-labelledby="wr-tab-2" hidden>
+    <div className="wr-inert">
+      <p>Phase 02 is host-only. Getting an event seen (announcements, cross-posting, group privacy) is work you never do as an attendee.</p>
+      <p>If you are here because you cannot see an event someone told you about, that is <a href="/features/group-privacy">group privacy</a>.</p>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-gpanel-3" role="tabpanel" aria-labelledby="wr-tab-3" hidden>
+    <div>
+      <h2>Your seat</h2>
+      <p className="wr-pintro">Between the RSVP and the door, two mechanisms decide whether the seat is still yours.</p>
+      <div className="wr-links">
+        <a href="/features/rsvp-and-waitlist"><span>RSVP, waitlist and promotion</span></a>
+        <a href="/features/roll-call"><span>Replying to Roll Call</span></a>
+        <a href="/features/bringing-list"><span>What you said you would bring</span></a>
+        <a href="/help/notifications"><span>Which reminders you get</span></a>
+      </div>
+      <div className="wr-qa">
+        <p className="wr-qalab">What goes wrong here</p>
+        <p className="wr-q">You are on the waitlist.</p>
+        <p className="wr-a">When a seat frees up the whole list is scanned in order and everyone who fits is promoted. A party larger than the opening is skipped rather than split, and keeps its place for the next one. <a href="/features/rsvp-and-waitlist">RSVP, waitlist and promotion</a></p>
+        <p className="wr-q">Roll Call asked whether you are coming.</p>
+        <p className="wr-a">It arrives four hours before the event, in-app and by text if you have turned on SMS. Replying is optional (not confirming does not drop you from the list), but confirming and then not showing costs more Trust than staying quiet. <a href="/features/roll-call">How Roll Call works</a></p>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-04-roll-call-confirm-sheet-1200x900.jpg" alt="Two hands holding a phone in a dim room, with a notification card reading Still coming tonight floating above the screen." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">The Roll Call prompt arrives four hours before the event starts.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-gpanel-4" role="tabpanel" aria-labelledby="wr-tab-4" hidden>
+    <div>
+      <h2>On the night</h2>
+      <p className="wr-pintro">Used one-handed, standing up, usually outside a venue you have not been to before.</p>
+      <div className="wr-links">
+        <a href="/features/transit"><span>Finding the meeting point</span></a>
+        <a href="/features/roll-call"><span>Checking in</span></a>
+        <a href="/features/on-the-table"><span>Seeing what is on the table</span></a>
+        <a href="/features/bga"><span>Joining a table on Board Game Arena</span></a>
+      </div>
+      <div className="wr-qa">
+        <p className="wr-qalab">What goes wrong here</p>
+        <p className="wr-q">You are outside and cannot find the room.</p>
+        <p className="wr-a">Every in-person event has a Directions link under the address. In the DC area there is also a Getting there card with the nearest Metro or bus stop, walking time, and live arrivals on the day. <a href="/features/transit">Venue and transit</a></p>
+        <p className="wr-q">You never checked in.</p>
+        <p className="wr-a">You do not have to. The host marks who showed up from the event panel, and can check in walk-ins who never RSVPed. <a href="/features/rsvp-and-waitlist">How check-in works</a></p>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-07-meeting-point-map-1200x900.jpg" alt="A person with a shoulder bag walking down station steps at dusk, across from a lit shop window full of board games." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Finding the venue on the way to an event.</div>
+    </div>
+  </section>
+
+  <section className="wr-panel" id="wr-gpanel-5" role="tabpanel" aria-labelledby="wr-tab-5" hidden>
+    <div>
+      <h2>Afterwards</h2>
+      <p className="wr-pintro">What the night leaves behind on your account.</p>
+      <div className="wr-links">
+        <a href="/features/play-logging"><span>Logging a play you were in</span></a>
+        <a href="/features/bg-stats"><span>Pushing plays to BG Stats</span></a>
+        <a href="/features/bgg-sync"><span>Keeping BGG in sync</span></a>
+        <a href="/concepts/trust-and-reputation"><span>Attendance history</span></a>
+      </div>
+      <div className="wr-qa">
+        <p className="wr-qalab">What goes wrong here</p>
+        <p className="wr-q">You are worried a BG Stats import will duplicate your plays.</p>
+        <p className="wr-a">It will not. Re-importing the same backup is safe: WR-Games skips plays it has already seen. <a href="/features/bg-stats">Bringing in your BG Stats history</a></p>
+        <p className="wr-q">Your attendance history looks wrong.</p>
+        <p className="wr-a">Trust Score compares events you attended against events you confirmed for and missed. Cancelling an RSVP before the event does not count against you. <a href="/concepts/trust-and-reputation">No-shows and reputation</a></p>
+      </div>
+    </div>
+    <div className="wr-panelshot" style={{ margin: '0' }}>
+      <img src="/images/panel-08-play-log-personal-1200x900.jpg" alt="A person sitting in an armchair at night lit by their phone screen, with shelves of board games behind them." loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: 'center', borderRadius: '0.75rem', border: '1px solid rgba(3,7,18,.1)' }} />
+      <div className="wr-cap">Your own play history, after the fact.</div>
+    </div>
+  </section>
   </div>
 
-  ---
-
-  <div className="flex flex-col gap-2">
-    <h3 className="text-base font-medium text-gray-900 dark:text-gray-50">Suggested articles</h3>
-    <p className="text-base text-gray-600 dark:text-gray-400">
-      Popular starting points for new WR-Games members
-    </p>
+  <div className="wr-offclock">
+    <p className="wr-eyebrow">Not on the clock <span className="wr-count">12 articles</span></p>
+    <div className="wr-offrow">
+      <a href="/introduction"><span>Introduction</span></a>
+      <a href="/quickstart"><span>Quickstart</span></a>
+      <a href="/account-setup">Account setup</a>
+      <a href="/help/profile-settings">Profile</a>
+      <a href="/help/privacy-settings">Privacy</a>
+      <a href="/help/notifications">Notifications</a>
+      <a href="/billing/plans">Plans</a>
+      <a href="/billing/manage-subscription">Subscription</a>
+      <a href="/features/integrations">Integrations</a>
+      <a href="/help/common-issues">Common issues</a>
+      <a href="/help/contact">Contact support</a>
+      <a href="/features/bgg-collection"><span>Your BGG collection</span></a>
+    </div>
   </div>
-
-  <Columns cols={2} className="suggested-articles">
-    <Card
-      title="Get started with WR-Games in minutes"
-      icon="timer"
-      iconType="light"
-      href="/quickstart"
-      cta="Read article"
-    >
-      Sign up, find a local group, and RSVP to your first board game event.
-    </Card>
-    <Card
-      title="How Roll Call works"
-      icon="circle-check"
-      iconType="light"
-      href="/features/roll-call"
-      cta="Read article"
-    >
-      Automatic pre-event reconfirmation so hosts know who is actually coming.
-    </Card>
-    <Card
-      title="Plans & pricing explained"
-      icon="scroll-text"
-      iconType="light"
-      href="/billing/plans"
-      cta="Read article"
-    >
-      Free to play for members — organizer plans start at $10/month.
-    </Card>
-    <Card
-      title="BGG Collection Sync"
-      icon="refresh-cw"
-      iconType="light"
-      href="/features/bgg-sync"
-      cta="Read article"
-    >
-      Connect your BoardGameGeek account to import your game collection.
-    </Card>
-  </Columns>
 </div>

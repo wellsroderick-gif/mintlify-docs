@@ -238,3 +238,254 @@ ul:is(:has(> #topbar-cta-button), :has(> li.navbar-link)) {
     }
   }
 }
+
+  /* ==========================================================================
+     WR-3657 - Door D help center homepage.
+     Everything below is scoped through .wr-home. The phase switcher and the
+     role switcher that drive it live in search.js, not in the page.
+     ========================================================================== */
+
+  .wr-home *, .wr-home *::before, .wr-home *::after { box-sizing: border-box; }
+  .wr-eyebrow {
+    display: flex; align-items: center; gap: .9rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgb(107,114,128); margin: 0 0 1rem;
+  }
+  .wr-eyebrow::after { content: ""; flex: 1; height: 1px; background: rgba(3,7,18,.1); }
+  html.dark .wr-eyebrow { color: rgb(148,152,160); }
+  html.dark .wr-eyebrow::after { background: rgba(255,255,255,.12); }
+  .wr-count { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; color: rgb(163,167,175); letter-spacing: .04em; }
+
+  /* ---- full-bleed band. Dark in BOTH themes on purpose: it is the table, ----
+     ---- not the page. Inside a max-width parent it escapes with 100vw.   ---- */
+  .wr-band {
+    position: relative; width: 100vw; margin-left: calc(50% - 50vw);
+    background: #0A0B10; color: rgb(226,229,235); overflow: hidden;
+  }
+  .wr-band::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 90% at 78% 20%, rgba(37,99,235,.28), transparent 62%);
+    pointer-events: none;
+  }
+  .wr-bandinner {
+    position: relative; max-width: 72rem; margin: 0 auto; padding: 3.5rem 1.5rem 3.25rem;
+    display: grid; grid-template-columns: minmax(0,1fr) minmax(0,28rem); gap: 3rem; align-items: center;
+  }
+  .wr-band .wr-kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgba(147,197,253,.9); margin: 0 0 1.1rem;
+  }
+  .wr-band h1 { margin: 0; font-size: 2.35rem; line-height: 1.1; font-weight: 600; letter-spacing: -.033em; color: #fff; max-width: 19ch; text-wrap: balance; }
+  .wr-band p.wr-lede { margin: 1rem 0 0; font-size: 1rem; line-height: 1.6; color: rgba(226,229,235,.72); max-width: 50ch; text-wrap: pretty; }
+
+  .wr-bandtools { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.75rem; }
+  .wr-bandtools button, .wr-bandtools .wr-fake {
+    display: inline-flex; align-items: center; gap: .55rem; height: 2.5rem; padding: 0 .9rem;
+    border-radius: 8px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06);
+    font: inherit; font-size: 14px; color: rgba(226,229,235,.9); cursor: pointer;
+  }
+  .wr-bandtools button:hover { border-color: rgba(147,197,253,.7); color: #fff; }
+  .wr-bandtools svg { width: 15px; height: 15px; flex: none; }
+  .wr-bandtools kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; color: rgba(226,229,235,.55); border: 1px solid rgba(255,255,255,.2); border-radius: 4px; padding: 1px 4px; }
+  .wr-bandshot .wr-cap {
+    margin: .7rem 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: rgba(226,229,235,.5);
+  }
+
+  /* ---- what's new: its own band, quieter than the hero, not a phase ---- */
+  .wr-whatsnew { margin-top: 2.5rem; padding: 1.5rem 1.6rem; border-radius: 12px;
+    background: rgba(3,7,18,.035); border: 1px solid rgba(3,7,18,.08); }
+  html.dark .wr-whatsnew { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1); }
+  .wr-wnhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; }
+  .wr-wnlabel { display: flex; align-items: center; gap: .6rem; margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgb(107,114,128); }
+  html.dark .wr-wnlabel { color: rgb(148,152,160); }
+  .wr-wnpill { padding: .15rem .5rem; border-radius: 999px; letter-spacing: .06em;
+    font-size: 10px; color: rgb(var(--primary)); background: rgba(37,99,235,.1); }
+  html.dark .wr-wnpill { color: rgb(147,197,253); background: rgba(59,130,246,.16); }
+  .wr-wnlink { font-size: 13.5px; color: rgb(var(--primary)); text-decoration: none; white-space: nowrap; }
+  .wr-wnlink:hover { text-decoration: underline; }
+  html.dark .wr-wnlink { color: rgb(var(--primary-light)); }
+  .wr-wntitle { margin: .9rem 0 0; font-size: 1.15rem; font-weight: 600; letter-spacing: -.02em; color: rgb(17,24,39); text-wrap: balance; }
+  html.dark .wr-wntitle { color: rgb(243,244,246); }
+  .wr-wnbody { margin: .4rem 0 0; font-size: .95rem; line-height: 1.6; color: rgb(107,114,128); max-width: 68ch; text-wrap: pretty; }
+  html.dark .wr-wnbody { color: rgb(148,152,160); }
+
+  /* ---- the phase rail ---- */
+  .wr-home { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 6rem; }
+  .wr-rail { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 0; margin: 3rem 0 0; }
+
+  /* Rows are fixed for the number / dot / title bands so all five columns align
+     regardless of how long a description runs, and so the connector line has a
+     known y to sit on: 1.1rem + .55rem + half the .6rem dot = 1.95rem. */
+  .wr-phase {
+    all: unset; box-sizing: border-box; position: relative; cursor: pointer; text-align: left;
+    display: grid; grid-template-rows: 1.1rem .6rem auto auto; row-gap: .55rem;
+    padding: 0 1.5rem 1.5rem 0;
+  }
+  /* The connector is drawn per phase, not across the rail, so it starts at the
+     first dot and stops at the last one instead of dangling off both ends. */
+  .wr-phase::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 1.95rem; height: 1px;
+    background: rgba(3,7,18,.12);
+  }
+  .wr-phase:first-child::before { left: .3rem; }
+  .wr-phase:last-child::before { right: calc(100% - .3rem); }
+  html.dark .wr-phase::before { background: rgba(255,255,255,.14); }
+  .wr-phase:focus-visible { outline: 2px solid rgb(var(--primary)); outline-offset: 4px; border-radius: 6px; }
+
+  .wr-phase .wr-dot {
+    position: relative; display: block; width: .6rem; height: .6rem; border-radius: 999px;
+    background: #fff; box-shadow: 0 0 0 1px rgba(3,7,18,.25);
+    transition: background-color .15s ease-out, box-shadow .15s ease-out;
+  }
+  html.dark .wr-phase .wr-dot { background: rgb(var(--background-dark)); box-shadow: 0 0 0 1px rgba(255,255,255,.28); }
+  .wr-phase .wr-pn { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; line-height: 1.1rem; letter-spacing: .12em; text-transform: uppercase; color: rgb(163,167,175); }
+  .wr-phase .wr-pt { display: block; margin-top: .3rem; font-size: 1.05rem; line-height: 1.3; font-weight: 600; letter-spacing: -.015em; color: rgb(75,85,99); transition: color .15s ease-out; }
+  .wr-phase .wr-pd { display: block; font-size: 13px; line-height: 1.5; color: rgb(150,156,166); max-width: 22ch; text-wrap: pretty; }
+  html.dark .wr-phase .wr-pt { color: rgb(160,165,175); }
+
+  .wr-phase:hover .wr-dot { box-shadow: 0 0 0 1px rgba(3,7,18,.45); }
+  html.dark .wr-phase:hover .wr-dot { box-shadow: 0 0 0 1px rgba(255,255,255,.5); }
+  .wr-phase:hover .wr-pt { color: rgb(31,41,55); }
+  html.dark .wr-phase:hover .wr-pt { color: rgb(226,229,235); }
+
+  .wr-phase[aria-selected="true"] .wr-dot { background: rgb(var(--primary)); box-shadow: 0 0 0 1px rgb(var(--primary)), 0 0 0 5px rgba(37,99,235,.16); }
+  html.dark .wr-phase[aria-selected="true"] .wr-dot { background: rgb(var(--primary-light)); box-shadow: 0 0 0 1px rgb(var(--primary-light)), 0 0 0 5px rgba(59,130,246,.22); }
+  .wr-phase[aria-selected="true"] .wr-pn { color: rgb(var(--primary)); }
+  .wr-phase[aria-selected="true"] .wr-pt { color: rgb(17,24,39); }
+  .wr-phase[aria-selected="true"] .wr-pd { color: rgb(107,114,128); }
+  html.dark .wr-phase[aria-selected="true"] .wr-pt { color: #fff; }
+  html.dark .wr-phase[aria-selected="true"] .wr-pd { color: rgb(160,165,175); }
+  html.dark .wr-phase[aria-selected="true"] .wr-pn { color: rgb(var(--primary-light)); }
+
+  /* ---- the swapped panel ---- */
+  .wr-panel[hidden] { display: none; }
+  .wr-panel {
+    display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: 3.5rem;
+    padding: 2.5rem 0 0; border-top: 1px solid rgba(3,7,18,.12);
+  }
+  html.dark .wr-panel { border-top-color: rgba(255,255,255,.14); }
+  .wr-panel h2 { margin: .4rem 0 .35rem; font-size: 1.45rem; font-weight: 600; letter-spacing: -.025em; color: rgb(17,24,39); }
+  html.dark .wr-panel h2 { color: rgb(243,244,246); }
+  .wr-panel .wr-pintro { margin: 0 0 1.5rem; font-size: .97rem; line-height: 1.6; color: rgb(107,114,128); max-width: 50ch; }
+  html.dark .wr-panel .wr-pintro { color: rgb(148,152,160); }
+  .wr-links { display: flex; flex-direction: column; }
+  .wr-links a {
+    display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1.5rem; align-items: baseline;
+    padding: .65rem 0; border-top: 1px solid rgba(3,7,18,.07); text-decoration: none; color: rgb(24,31,45); font-size: 15px;
+  }
+  html.dark .wr-links a { color: rgb(222,225,231); border-top-color: rgba(255,255,255,.08); }
+  .wr-links a:hover { color: rgb(var(--primary)); }
+  html.dark .wr-links a:hover { color: rgb(var(--primary-light)); }
+
+  .wr-breaks { margin-top: 1.5rem; padding: 1rem 1.1rem; border-radius: 10px; background: rgba(37,99,235,.06); border: 1px solid rgba(37,99,235,.18); }
+  html.dark .wr-breaks { background: rgba(37,99,235,.12); border-color: rgba(59,130,246,.28); }
+  .wr-breaks p { margin: 0 0 .5rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--primary)); }
+  html.dark .wr-breaks p { color: rgb(147,197,253); }
+  .wr-breaks a { display: block; padding: .2rem 0; font-size: 14px; color: rgb(55,65,81); text-decoration: none; }
+  .wr-breaks a:hover { color: rgb(var(--primary)); }
+  html.dark .wr-breaks a { color: rgb(199,203,211); }
+  .wr-panelshot .wr-cap { margin: .7rem 0 0; font-size: 12.5px; line-height: 1.5; color: rgb(122,129,141); border-left: 2px solid rgba(3,7,18,.12); padding-left: .7rem; }
+  html.dark .wr-panelshot .wr-cap { color: rgb(139,144,153); border-left-color: rgba(255,255,255,.16); }
+
+  /* ---- everything that is not event-shaped ---- */
+  .wr-offclock { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(3,7,18,.12); }
+  html.dark .wr-offclock { border-top-color: rgba(255,255,255,.14); }
+  .wr-offrow { display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+  .wr-offrow a { font-size: 14.5px; color: rgb(90,98,112); text-decoration: none; }
+  .wr-offrow a:hover { color: rgb(var(--primary)); }
+  html.dark .wr-offrow a { color: rgb(160,165,175); }
+  .wr-popbar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: 1.5rem; }
+  .wr-popbar .wr-plabel { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgb(163,167,175); margin-right: .3rem; }
+
+  /* The !important here is carried over from the design harness, where it had
+     to beat the old pills' escaped-v4 Tailwind fill. That fill belonged to the
+     markup this page replaced, so nothing competes with these declarations now.
+     They are kept at wrapper specificity so the treatment holds if a utility
+     fill is ever reintroduced. */
+  .wr-popbar [data-popular-search] {
+    all: unset; cursor: pointer; font-size: 13px; padding: .35rem .6rem; border-radius: 6px; text-transform: none;
+    color: rgb(75,85,99) !important;
+    background-color: transparent !important;
+    box-shadow: inset 0 0 0 1px rgba(3,7,18,.12);
+  }
+  .wr-popbar [data-popular-search]:hover { color: rgb(var(--primary)) !important; box-shadow: inset 0 0 0 1px rgb(var(--primary)); }
+  html.dark .wr-popbar [data-popular-search] { background-color: transparent !important; color: rgb(199,203,211) !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  html.dark .wr-popbar [data-popular-search]:hover { color: rgb(var(--primary-light)) !important; box-shadow: inset 0 0 0 1px rgb(var(--primary-light)); }
+
+
+  /* ---- featured guides: three doors, one row, quiet as the off-clock list ---- */
+  .wr-guides { margin-top: 2.5rem; }
+  .wr-guidegrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+  .wr-guide {
+    display: grid; grid-template-rows: auto auto 1fr; gap: .5rem;
+    padding: 1.25rem 1.3rem 1.35rem; border-radius: 12px; text-decoration: none;
+    border: 1px solid rgba(3,7,18,.1); background: rgba(3,7,18,.015);
+    transition: border-color .15s ease-out, background-color .15s ease-out;
+  }
+  html.dark .wr-guide { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.03); }
+  .wr-guide:hover { border-color: rgb(var(--primary)); background: rgba(37,99,235,.04); }
+  html.dark .wr-guide:hover { border-color: rgb(var(--primary-light)); background: rgba(59,130,246,.08); }
+  .wr-gnum {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px; letter-spacing: .12em; color: rgb(var(--primary));
+  }
+  html.dark .wr-gnum { color: rgb(var(--primary-light)); }
+  .wr-gtitle { font-size: 1.02rem; font-weight: 600; letter-spacing: -.015em; color: rgb(17,24,39); }
+  html.dark .wr-gtitle { color: rgb(243,244,246); }
+  .wr-gdesc { font-size: 13.5px; line-height: 1.55; color: rgb(107,114,128); text-wrap: pretty; }
+  html.dark .wr-gdesc { color: rgb(148,152,160); }
+
+  /* Popular searches sit in the band, under the search row: dark-band values. */
+  .wr-band .wr-popbar { margin-top: 1.1rem; }
+  .wr-band .wr-popbar .wr-plabel { color: rgba(226,229,235,.55); }
+  .wr-band .wr-popbar [data-popular-search] {
+    text-transform: uppercase; letter-spacing: .07em; font-size: 12px;
+    color: rgba(226,229,235,.85) !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  }
+  .wr-band .wr-popbar [data-popular-search]:hover {
+    color: #fff !important; box-shadow: inset 0 0 0 1px rgba(147,197,253,.7);
+  }
+
+  @media (max-width: 1000px) {
+    .wr-bandinner { grid-template-columns: 1fr; gap: 2rem; padding: 2.75rem 1.5rem; }
+    .wr-rail { grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem 1rem; }
+    .wr-phase::before { display: none; }
+    .wr-phase { padding-right: 1rem; padding-bottom: 1rem; }
+    .wr-panel { grid-template-columns: 1fr; gap: 2rem; }
+    .wr-guidegrid { grid-template-columns: 1fr; }
+  }
+
+
+  /* ✎ D: the page has a mode. There is no player object at all: the switch
+     re-points the same clock at a different reader. Phase 02 is host-only and
+     goes inert rather than disappearing, so the shape of the clock is stable.
+     Both modes are in the DOM at all times, so crawlers get both. */
+  .wr-roleswitch { display:inline-flex; margin-top:1.6rem; padding:3px; border-radius:9px;
+    border:1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+  .wr-roleswitch button { all:unset; cursor:pointer; padding:.5rem .95rem; border-radius:6px;
+    font-size:13.5px; color: rgba(226,229,235,.72); }
+  .wr-roleswitch button:hover { color:#fff; }
+  .wr-roleswitch button[aria-pressed="true"] { background: rgba(255,255,255,.14); color:#fff; }
+  [data-role-view][hidden] { display:none; }
+  .wr-phase[aria-disabled="true"] { cursor:default; opacity:.4; }
+  .wr-inert { padding: 2.5rem 0 0; border-top:1px solid rgba(3,7,18,.12); }
+  html.dark .wr-inert { border-top-color: rgba(255,255,255,.14); }
+  .wr-inert p { margin:0; max-width:48ch; font-size:.97rem; line-height:1.6; color: rgb(140,146,156); }
+  .wr-inert p + p { margin-top:.75rem; }
+  .wr-inert a { color: rgb(var(--primary)); text-decoration:none; }
+  html.dark .wr-inert a { color: rgb(var(--primary-light)); }
+  .wr-qa { margin-top:1.5rem; padding-top:.9rem; border-top:1px solid rgba(3,7,18,.12); }
+  html.dark .wr-qa { border-top-color: rgba(255,255,255,.14); }
+  .wr-qa .wr-q { margin:.7rem 0 0; font-size:14.5px; font-weight:600; color: rgb(31,41,55); }
+  html.dark .wr-qa .wr-q { color: rgb(226,229,235); }
+  .wr-qa .wr-a { margin:.2rem 0 0; font-size:13.5px; line-height:1.6; color: rgb(107,114,128); max-width:56ch; text-wrap:pretty; }
+  html.dark .wr-qa .wr-a { color: rgb(148,152,160); }
+  .wr-qa .wr-a a { color: rgb(var(--primary)); text-decoration:none; }
+  html.dark .wr-qa .wr-a a { color: rgb(var(--primary-light)); }
+  .wr-qalab { margin:0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color: rgb(140,146,156); }
