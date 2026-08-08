@@ -394,7 +394,16 @@ ul:is(:has(> #topbar-cta-button), :has(> li.navbar-link)) {
   /* ---- everything that is not event-shaped ---- */
   .wr-offclock { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(3,7,18,.12); }
   html.dark .wr-offclock { border-top-color: rgba(255,255,255,.14); }
-  .wr-offrow { display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+  /* Five labeled groups: a column each on desktop, stacked at the 1000px break.
+     The groups are layout wrappers only. Link color and hover still come from
+     the .wr-offrow a rules below, so a group adds nothing but its own label. */
+  .wr-offrow { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 1.75rem 2rem; }
+  .wr-offgroup { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; min-width: 0; }
+  .wr-offclock .wr-plabel {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: rgb(163,167,175); margin-bottom: .15rem;
+  }
   .wr-offrow a { font-size: 14.5px; color: rgb(90,98,112); text-decoration: none; }
   .wr-offrow a:hover { color: rgb(var(--primary)); }
   html.dark .wr-offrow a { color: rgb(160,165,175); }
@@ -458,6 +467,7 @@ ul:is(:has(> #topbar-cta-button), :has(> li.navbar-link)) {
     .wr-phase { padding-right: 1rem; padding-bottom: 1rem; }
     .wr-panel { grid-template-columns: 1fr; gap: 2rem; }
     .wr-guidegrid { grid-template-columns: 1fr; }
+    .wr-offrow { grid-template-columns: 1fr; gap: 1.5rem; }
   }
 
 
