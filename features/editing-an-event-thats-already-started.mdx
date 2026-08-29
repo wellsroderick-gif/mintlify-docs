@@ -1,0 +1,73 @@
+---
+title: "Editing an Event That's Already Started"
+sidebarTitle: "Editing an Active Event"
+description: "What you can and can't change after an event has started on WR-Games, including the earliest you can set it to end and what happens when you end one early."
+---
+
+Once an event is in progress, you can still edit it — but two safeguards kick in around the end time, because ending an event triggers things that can't be undone.
+
+## What you can change once an event is in progress
+
+Description, location, capacity, and other content fields save normally. The **start time is locked** once an event has begun; you can't move it.
+
+The end time is where the safeguards live:
+
+| If you set the event to end | What happens |
+| --- | --- |
+| Less than 15 minutes from now | Blocked |
+| Earlier than scheduled, but 15\+ minutes from now | Asks you to confirm before saving |
+| At or after its scheduled time, 15\+ minutes from now | Saves right away |
+
+## Why you can't end an event right now
+
+<Note>
+  An in-progress event has to stay open for at least another 15 minutes. If you set the end time closer than that, you'll see: _"An in-progress event must stay open at least 15 more minutes. Pick a later end time."_
+</Note>
+
+That 15-minute buffer exists because ending an event is what stops Roll Call and check-in, and starts the 72-hour countdown to attendance being finalized. The delay means none of that happens from a single accidental click.
+
+If you want the event to wrap as soon as possible, set the end time to exactly 15 minutes out — that's the earliest WR-Games will accept.
+
+## Ending an event early
+
+If you shorten an in-progress event but still leave at least 15 minutes on the clock, WR-Games asks you to confirm before saving:
+
+<Warning>
+  **End this event sooner than planned?**
+
+  This ends the event earlier than scheduled. Once it ends, it can't be reopened, and attendance is finalized.
+
+  **End Sooner** · **Keep Current End Time**
+</Warning>
+
+That confirmation isn't a formality. Once an event ends — on schedule or early — here's what changes:
+
+- **Roll Call and check-in stop right away.** No one can check in after the event ends, even if they're standing right there.
+- **The event can't be reopened.** If you need to keep playing, create a new event.
+- **Attendance settles 72 hours later.** Until then nothing is locked in. After that, who came along (and who didn't) counts toward everyone's [Trust Score](/concepts/trust-and-reputation) and reputation points.
+
+## If you ended an event by mistake
+
+<Note>
+  There's no self-serve way to reopen an ended event, but you do have a window. Attendance doesn't settle for 72 hours, so if you confirmed "End Sooner" by accident, [get in touch](/help/contact) and we can sort it out.
+</Note>
+
+## Related articles
+
+<Columns cols={2}>
+  <Card title="Creating and Managing Events" icon="calendar" href="/features/creating-events">
+    The rest of the editing rules — for events that haven't started yet.
+  </Card>
+
+  <Card title="Roll Call" icon="clipboard-check" href="/features/roll-call">
+    How reconfirmation works, and what happens when it de-arms.
+  </Card>
+
+  <Card title="Trust & Reputation" icon="shield-check" href="/concepts/trust-and-reputation">
+    How attendance and no-shows factor into Trust Score and RP.
+  </Card>
+
+  <Card title="Contact Us" icon="life-ring" href="/help/contact">
+    Reach the team for a correction after an event has ended.
+  </Card>
+</Columns>
