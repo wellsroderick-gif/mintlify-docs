@@ -1,0 +1,71 @@
+---
+title: "Editing an Event That's Already Started"
+sidebarTitle: "Editing an Active Event"
+description: "How the 15-minute floor and shorten confirmation work when you edit an event that's already begun on WR-Games."
+---
+
+Once an event is in progress, you can still edit it — but two safeguards kick in around the end time, because ending an event triggers things that can't be undone.
+
+## What you can change once an event is in progress
+
+| What you're changing | What happens |
+| --- | --- |
+| Description, location, capacity, or other content fields | Saves immediately — not affected by the floor or the confirm step below |
+| Start time | Locked. You can't move the start time of an event that's already begun |
+| New end time is less than 15 minutes from now | Blocked. See "The 15-minute floor" |
+| New end time is earlier than the original schedule (15\+ minutes from now) | Requires confirmation before it saves. See "Ending an event early" |
+| New end time is unchanged or later than scheduled (15\+ minutes from now) | Saves immediately |
+
+## The 15-minute floor
+
+<Note>
+  WR-Games won't let you set an in-progress event's end time to less than 15 minutes from now, whether you're shortening it or pushing it later. You'll see: _"An in-progress event must stay open at least 15 more minutes. Pick a later end time."_
+</Note>
+
+The floor exists because ending an event is what stops Roll Call and check-in, and starts the 72-hour countdown to attendance being finalized. A 15-minute buffer means that doesn't happen from a single accidental click.
+
+If you want the event to end as soon as possible, set the end time to exactly 15 minutes out — that's the earliest WR-Games will accept.
+
+## Ending an event early
+
+If you shorten an in-progress event's end time and it clears the 15-minute floor, WR-Games asks you to confirm before saving:
+
+<Warning>
+  **End this event sooner than planned?**
+
+  This ends the event earlier than scheduled. Once it ends, it can't be reopened, and attendance is finalized.
+
+  **End Sooner** · **Keep Current End Time**
+</Warning>
+
+That confirmation isn't a formality. Once an event ends — on schedule or early — it's final:
+
+- **Roll Call and check-in stop immediately.** No one can check in after the event ends, even if they're standing right there.
+- **It can't be reopened.** There's no "undo end" — you'd need to create a new event.
+- **Attendance finalizes 72 hours later.** WR-Games then writes permanent records: who attended, no-show counts, [Trust Score](/concepts/trust-and-reputation) changes, and RP.
+
+## If you ended an event by mistake
+
+<Note>
+  There's no self-serve way to reopen or undo an ended event. If you confirmed "End Sooner" by accident, [contact support](/help/contact) right away — a correction is only possible in the 72-hour window before attendance finalizes. Once that window closes, the record is permanent.
+</Note>
+
+## Related articles
+
+<Columns cols={2}>
+  <Card title="Creating and Managing Events" icon="calendar" href="/features/creating-events">
+    The rest of the editing rules — for events that haven't started yet.
+  </Card>
+
+  <Card title="Roll Call" icon="clipboard-check" href="/features/roll-call">
+    How reconfirmation works, and what happens when it de-arms.
+  </Card>
+
+  <Card title="Trust & Reputation" icon="shield-check" href="/concepts/trust-and-reputation">
+    How attendance and no-shows factor into Trust Score and RP.
+  </Card>
+
+  <Card title="Contact Us" icon="life-ring" href="/help/contact">
+    Reach the team for a correction after an event has ended.
+  </Card>
+</Columns>

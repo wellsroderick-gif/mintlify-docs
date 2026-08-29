@@ -57,6 +57,7 @@
             "pages": [
               "features/event-types",
               "features/creating-events",
+              "features/editing-an-event-thats-already-started",
               "features/rsvp-and-waitlist",
               "features/roll-call",
               "features/on-the-table",
