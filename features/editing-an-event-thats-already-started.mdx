@@ -8,27 +8,29 @@ Once an event is in progress, you can still edit it — but two safeguards kick 
 
 ## What you can change once an event is in progress
 
-| What you're changing | What happens |
-| --- | --- |
-| Description, location, capacity, or other content fields | Saves immediately — not affected by the floor or the confirm step below |
-| Start time | Locked. You can't move the start time of an event that's already begun |
-| New end time is less than 15 minutes from now | Blocked. See "The 15-minute floor" |
-| New end time is earlier than the original schedule (15\+ minutes from now) | Requires confirmation before it saves. See "Ending an event early" |
-| New end time is unchanged or later than scheduled (15\+ minutes from now) | Saves immediately |
+Description, location, capacity, and other content fields save normally. The **start time is locked** once an event has begun; you can't move it.
 
-## The 15-minute floor
+The end time is where the safeguards live:
+
+| If your new end time is | What happens |
+| --- | --- |
+| Less than 15 minutes away | Blocked |
+| Earlier than scheduled, but 15\+ minutes away | Asks you to confirm before saving |
+| The same or later, and 15\+ minutes away | Saves right away |
+
+## Why you can't end an event right now
 
 <Note>
-  WR-Games won't let you set an in-progress event's end time to less than 15 minutes from now, whether you're shortening it or pushing it later. You'll see: _"An in-progress event must stay open at least 15 more minutes. Pick a later end time."_
+  An in-progress event has to stay open for at least another 15 minutes. If you set the end time closer than that, you'll see: _"An in-progress event must stay open at least 15 more minutes. Pick a later end time."_
 </Note>
 
-The floor exists because ending an event is what stops Roll Call and check-in, and starts the 72-hour countdown to attendance being finalized. A 15-minute buffer means that doesn't happen from a single accidental click.
+That 15-minute buffer exists because ending an event is what stops Roll Call and check-in, and starts the 72-hour countdown to attendance being finalized. The delay means none of that happens from a single accidental click.
 
-If you want the event to end as soon as possible, set the end time to exactly 15 minutes out — that's the earliest WR-Games will accept.
+If you want the event to wrap as soon as possible, set the end time to exactly 15 minutes out — that's the earliest WR-Games will accept.
 
 ## Ending an event early
 
-If you shorten an in-progress event's end time and it clears the 15-minute floor, WR-Games asks you to confirm before saving:
+If you shorten an in-progress event but still leave at least 15 minutes on the clock, WR-Games asks you to confirm before saving:
 
 <Warning>
   **End this event sooner than planned?**
