@@ -4,19 +4,19 @@ sidebarTitle: "Contact"
 description: "The three ways to reach WR-Games support, which one to use for your situation, and how to follow a case once it's open."
 ---
 
-There are three ways to get in touch. Which one you want depends on whether you're signed in and what kind of problem you're having.
+There are three ways to get in touch. Which one you want depends on whether you have an account and what kind of problem you're having.
 
 <Columns cols={3}>
   <Card title="Support request" icon="inbox">
-    Opened from your inbox. Keeps your question and every reply in one thread.
+    For any question or account issue. Opens a case in your inbox, and replies come back to the same thread.
   </Card>
 
   <Card title="Bug reporter" icon="bug">
-    A floating button on any page. For things that are visibly broken.
+    For something visibly broken. Also opens a case, and records the page you were on when you hit the problem.
   </Card>
 
   <Card title="Contact form" icon="mail">
-    At wr-games.com/contact. Open to anyone, signed in or not.
+    For when you don't have an account. Replies come by email, so nothing appears on WR-Games.
   </Card>
 </Columns>
 
@@ -26,62 +26,68 @@ There are three ways to get in touch. Which one you want depends on whether you'
 
 ---
 
-## Which option to use
+## How to send one
 
-| Your situation | Use this |
-| --- | --- |
-| Signed in, and you have a question or a problem with your account | Support request |
-| Signed in, and something on the site looks broken | Bug reporter |
-| Can't sign in, or don't have an account | Contact form |
+<Tabs>
+  <Tab title="Support request">
+    Use this for anything at all — a question, a billing problem, something about your account or a group you're in. You need to be signed in.
 
-<Note>
-  Opening a support request from your inbox requires being signed in. If you can't get into your account, use the [contact form](https://wr-games.com/contact) instead.
-</Note>
+    <Steps>
+      <Step title="Open your inbox">
+        Go to **Messages** and select the **Inbox** tab.
+      </Step>
+      <Step title="Start a request">
+        Click **New support request** in the toolbar above your message list.
+      </Step>
+      <Step title="Describe it">
+        Give it a short title and fill in the details. There's no category to pick — tell us what's going on in your own words.
+      </Step>
+    </Steps>
 
----
+    **What to include.** What you were trying to do, what happened instead, and the name or link of the group or event if it's about one. You don't need to give us your name or email — the case is already tied to your account.
+  </Tab>
+  <Tab title="Bug reporter">
+    Use this when something on the site is broken: a button that does nothing, a page that won't load, a number that looks wrong. You need to be signed in.
 
-## Support request from your inbox
+    <Steps>
+      <Step title="Go to the page with the problem">
+        The reporter records where you were, so send it from the screen where things went wrong.
+      </Step>
+      <Step title="Open the reporter">
+        Click the floating bug button. It's available on any page.
+      </Step>
+      <Step title="Pick a category and describe it">
+        Choosing what kind of thing broke helps the report reach the right place faster.
+      </Step>
+    </Steps>
 
-The best option for most questions, because your request and every reply stay together in one thread you can return to.
+    **What to include.** What you expected to happen and what happened instead. You don't need to describe where you were or give us your details — both are captured for you.
+  </Tab>
+  <Tab title="Contact form">
+    Use this if you don't have an account, or can't get into the one you have. It's open to anyone.
 
-<Steps>
-  <Step title="Open your inbox">
-    Go to **Messages** and select the **Inbox** tab.
-  </Step>
-  <Step title="Start a request">
-    Click **New support request** in the toolbar above your message list.
-  </Step>
-  <Step title="Describe the problem">
-    Give it a short title and fill in the details. There's no category to pick — just tell us what's going on in your own words.
-  </Step>
-  <Step title="Send it">
-    Your new case opens in your inbox, and that's where replies will appear.
-  </Step>
-</Steps>
+    <Steps>
+      <Step title="Go to the form">
+        Open [wr-games.com/contact](https://wr-games.com/contact).
+      </Step>
+      <Step title="Fill it in">
+        Tell us what you need and how to reach you.
+      </Step>
+    </Steps>
 
----
+    **What to include.** Your account email address matters most here — without it we have no way to find you. Add your display name, the group or event in question, and a description of the problem.
 
-## Bug reporter
-
-If something on the site is visibly broken — a button that does nothing, a page that won't load, a number that looks wrong — use the bug reporter instead. It's the floating button available on any page while you're signed in.
-
-The difference from a support request is that the bug reporter asks you to categorize what broke, which helps the report reach the right place faster. Both land with the same team.
-
----
-
-## Contact form
-
-The form at [**wr-games.com/contact**](https://wr-games.com/contact) is open to everyone, signed in or not. It's the right choice when you can't reach your account, and the only option if you don't have one.
-
-<Warning>
-  A message sent through the contact form won't appear in your WR-Games inbox, and won't have a case number to follow. Replies come by email instead. If you're signed in and want the thread in one place, open a support request from your inbox.
-</Warning>
+    <Warning>
+      A message sent this way won't appear in a WR-Games inbox and won't have a case number. The reply comes to your email instead.
+    </Warning>
+  </Tab>
+</Tabs>
 
 ---
 
 ## Following your case
 
-Once you've opened a support request, it lives in your inbox with a case number (something like `CASE-10842`) at the top of the thread. That number is worth quoting if you ever need to refer back to it.
+Support requests and bug reports both open a case in your inbox, with a case number (something like `CASE-10842`) at the top of the thread. That number is worth quoting if you need to refer back to it.
 
 Each case shows a status:
 
@@ -97,30 +103,6 @@ You'll get a notification and an email whenever we reply, so you don't need to k
 
 <Note>
   You can reply in the thread while a case is open. Once it moves to **Closed** or **Dismissed**, the reply box is replaced with "This case is closed." That's expected, not a bug — if the problem comes back, open a new request and mention the old case number.
-</Note>
-
----
-
-## What to include
-
-The more context you give, the faster we can help.
-
-<Columns cols={1}>
-  <Card title="Your display name or account email" icon="user">
-    Helps us find your account quickly, especially for access or billing questions.
-  </Card>
-
-  <Card title="The group or event you're asking about" icon="calendar">
-    Include the name and, if you can, a direct link.
-  </Card>
-
-  <Card title="What you were trying to do" icon="message-square-text">
-    What happened instead, and anything the error message said.
-  </Card>
-</Columns>
-
-<Note>
-  If you're locked out of your account, put your **account email address** in the message itself — we can't look you up from the contact form otherwise.
 </Note>
 
 ---
