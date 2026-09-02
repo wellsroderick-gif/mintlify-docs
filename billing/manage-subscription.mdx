@@ -1,62 +1,101 @@
 ---
 title: "Manage Your WR-Games Subscription"
-sidebarTitle: "Subscription"
 description: "Learn how to upgrade, downgrade, or cancel your WR-Games plan, switch to annual billing, and view your invoices and receipts — all from your account settings."
+sidebarTitle: "Subscription"
 ---
 
-You can review and change your WR-Games subscription at any time without contacting support. Whether you want to unlock more features, scale back, or simply check a past invoice, everything you need is a few clicks away in your account settings. This page walks you through each common billing task.
+You start a subscription in WR-Games. Everything after that — changing plans, switching to annual, cancelling, invoices, updating your card — happens in the **Stripe billing portal**, which WR-Games opens for you from your settings. We don't run billing in-house, so there's no second set of controls to hunt for.
 
-## Finding Your Billing Settings
+## Finding Your Subscription Settings
 
-Go to **Settings → Subscription** (also accessible via **Account → Subscription** in the top-right menu). From there you can see your current plan, next renewal date, credit balance, and billing history.
+Open **Settings** from the menu in the top right, then choose the **Subscription** tab.
 
-## Upgrading Your Plan
+The **Your Plan** card shows which plan you're on, what it costs, and what it includes. On an active paid plan you'll also see:
+
+- **Next charge** — the amount and the date
+- **Billing** — Monthly or Annual
+- **Status** — active, past due, and so on
+
+Below that, the **Event Credits** card shows your current balance and lets you buy more.
+
+## Starting or Upgrading a Plan
+
+This is the one billing action that happens inside WR-Games.
 
 <Steps>
-  <Step title="Open Settings → Subscription">
-    Select your current plan tile or click the **Upgrade** button.
+  <Step title="Open the Subscription tab">
+    **Settings → Subscription**, then find the **Ready to level up?** card.
   </Step>
-  <Step title="Choose a plan and billing cycle">
-    Pick Standard or Pro, then choose **monthly** or **annual** billing. Annual billing saves you 20% — Standard is \$8/month (\$96/year) and Pro is \$16/month (\$192/year).
+  <Step title="Compare the plans">
+    The two columns show your current plan next to the one above it. They're there to compare — the buttons underneath are what you click.
   </Step>
-  <Step title="Complete checkout">
-    You'll be taken to a secure checkout page to confirm payment. Your upgrade takes effect **immediately** once the payment is processed.
+  <Step title="Pick monthly or annual">
+    **Upgrade to Standard (monthly)** or **Annual (save 20%)**. Pro works the same way.
+  </Step>
+  <Step title="Pay through Stripe">
+    You'll land on a secure Stripe checkout page. Once Stripe confirms the payment, your new plan appears on the Subscription tab.
   </Step>
 </Steps>
 
-## Downgrading Your Plan
-
-To move to a lower tier, go to **Settings → Subscription** and select the plan you'd like to switch to. Your current plan remains active until the end of your billing period — you won't lose access to your current features mid-cycle. At renewal, your account moves to the new plan.
-
-<Warning>
-  **Check your usage before you downgrade.** If your current setup exceeds the limits of the lower plan, some features will become restricted at the end of your billing period. For example, the Free plan allows only **1 group** — if you have 3 groups on Standard and downgrade to Free, you'll need to consolidate to 1 group before the transition to avoid losing access to the additional groups' content and settings. Review your groups, roles, and any active features ahead of time.
-</Warning>
-
-## Cancelling Your Subscription
-
-You can cancel at any time from **Settings → Subscription** by selecting **Cancel Plan**. Cancellation does not cut off access immediately — your paid plan stays active through the end of your current billing period. After that, your account reverts to the **Free plan** automatically. You won't be charged again unless you re-subscribe.
+<Tip>
+  **View all plans and pricing** on the same card opens the full comparison if you want to see everything side by side first.
+</Tip>
 
 ## Annual vs. Monthly Billing
 
-| Plan | Monthly | Annual (billed yearly) | You save |
-| --- | --- | --- | --- |
-| Standard | \$10 / month | \$8 / month (\$96/year) | 20% |
-| Pro | \$20 / month | \$16 / month (\$192/year) | 20% |
+Annual plans are billed once a year at 20% off the monthly rate.
 
-You can switch between monthly and annual billing from **Settings → Subscription**. Switching to annual applies at your next renewal date; switching from annual to monthly takes effect when your current annual term ends.
+| Plan | Monthly | Annual | You save |
+| :-- | :-- | :-- | :-- |
+| Standard | \$10 / month | \$96 / year | 20% |
+| Pro | \$20 / month | \$192 / year | 20% |
 
-<Tip>
-  If you're sure you'll use WR-Games year-round, annual billing is the easiest way to save — two months free compared to paying month to month.
-</Tip>
+If you're already on an active monthly plan, the Subscription tab shows a **Switch to annual billing and save 20%** callout with a button carrying your exact total: **Switch to Annual — \$96/year** on Standard, **Switch to Annual — \$192/year** on Pro.
 
-## Viewing Invoices and Receipts
+That button opens the Stripe billing portal straight to the plan-change screen. Once Stripe confirms the change, your plan and billing cycle update on the Subscription tab.
 
-All invoices and receipts are available through the **Stripe Customer Portal**, linked from **Settings → Subscription → Billing History**. From the portal you can:
+## Everything Else Happens in Stripe
 
-- Download PDF invoices for any past payment
-- View upcoming charge dates and amounts
+Once you're subscribed, use **Manage subscription** on the Subscription tab — or the **Stripe billing portal** link next to **Cancel or change plans in the Stripe billing portal**. Either one opens the portal, where you can:
+
+- Move to a different plan
+- Cancel your subscription
+- Download a PDF invoice for any past payment
+- See upcoming charge dates and amounts
 - Update your payment method or billing address
 
 <Note>
-  WR-Games billing is handled securely by **Stripe**, a globally trusted payment processor. WR-Games never stores your full card details — all payment information is managed directly by Stripe.
+  There's no invoice list on the Subscription tab. Receipts and invoices are in the portal.
 </Note>
+
+If your subscription lapses, a **Resubscribe** option appears on the tab so you can pick the same plan back up.
+
+## If You Move to a Lower Plan
+
+Your groups don't disappear, and you don't need to dismantle anything before you switch. Groups you already organize keep working past the limit. What changes is that you can't create another one until you're back at or below your new plan's cap.
+
+| Your plan | Groups you can organize |
+| :-- | :-- |
+| Free | 1 |
+| Standard | 2 |
+| Pro | 5 |
+
+The cap counts groups where you're the organizer. Stepping down as organizer of a group frees up a slot.
+
+<Note>
+  Billing is handled by **Stripe**. WR-Games never stores your full card details.
+</Note>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Plans & Billing" icon="credit-card" href="/billing/plans">
+    What each plan includes, and how the tiers compare.
+  </Card>
+
+  <Card title="Event Credits" icon="ticket" href="/billing/event-credits">
+    What credits are for, and when an event needs one.
+  </Card>
+</Columns>
+
+Something not adding up on your billing? [Contact us](/help/contact) and we'll take a look.
