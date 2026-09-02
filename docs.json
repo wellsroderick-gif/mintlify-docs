@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "WR-Games Help Center",
-  "description": "Documentation, feature guides, and support for WR-Games — the board game community platform.",
+  "description": "Documentation, feature guides, and support for WR-Games: the board game community platform.",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",

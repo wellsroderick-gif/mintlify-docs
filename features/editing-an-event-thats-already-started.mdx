@@ -4,11 +4,16 @@ sidebarTitle: "Editing an Active Event"
 description: "What you can and can't change after an event has started on WR-Games, including the earliest you can set it to end and what happens when you end one early."
 ---
 
-Once an event is in progress, you can still edit it — but two safeguards kick in around the end time, because ending an event triggers things that can't be undone.
+Once an event is in progress, you can still edit it, but two safeguards kick in around the end time, because ending an event triggers things that can't be undone.
 
 ## What you can change once an event is in progress
 
-Description, location, capacity, and other content fields save normally. The **start time is locked** once an event has begun; you can't move it.
+Description, location, capacity, and other content fields save normally. The **date and start time are locked** once an event has begun; you can't move them.
+
+How you change the end time depends on how the event's length was set:
+
+- **If the event uses a duration preset,** the **Duration** control still works. Pick 1hr, 90min, 2hr, 3hr or 4hr and the event ends that long after its **start** time. This is the only way to change the end time of an event that is already running.
+- **If the event uses a custom end time,** the End date and End time fields are shown but greyed out, and no Duration control appears. The end time can't be changed at all while the event is in progress.
 
 The end time is where the safeguards live:
 
@@ -26,7 +31,7 @@ The end time is where the safeguards live:
 
 That 15-minute buffer exists because ending an event is what stops Roll Call and check-in, and starts the 72-hour countdown to attendance being finalized. The delay means none of that happens from a single accidental click.
 
-If you want the event to wrap as soon as possible, set the end time to exactly 15 minutes out — that's the earliest WR-Games will accept.
+If you want the event to wrap as soon as possible, pick the shortest duration that still leaves at least 15 minutes on the clock. Presets are measured from the **start** time rather than from now, so which one is shortest-but-still-allowed depends on how long the event has been running: a 1hr preset on an event that started three hours ago would put the end in the past, and is rejected.
 
 ## Ending an event early
 
@@ -40,7 +45,7 @@ If you shorten an in-progress event but still leave at least 15 minutes on the c
   **End Sooner** · **Keep Current End Time**
 </Warning>
 
-That confirmation isn't a formality. Once an event ends — on schedule or early — here's what changes:
+That confirmation isn't a formality. Once an event ends, on schedule or early, here's what changes:
 
 - **Roll Call and check-in stop right away.** No one can check in after the event ends, even if they're standing right there.
 - **The event can't be reopened.** If you need to keep playing, create a new event.
@@ -56,7 +61,7 @@ That confirmation isn't a formality. Once an event ends — on schedule or early
 
 <Columns cols={2}>
   <Card title="Creating and Managing Events" icon="calendar" href="/features/creating-events">
-    The rest of the editing rules — for events that haven't started yet.
+    The rest of the editing rules, for events that haven't started yet.
   </Card>
 
   <Card title="Roll Call" icon="clipboard-check" href="/features/roll-call">

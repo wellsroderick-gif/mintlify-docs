@@ -48,6 +48,9 @@ jobs:
       - name: Check icons
         run: node scripts/ci/check-icons.mjs
 
+      - name: Check self-links
+        run: node scripts/ci/check-self-links.mjs
+
   merge:
     needs: checks
     if: (startsWith(github.head_ref, 'mintlify-mcp/') || startsWith(github.head_ref, 'admin-mcp/')) && vars.AUTO_MERGE_ENABLED == 'true'

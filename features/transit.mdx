@@ -4,17 +4,17 @@ sidebarTitle: "Transit Options"
 description: "How WR-Games shows DC-area attendees nearest transit, walking time, live train and bus arrivals around event time, and directions on in-person event pages."
 ---
 
-WR-Games shows transit info on in-person event pages in the DC area — a **Getting there** card that helps attendees reach the venue by train or bus, with live arrival times around the event itself. It's public, so even people who aren't logged in can see how to get there.
+WR-Games shows transit info on in-person event pages in the DC area: a **Getting there** card that helps attendees reach the venue by train or bus, with live arrival times around the event itself. It's public, so even people who aren't logged in can see how to get there.
 
 <Info>
-  Transit details currently cover the **Washington, DC metro area (WMATA)** only. Events elsewhere won't show a transit card yet — though every in-person event still gets a **Directions** link (see below).
+  Transit details currently cover the **Washington, DC metro area (WMATA)** only. Events elsewhere won't show a transit card yet, though every in-person event still gets a **Directions** link (see below).
 </Info>
 
 ## What's always on the card
 
-Once we've placed an event at a real address with a supported stop nearby, the card shows the basics — every day, at any hour, and it stays on the page after the event is over:
+Once we've placed an event at a real address with a supported stop nearby, the card shows the basics: every day, at any hour, and it stays on the page after the event is over:
 
-- **Nearest station or stop**, with walking time — e.g. _Nearest station · 6 min walk_, or _Nearest bus stop · 4 min walk_. We look for a Metro station and a bus stop separately, each within about a mile's walk, so an event can turn up one, both, or neither.
+- **Nearest station or stop**, with walking time: e.g. _Nearest station · 6 min walk_, or _Nearest bus stop · 4 min walk_. We look for a Metro station and a bus stop separately, each within about a mile's walk, so an event can turn up one, both, or neither.
 - **Lines or routes served.** For rail, each line is a colored badge with its Metro code:
 
 | Badge | Line |
@@ -31,24 +31,24 @@ For bus, each route shows as a pill with its route number (`70`, `S2`, and so on
 - **A Directions button** that opens the route in Google Maps, in transit mode.
 
 <Note>
-  There are actually **two** Directions links on an event page. The one _inside_ the Getting there card shows only when the transit card appears. A second **Directions** link sits in the event's location block — just under the address — and appears on **every** in-person event with a location, even when there's no transit card.
+  There are actually **two** Directions links on an event page. The one _inside_ the Getting there card shows only when the transit card appears. A second **Directions** link sits in the event's location block, just under the address, and appears on **every** in-person event with a location, even when there's no transit card.
 </Note>
 
 ## When live arrivals appear
 
-Live arrival times are the extra layer on top. They aren't there all the time, and they aren't tied to the calendar day — they run in a window around the event:
+Live arrival times are the extra layer on top. They aren't there all the time, and they aren't tied to the calendar day. They run in a window around the event:
 
 | Event timing | Live arrivals open | Live arrivals close |
 | :-- | :-- | :-- |
 | Has a start and an end time | 8 hours before the start | 4 hours after the end |
 | Start time only, no end time | 8 hours before the start | 7 hours after the start |
 
-When an event has no end time, we assume it runs about 3 hours, then add the same 4-hour tail — which is where that 7 comes from.
+When an event has no end time, we assume it runs about 3 hours, then add the same 4-hour tail, which is where that 7 comes from.
 
 So for a game night running **7:00 PM to 10:00 PM**, the arrival board switches on at **11:00 AM** that morning and stays up until **2:00 AM**. Check the page at 9:00 AM and you'll see the station, the lines, and the walk time, but no train times yet. That's the window not being open, not something broken.
 
 <Tip>
-  Nothing disappears when the window is closed. The station, the walking time, and the Directions button are always there — you're just not getting minute-by-minute departures outside the window.
+  Nothing disappears when the window is closed. The station, the walking time, and the Directions button are always there. You're just not getting minute-by-minute departures outside the window.
 </Tip>
 
 Inside the window the card gains a **Live** indicator and shows a **Next trains** board for rail or **Next buses** for a stop. Times count down in minutes, or read `ARR` / `BRD` when a train is arriving or boarding, and rail also notes car count.
@@ -57,7 +57,7 @@ Inside the window the card gains a **Live** indicator and shows a **Next trains*
 
 While you're looking at the board, it refreshes itself roughly every 30 seconds.
 
-It also stops when you're not watching. Scroll the card off-screen, or switch to another browser tab, and the updates pause until you come back. That's deliberate — WMATA limits how often we can ask for predictions, and pausing idle boards keeps that budget for the people actually standing on a platform.
+It also stops when you're not watching. Scroll the card off-screen, or switch to another browser tab, and the updates pause until you come back. That's deliberate: WMATA limits how often we can ask for predictions, and pausing idle boards keeps that budget for the people actually standing on a platform.
 
 ## When the board is empty inside the window
 
@@ -66,17 +66,17 @@ Sometimes the window is open and there still aren't any times. Two usual reasons
 - **The transit agency's live feed is down or quiet.** It happens, and it's on their end.
 - **Service has ended for the night.** After the last train or bus, there's nothing left to predict.
 
-Either way the card falls back to the static station info rather than showing an error. A card with no arrival times is doing its job — it's still telling you where to walk.
+Either way the card falls back to the static station info rather than showing an error. A card with no arrival times is doing its job. It's still telling you where to walk.
 
 ## First & last
 
 **First & last** shows the first and last departures of the day, so you can tell before you commit whether you'll still be able to get home afterwards.
 
-This one is timetable data, not a live feed, so it doesn't follow the live-arrivals window — it's available whenever the card is. Rail only for now; buses don't have a first/last view yet.
+This one is timetable data, not a live feed, so it doesn't follow the live-arrivals window. It's available whenever the card is. Rail only for now; buses don't have a first/last view yet.
 
 ## Switching between rail and bus
 
-When an event has **both** a Metro station and a bus stop within range, a **Rail | Bus** toggle lets you flip between them — it opens on **Rail** by default. If only one is nearby, the card just shows that one, with no toggle.
+When an event has **both** a Metro station and a bus stop within range, a **Rail | Bus** toggle lets you flip between them: it opens on **Rail** by default. If only one is nearby, the card just shows that one, with no toggle.
 
 ## Service alerts
 
@@ -94,19 +94,19 @@ Prefer not to see transit on event pages? You can turn it off for your account:
     Scroll to the **Event Page Modules** section.
   </Step>
   <Step title="Turn off transit">
-    Switch off **Show transit on event pages**. The card — and its live lookups — stop appearing on event pages for you.
+    Switch off **Show transit on event pages**. The card, and its live lookups, stop appearing on event pages for you.
   </Step>
 </Steps>
 
 <Note>
-  This is a single, personal, site-wide switch — it covers rail and bus together, and it changes only what _you_ see. It doesn't affect the standalone Directions link in the location block.
+  This is a single, personal, site-wide switch: it covers rail and bus together, and it changes only what _you_ see. It doesn't affect the standalone Directions link in the location block.
 </Note>
 
 ## Frequently asked
 
 <AccordionGroup>
   <Accordion title="I can see the station but there are no arrival times.">
-    Almost always the live window simply isn't open yet. It opens 8 hours before the event starts — so for a 7:00 PM event, times appear from 11:00 AM. Inside the window, an empty board usually means WMATA's feed is briefly unavailable, or service has finished for the night.
+    Almost always the live window simply isn't open yet. It opens 8 hours before the event starts, so for a 7:00 PM event, times appear from 11:00 AM. Inside the window, an empty board usually means WMATA's feed is briefly unavailable, or service has finished for the night.
   </Accordion>
 
   <Accordion title="Why don't I see a Getting there card on this event?">
@@ -114,7 +114,7 @@ Prefer not to see transit on event pages? You can turn it off for your account:
   </Accordion>
 
   <Accordion title="Do I need an account to see it?">
-    No — the Getting there card is public, so anyone viewing an in-person event page can use it, logged in or not.
+    No: the Getting there card is public, so anyone viewing an in-person event page can use it, logged in or not.
   </Accordion>
 
   <Accordion title="Which cities are supported?">
