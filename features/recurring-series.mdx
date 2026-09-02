@@ -48,9 +48,9 @@ Use **This event only** for one-off adjustments, like a holiday venue change, so
 
 You can change the pattern of a series that's already running: every week to every other week, Thursdays to Tuesdays, weekly to monthly. All of those work the same way.
 
-Cadence changes need one of the wider scopes — **This and all following** or **All upcoming events in the series**. **This event only** can move a single date, but it can't change the pattern.
+Cadence changes need one of the wider scopes — **This and all following** or **All upcoming events in the series**. **This event only** can move a single date, but it can't change the pattern. The two wider scopes re-space the same way; they just start from different places, one from the occurrence you're editing and one from the earliest occurrence still to come.
 
-The first upcoming event in the scope keeps its date. Everything after it re-spaces from there.
+That starting occurrence keeps its date if the date already fits the new pattern. If it doesn't fit, it moves forward to the first date that does. Everything after it re-spaces from there, and a series never moves earlier than it already was.
 
 | Part of the series | What a cadence change does to it |
 | :-- | :-- |
@@ -58,6 +58,13 @@ The first upcoming event in the scope keeps its date. Everything after it re-spa
 | Number of events | Stays the same |
 | RSVPs and attendees | Kept, nothing lost |
 | Occurrences you moved by hand | Re-spaced with the rest |
+| Notification to attendees | None at the time you save |
+
+<Warning>
+  Attendees aren't told the dates moved. Nothing is cancelled, so no cancellation goes out, and people see a new date the next time they open the event. If they've already RSVPed, telling them is on you.
+</Warning>
+
+One message does go out on its own: when an occurrence shifts by three days or more, its usual 24-hour reminder is sent again against the new date. That's a reminder, not a notice that anything changed.
 
 ### If the setting already says what you want
 
@@ -67,13 +74,15 @@ The round trip is needed because the reschedule only runs when the setting actua
 
 ### If the series has an end date
 
-If the new spacing would push occurrences past the date the series is set to end, the save is refused and you'll see a message explaining why. Nothing gets dropped quietly. Extend the end date or choose a shorter gap, then save again.
+If the new spacing would push occurrences past the date the series is set to end, the save is refused and you'll see **This cadence doesn't fit before the series end date. Extend the end date or choose a shorter gap.** Nothing gets dropped or cancelled to make it fit. Do one of those two things and save again.
 
 ## How many upcoming events you see
 
-A series keeps about six upcoming events on the board at a time, whether it runs weekly, bi-weekly, or monthly. As each one passes, another is added at the far end.
+A series keeps around six upcoming events on the board at a time, whichever cadence it runs on. It doesn't add a new one every time one passes. It waits until about four are left, then tops back up to six.
 
-A count that moves on its own isn't a fault. If you counted eight a while back and six today, the series is topping itself up rather than losing dates.
+A count that moves on its own isn't a fault. If you counted six a while back and four today, the next top-up hasn't run yet.
+
+The exception is a series you set to end after a specific number of events. Those are all created up front, so you see the whole run rather than a rolling six.
 
 ## Cancelling occurrences
 
