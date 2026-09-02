@@ -38,12 +38,49 @@ Occurrences automatically follow a shared title pattern — for example, **"Thur
 
 ## Editing a Series
 
-When you make a change to an occurrence — updating the description, adjusting the time, changing the venue — WR-Games asks whether you want to:
+When you change an occurrence — the description, the time, the venue — WR-Games asks how far the change should reach:
 
-- **Edit this occurrence only** — applies the change to just the selected date, leaving all other occurrences untouched.
-- **Edit this and all future occurrences** — applies the change to the selected date and every occurrence that comes after it.
+- **This event only** — just the date you're on. Every other occurrence stays put.
+- **This and all following** — the date you're on and every occurrence after it.
+- **All upcoming events in the series** — every occurrence still to come.
 
-This lets you handle one-off adjustments (a holiday venue change, for example) without disrupting the rest of your series.
+Use **This event only** for one-off adjustments, like a holiday venue change, so the rest of the series isn't disturbed. The two wider scopes reach every occurrence they cover, including any you'd previously moved or edited on their own.
+
+## Changing how often a series repeats
+
+You can change the pattern of a series that's already running: every week to every other week, Thursdays to Tuesdays, weekly to monthly. All of those work the same way.
+
+Cadence changes need one of the wider scopes — **This and all following** or **All upcoming events in the series**. **This event only** can move a single date, but it can't change the pattern.
+
+The first upcoming event in the scope keeps its date. Everything after it re-spaces from there.
+
+| Part of the series | What a cadence change does to it |
+| :-- | :-- |
+| Dates of upcoming events | Re-spaced from the first one |
+| Number of events | Stays the same |
+| RSVPs and attendees | Kept, nothing lost |
+| Occurrences you moved by hand | Re-spaced with the rest |
+| Notification to attendees | None is sent |
+
+<Warning>
+  Nobody is told the dates moved. Nothing is cancelled, so no cancellation email goes out — attendees simply see a different date the next time they look. If people have already RSVPed, telling them is on you.
+</Warning>
+
+### If the setting already says what you want
+
+Dates look wrong, and the cadence setting already reads what you wanted? Switch it to something else, save, then switch it back and save again. That second save re-spaces everything.
+
+The round trip is needed because the reschedule only runs when the setting actually changes. Picking the value that's already stored isn't a change, so nothing moves, and nothing tells you nothing moved.
+
+### If the series has an end date
+
+If the new spacing would push occurrences past the date the series is set to end, the save is refused and you'll see a message explaining why. Nothing gets dropped quietly. Extend the end date or choose a shorter gap, then save again.
+
+## How many upcoming events you see
+
+A series keeps about six upcoming events on the board at a time, whether it runs weekly, bi-weekly, or monthly. As each one passes, another is added at the far end.
+
+A count that moves on its own isn't a fault. If you counted eight a while back and six today, the series is topping itself up rather than losing dates.
 
 ## Cancelling Occurrences
 
