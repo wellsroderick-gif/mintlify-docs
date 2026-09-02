@@ -6,17 +6,15 @@ description: "Schedule repeating events on weekly, bi-weekly, or monthly cadence
 
 If your group meets on a regular schedule — every Thursday, the first Saturday of the month, every other week — Recurring Series lets you set that cadence once and let WR-Games generate each individual event automatically. Rather than duplicating events by hand, you define the pattern and publish a series that takes care of itself.
 
-## What a Recurring Series Is
+## What a recurring series is
 
 A recurring series is a repeating event schedule that produces individual event pages for each occurrence. Every occurrence is a fully independent event: it has its own event page, its own RSVP list, and its own attendees. Members can RSVP to individual occurrences without committing to the whole series. The series itself has a landing page that displays all upcoming occurrences at a glance so members can plan ahead.
 
-Occurrences automatically follow a shared title pattern — for example, **"Thursday Game Night #12"** — so attendees always know where they are in the series.
-
 <Note>
-  Recurring Series requires a **Standard or Pro plan**. Upgrade your group's plan in **Group Settings → Subscription** to unlock this feature.
+  Recurring series are available on the <Badge color="orange" size="sm">Standard</Badge> and <Badge color="orange" size="sm">Pro</Badge> plans. You can change your group's plan in **Group Settings → Subscription**.
 </Note>
 
-## Creating a Recurring Series
+## Creating a recurring series
 
 <Steps>
   <Step title="Start a new event">
@@ -36,16 +34,57 @@ Occurrences automatically follow a shared title pattern — for example, **"Thur
   </Step>
 </Steps>
 
-## Editing a Series
+## Editing a series
 
-When you make a change to an occurrence — updating the description, adjusting the time, changing the venue — WR-Games asks whether you want to:
+When you change an occurrence — the description, the time, the venue — WR-Games asks how far the change should reach:
 
-- **Edit this occurrence only** — applies the change to just the selected date, leaving all other occurrences untouched.
-- **Edit this and all future occurrences** — applies the change to the selected date and every occurrence that comes after it.
+- **This event only** — just the date you're on. Every other occurrence stays put.
+- **This and all following** — the date you're on and every occurrence after it.
+- **All upcoming events in the series** — every occurrence still to come.
 
-This lets you handle one-off adjustments (a holiday venue change, for example) without disrupting the rest of your series.
+Use **This event only** for one-off adjustments, like a holiday venue change, so the rest of the series isn't disturbed. The two wider scopes reach every occurrence they cover, including any you'd previously moved or edited on their own.
 
-## Cancelling Occurrences
+## Changing how often a series repeats
+
+You can change the pattern of a series that's already running: every week to every other week, Thursdays to Tuesdays, weekly to monthly. All of those work the same way.
+
+Cadence changes need one of the wider scopes — **This and all following** or **All upcoming events in the series**. **This event only** can move a single date, but it can't change the pattern. The two wider scopes re-space the same way; they just start from different places, one from the occurrence you're editing and one from the earliest occurrence still to come.
+
+That starting occurrence keeps its date if the date already fits the new pattern. If it doesn't fit, it moves forward to the first date that does. Everything after it re-spaces from there, and a series never moves earlier than it already was.
+
+| Part of the series | What a cadence change does to it |
+| :-- | :-- |
+| Dates of upcoming events | Re-spaced from the first one |
+| Number of events | Stays the same |
+| RSVPs and attendees | Kept, nothing lost |
+| Occurrences you moved by hand | Re-spaced with the rest |
+| Notification to attendees | None at the time you save |
+
+<Warning>
+  Attendees aren't told the dates moved. Nothing is cancelled, so no cancellation goes out, and people see a new date the next time they open the event. If they've already RSVPed, telling them is on you.
+</Warning>
+
+One message does go out on its own: when an occurrence shifts by three days or more, its usual 24-hour reminder is sent again against the new date. That's a reminder, not a notice that anything changed.
+
+### If the setting already says what you want
+
+Dates look wrong, and the cadence setting already reads what you wanted? Switch it to something else, save, then switch it back and save again. That second save re-spaces everything.
+
+The round trip is needed because the reschedule only runs when the setting actually changes. Picking the value that's already stored isn't a change, so nothing moves, and nothing tells you nothing moved.
+
+### If the series has an end date
+
+If the new spacing would push occurrences past the date the series is set to end, the save is refused and you'll see **This cadence doesn't fit before the series end date. Extend the end date or choose a shorter gap.** Nothing gets dropped or cancelled to make it fit. Do one of those two things and save again.
+
+## How many upcoming events you see
+
+A series keeps around six upcoming events on the board at a time, whichever cadence it runs on. It doesn't add a new one every time one passes. It waits until about four are left, then tops back up to six.
+
+A count that moves on its own isn't a fault. If you counted six a while back and four today, the next top-up hasn't run yet.
+
+The exception is a series you set to end after a specific number of events. Those are all created up front, so you see the whole run rather than a rolling six.
+
+## Cancelling occurrences
 
 You can cancel individual dates or shut down the entire series from any occurrence page or the series landing page:
 
@@ -59,7 +98,7 @@ You can cancel individual dates or shut down the entire series from any occurren
   </Card>
 </Columns>
 
-## The Series Landing Page
+## The series landing page
 
 Every recurring series has a dedicated landing page that lists all upcoming occurrences in chronological order. Members can browse future dates from one place and RSVP to whichever occurrences work for their schedule. Share the series landing page link with your community to make it easy for members to stay plugged in to your regular game nights.
 
