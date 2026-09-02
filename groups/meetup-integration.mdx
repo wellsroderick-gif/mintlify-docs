@@ -1,10 +1,10 @@
 ---
-title: "Meetup Integration — Sync, Modes, and Managing Your Connection"
+title: "Meetup Integration: Sync, Modes, and Managing Your Connection"
 description: "How WR-Games syncs events from your Meetup group, what link-out and side-by-side RSVP modes mean, and how to refresh, monitor, and unlink."
 sidebarTitle: "Meetup Integration"
 ---
 
-If your group runs on Meetup, the WR-Games Meetup integration keeps your events in sync without manual copy-paste. Once linked, Meetup events mirror into WR-Games automatically — your local community can browse them, get notified when their games are on the table, and RSVP without leaving WR-Games (depending on your mode).
+If your group runs on Meetup, the WR-Games Meetup integration keeps your events in sync without manual copy-paste. Once linked, Meetup events mirror into WR-Games automatically: your local community can browse them, get notified when their games are on the table, and RSVP without leaving WR-Games (depending on your mode).
 
 ## Linking Your Group to Meetup
 
@@ -33,7 +33,7 @@ The mode you choose determines where RSVPs live and what attendees see.
 | The two lists reconcile? | N/A | No |
 
 <Note>
-  **“Attending via Meetup” appears in both modes.** In link-out, it is the only attendee surface — the native WR-Games attendees panel is hidden. In side-by-side, it shows read-only alongside the native list. Either way, the two lists never merge.
+  **“Attending via Meetup” appears in both modes.** In link-out, it is the only attendee surface: the native WR-Games attendees panel is hidden. In side-by-side, it shows read-only alongside the native list. Either way, the two lists never merge.
 </Note>
 
 **Which mode to choose:**
@@ -43,7 +43,7 @@ The mode you choose determines where RSVPs live and what attendees see.
 
 ## Sync Cadence
 
-Mirrored events update automatically about every **15 minutes** — an event's title, time, and description stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
+Mirrored events update automatically about every **15 minutes**: an event's title, time, and description stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
 
 ## Refresh from Meetup
 
@@ -55,15 +55,15 @@ The **Refresh from Meetup** button on the Integrations card re-polls the Meetup 
 
 ## What You Can Edit on a Mirror
 
-Meetup controls certain fields on mirrored events — changes you make on WR-Games to those fields get overwritten on the next sync. Other fields are yours to set directly.
+Meetup controls certain fields on mirrored events. Changes you make on WR-Games to those fields get overwritten on the next sync. Other fields are yours to set directly.
 
 | Field | Who controls it |
 | :-- | :-- |
-| Title | **Meetup** — syncs automatically every cycle |
-| Date and time | **Meetup** — syncs automatically every cycle |
-| Description | **Meetup** — syncs automatically every cycle |
-| Location / venue | **Meetup** — re-enriched on every Refresh from Meetup |
-| Cover image | **You** — an upload through WR-Games is never overwritten by sync |
+| Title | **Meetup**, syncs automatically every cycle |
+| Date and time | **Meetup**, syncs automatically every cycle |
+| Description | **Meetup**, syncs automatically every cycle |
+| Location / venue | **Meetup**, re-enriched on every Refresh from Meetup |
+| Cover image | **You**, an upload through WR-Games is never overwritten by sync |
 | Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
 | RSVP settings | **You** (side-by-side mode only; in link-out, RSVP lives on Meetup) |
 | Hosts | **You** |
@@ -76,24 +76,24 @@ The Integrations card shows the current health of your Meetup connection:
 | Status | What it means |
 | :-- | :-- |
 | Healthy | Syncing normally |
-| Auth revoked | Meetup access was revoked — re-link to restore |
-| Slug renamed | Your Meetup group URL changed — update the slug in Integrations |
+| Auth revoked | Meetup access was revoked, re-link to restore |
+| Slug renamed | Your Meetup group URL changed. Update the slug in Integrations |
 
 Other error states may appear if the feed is temporarily unreachable. Waiting for the next automatic sync or tapping **Refresh from Meetup** resolves most transient issues.
 
 ## Unlinking
 
 <Warning>
-  Unlinking stops all future syncing. Before you confirm, WR-Games asks what to do with **upcoming** mirrored events — you can cancel them or leave them frozen as-is. Cancelling notifies native WR-Games RSVPs; Meetup attendees on the “Attending via Meetup” list are not emailed. Past mirrors are always retained.
+  Unlinking stops all future syncing. Before you confirm, WR-Games asks what to do with **upcoming** mirrored events. You can cancel them or leave them frozen as-is. Cancelling notifies native WR-Games RSVPs; Meetup attendees on the “Attending via Meetup” list are not emailed. Past mirrors are always retained.
 </Warning>
 
 Go to **Group Manage → Integrations** → **Disconnect Meetup** to unlink.
 
 ## What Members See
 
-Members don’t configure anything — here’s how mirrored events appear to them.
+Members don’t configure anything. Here’s how mirrored events appear to them.
 
-**“via Meetup” badge** — shown on event cards and detail pages so it’s clear the event originated on Meetup.
+**“via Meetup” badge**, shown on event cards and detail pages so it’s clear the event originated on Meetup.
 
 **RSVPs and CTAs** depend on mode and event status:
 
@@ -101,7 +101,7 @@ Members don’t configure anything — here’s how mirrored events appear to th
 - Future/published event in **side-by-side** → native WR-Games RSVP as normal.
 - Past or cancelled event in either mode → “View on Meetup.”
 
-**“Attending via Meetup” list** — shown on every mirror in both modes. It includes a last-synced timestamp and a note that guest counts may be understated (Meetup’s API doesn’t always surface full guest totals).
+**“Attending via Meetup” list**, shown on every mirror in both modes. It includes a last-synced timestamp and a note that guest counts may be understated (Meetup’s API doesn’t always surface full guest totals).
 
 **Auto-cancel:** A mirror is cancelled automatically only when Meetup’s feed positively reports a cancellation. A failed or blocked fetch never triggers an auto-cancel.
 
