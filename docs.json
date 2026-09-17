@@ -44,7 +44,8 @@
             "pages": [
               "billing/plans",
               "billing/event-credits",
-              "billing/manage-subscription"
+              "billing/manage-subscription",
+              "billing/what-happens-when-you-cancel"
             ]
           }
         ]
