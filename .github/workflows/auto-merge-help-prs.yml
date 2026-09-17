@@ -2,7 +2,7 @@ name: Auto-merge help PRs
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, ready_for_review]
     branches: [main]
 
 concurrency:
@@ -15,11 +15,11 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -53,7 +53,7 @@ jobs:
 
   merge:
     needs: checks
-    if: (startsWith(github.head_ref, 'mintlify-mcp/') || startsWith(github.head_ref, 'admin-mcp/')) && vars.AUTO_MERGE_ENABLED == 'true'
+    if: (startsWith(github.head_ref, 'mintlify-mcp/') || startsWith(github.head_ref, 'admin-mcp/')) && vars.AUTO_MERGE_ENABLED == 'true' && github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     permissions:
       contents: write
