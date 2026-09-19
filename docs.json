@@ -61,6 +61,7 @@
               "features/editing-an-event-thats-already-started",
               "features/rsvp-and-waitlist",
               "features/roll-call",
+              "features/ranked-seating",
               "features/on-the-table",
               "features/transit"
             ]
