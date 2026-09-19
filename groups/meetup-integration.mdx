@@ -67,7 +67,34 @@ Meetup controls certain fields on mirrored events. Changes you make on WR-Games 
 | Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
 | RSVP settings | **You** (side-by-side mode only; in link-out, RSVP lives on Meetup) |
 | Hosts | **You** |
-| Games / On The Table | **You** |
+| Games / On The Table | **You**, unless you switch on auto-pin (below) |
+
+## Auto-Pin a Game from a BGG Link
+
+If you already put a BoardGameGeek link in your Meetup listings, WR-Games can read it and pin that game to the mirrored event for you. No extra step on Meetup, no editing the mirror afterwards.
+
+Turn it on at **Group Manage → Integrations**, or on the review step when you first import a group. It's off until you switch it on, it's set per linked group, and it works in both link-out and side-by-side.
+
+Once a game is pinned it shows on the event's **On the Table** tab, exactly like a game you pinned by hand. Mirrors open on Overview, so it's one tab across.
+
+### When it pins, and when it doesn't
+
+| Your listing | What happens |
+| :-- | :-- |
+| One BGG link | That game gets pinned |
+| Two or more BGG links | Nothing is pinned. It won't guess which one you meant |
+| The same link twice | Still counts as one, so it pins |
+| A game we don't have yet | Nothing is pinned, and nothing is guessed from the web address |
+
+<Note>
+  Your own pin always wins. If you pin a game by hand, sync will never overwrite it, even if the listing later points at something else.
+</Note>
+
+<Warning>
+  **Removing a pinned game is permanent.** Edit the event, clear the game, and it stays gone. Sync keeps running every 15 minutes and the link is still sitting in your listing, but that game won't come back. If you want it again, pin it by hand.
+</Warning>
+
+Two more things worth knowing. If you change which game your listing links to _after_ a pin has already landed, the pin doesn't follow. Edit the event instead. And on a very long listing, a BGG link buried right at the bottom may not be seen at all, so if you want it picked up, put it somewhere reasonable in the body.
 
 ## Sync Health
 
