@@ -43,6 +43,42 @@ WR-Games event creation uses a guided wizard that walks you through every settin
   </Step>
 </Steps>
 
+## Cover image
+
+Every event has a cover image. On events with a game attached, a Game Session or a Custom Event with a game pinned, you choose which image that is. The picker lives in the event wizard with the rest of your event details, and it's the same picker in the same place whether you're creating an event or editing one that's already published.
+
+There are three ways to set it:
+
+<Columns cols={3}>
+  <Card title="Upload your own" icon="upload">
+    Any image you like. Works on every event type, with or without a game.
+  </Card>
+
+  <Card title="Use game art" icon="dices">
+    A row of thumbnails: your pinned game first, then each expansion you've selected.
+  </Card>
+
+  <Card title="Search the game catalog" icon="search">
+    Pick any game's box art from the WR-Games catalog, whether or not it's on your event.
+  </Card>
+</Columns>
+
+### Expansion art
+
+Select three expansions and you get three thumbnails, in the order you picked them, each labelled with that expansion's name. There's no rule about which expansion "wins" and nothing is chosen for you. They're just more options in the row.
+
+If an expansion has no box art in the catalog, its thumbnail still appears but greyed out. That's deliberate. An expansion vanishing from the row while you can see it selected right above looks like a bug, whereas a greyed tile tells you the truth: there's no art to use.
+
+Game art is shown whole rather than cropped, so a tall box doesn't get its top and bottom sliced off.
+
+### Two things worth knowing
+
+**Once you choose an image, it stays chosen.** If you pick an expansion's art and later deselect that expansion, your cover doesn't revert. The same goes for switching the base game afterwards. WR-Games only fills the cover in automatically when you haven't made a choice, and picking the base game's own art on purpose counts as a choice.
+
+<Note>
+  The one exception is clearing the game entirely. Art you picked depicts the game you just removed, so it goes with it and you'll be back to no cover. An image you uploaded yourself never depicted the game, so it stays put.
+</Note>
+
 ## Editing an event
 
 You can edit most fields on an upcoming event at any time before it starts. Navigate to the event page, click **Edit Event**, make your changes, and save.
