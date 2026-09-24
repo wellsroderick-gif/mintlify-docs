@@ -11,6 +11,7 @@ concurrency:
 
 jobs:
   checks:
+    # hosted-runner: (b) public repo — standard hosted runners are free here, and GitHub advises against self-hosted runners on public repos
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -54,6 +55,7 @@ jobs:
   merge:
     needs: checks
     if: (startsWith(github.head_ref, 'mintlify-mcp/') || startsWith(github.head_ref, 'admin-mcp/')) && vars.AUTO_MERGE_ENABLED == 'true' && github.event.pull_request.draft == false
+    # hosted-runner: (b) public repo — standard hosted runners are free here, and GitHub advises against self-hosted runners on public repos
     runs-on: ubuntu-latest
     permissions:
       contents: write
