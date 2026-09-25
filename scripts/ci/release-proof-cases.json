@@ -1,0 +1,24 @@
+{
+  "_note": "Shared release-proof fixture. CANONICAL in board-game-meetup-nexus scripts/release/__fixtures__/; carried BYTE-IDENTICAL into command-admin scripts/merge-gate/ and mintlify-docs scripts/ci/ by npm run release-proof:vendor (nexus), and checked nightly by the nexus custodian release-proof-pair audit. Never edit a copy.",
+  "release": {
+    "identifier": "WR-7170",
+    "project": "Releases",
+    "stateType": "completed",
+    "description": "Pinned-SHA: 38c78f25aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n\n## Manifest\n\n* WR-7165 Probe: WR-7149 migration lane smoke\n* WR-7160 Something else\n\n## Notes\n\nWR-7001 is mentioned in prose only.\n",
+    "comments": ["**Release verified** for `38c78f25`.\n\n`release-verify` = success."]
+  },
+  "cases": [
+    { "name": "leading manifest key of a verified completed Release is proven", "key": "WR-7165", "mutate": {}, "proven": true },
+    { "name": "a key named only in a manifest line TITLE is not proven (WR-7149)", "key": "WR-7149", "mutate": {}, "proven": false },
+    { "name": "a key mentioned only in prose outside the manifest is not proven", "key": "WR-7001", "mutate": {}, "proven": false },
+    { "name": "a canceled Release proves nothing", "key": "WR-7165", "mutate": { "stateType": "canceled" }, "proven": false },
+    { "name": "an In Progress (post-production failure) Release proves nothing", "key": "WR-7165", "mutate": { "stateType": "started" }, "proven": false },
+    { "name": "a completed Release with no verdict comment (closed by hand) proves nothing", "key": "WR-7165", "mutate": { "comments": [] }, "proven": false },
+    { "name": "a completed Release whose only verdict is FAILED proves nothing", "key": "WR-7165", "mutate": { "comments": ["**Release FAILED** for `38c78f25` at **gates**."] }, "proven": false },
+    { "name": "an issue outside the Releases project proves nothing", "key": "WR-7165", "mutate": { "project": "Automation Platform" }, "proven": false },
+    { "name": "a key absent from every manifest is not proven", "key": "WR-1", "mutate": {}, "proven": false },
+    { "name": "a leading key written as a Linear mention link is proven (release WR-7954 lists every item this way)", "key": "WR-7590", "mutate": { "description": "## Manifest\n\n* [WR-7590](https://linear.app/wr-inc/issue/WR-7590/send-back-rail) Send-back rail\n"}, "proven": true},
+    { "name": "a leading key written as an issue element (the Linear MCP serialisation) is proven", "key": "WR-7590", "mutate": { "description": "## Manifest\n\n* <issue id=\"u\" href=\"https://linear.app/wr-inc/issue/WR-7590/x\">WR-7590</issue> Send-back rail\n"}, "proven": true},
+    { "name": "a mention link inside a manifest line TITLE is not proven", "key": "WR-7149", "mutate": { "description": "## Manifest\n\n* WR-7165 Probe: [WR-7149](https://linear.app/wr-inc/issue/WR-7149/x) migration lane smoke\n"}, "proven": false }
+  ]
+}

@@ -1,0 +1,65 @@
+name: Help PR checks
+
+# The content checks for every PR into main. They run the PR's own code, so this workflow holds no
+# secret and can write nothing. Merging, and closing the ticket, is auto-merge-help-prs.yml: it
+# starts when this workflow completes, runs from main, and is the only place the Linear key exists.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main]
+
+concurrency:
+  group: help-pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    # hosted-runner: (b) public repo — standard hosted runners are free here, and GitHub advises against self-hosted runners on public repos
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # Unpinned npx mintlify — always latest CLI on each run.
+      # Tradeoff: reproducibility vs picking up Mintlify fixes without bumping a pin.
+      # Pin to a specific version here only if CI becomes flaky across releases.
+      - name: Mintlify validate
+        run: npx mintlify validate
+
+      # Same unpinned tradeoff as validate above.
+      - name: Mintlify broken-links
+        run: npx mintlify broken-links
+
+      - name: Check frontmatter
+        run: node scripts/ci/check-frontmatter.mjs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+
+      - name: Check nav membership
+        run: node scripts/ci/check-nav-membership.mjs
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+
+      - name: Check icons
+        run: node scripts/ci/check-icons.mjs
+
+      - name: Check self-links
+        run: node scripts/ci/check-self-links.mjs
+
+      - name: Merge gate tests
+        run: node --test scripts/ci/help-merge-gate.test.mjs
