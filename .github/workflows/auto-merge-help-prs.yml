@@ -1,67 +1,117 @@
 name: Auto-merge help PRs
 
+# TRUSTED. Every trigger below runs this file as it is on main, and every job checks out main
+# with no persisted credentials, so no PR's code runs here. The Linear key is the secret
+# LINEAR_API_KEY in the Environment `linear-robot`, whose branch policy admits main only; only the
+# two jobs that need it name that environment. PR text reaches the script through env:, never
+# inside a run: line. The content checks are help-pr-checks.yml, which holds no secret.
+#
+#   select  after the Help PR checks finish, hourly, or by hand: is any help PR green? No key.
+#   sweep   only when select found one: the path veto, the release-proof gate, the merge pinned
+#           to the head, and closing the help ticket (scripts/ci/help-merge-gate.mjs).
+#   close   whenever a PR into main merges: close the ticket it names. The sweep's own merges
+#           start no workflow (GITHUB_TOKEN), so the sweep closes those itself.
+#
+# Kill switch: select and sweep run only while the repository variable AUTO_MERGE_ENABLED is
+# 'true'. close always runs, because Linear no longer closes help tickets at merge.
+
 on:
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_run:
+    workflows: ["Help PR checks"]
+    types: [completed]
+  schedule:
+    # Hourly, because a PR held for a WR-Games release has no GitHub event to wake it when the
+    # release lands.
+    - cron: "23 * * * *"
+  workflow_dispatch:
+  pull_request_target:
+    types: [closed]
     branches: [main]
 
-concurrency:
-  group: help-pr-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+permissions: {}
 
 jobs:
-  checks:
+  select:
+    if: github.event_name != 'pull_request_target' && vars.AUTO_MERGE_ENABLED == 'true'
     # hosted-runner: (b) public repo — standard hosted runners are free here, and GitHub advises against self-hosted runners on public repos
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
+      pull-requests: read
+      actions: read
+    outputs:
+      ready: ${{ steps.select.outputs.ready }}
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          ref: main
+          persist-credentials: false
 
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
 
-      # Unpinned npx mintlify — always latest CLI on each run.
-      # Tradeoff: reproducibility vs picking up Mintlify fixes without bumping a pin.
-      # Pin to a specific version here only if CI becomes flaky across releases.
-      - name: Mintlify validate
-        run: npx mintlify validate
-
-      # Same unpinned tradeoff as validate above.
-      - name: Mintlify broken-links
-        run: npx mintlify broken-links
-
-      - name: Check frontmatter
-        run: node scripts/ci/check-frontmatter.mjs
+      - name: Find help PRs whose checks passed
+        id: select
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci/help-merge-gate.mjs select
 
-      - name: Check nav membership
-        run: node scripts/ci/check-nav-membership.mjs
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.sha }}
-
-      - name: Check icons
-        run: node scripts/ci/check-icons.mjs
-
-      - name: Check self-links
-        run: node scripts/ci/check-self-links.mjs
-
-  merge:
-    needs: checks
-    if: (startsWith(github.head_ref, 'mintlify-mcp/') || startsWith(github.head_ref, 'admin-mcp/')) && vars.AUTO_MERGE_ENABLED == 'true' && github.event.pull_request.draft == false
+  sweep:
+    needs: select
+    if: needs.select.outputs.ready != '0'
     # hosted-runner: (b) public repo — standard hosted runners are free here, and GitHub advises against self-hosted runners on public repos
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: linear-robot
+    concurrency:
+      group: help-merge-gate-sweep
+      cancel-in-progress: false
     permissions:
       contents: write
       pull-requests: write
+      issues: write
+      actions: read
     steps:
-      - name: Squash merge
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Merge green help PRs and close their tickets
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh pr merge ${{ github.event.pull_request.number }} -R ${{ github.repository }} --squash --delete-branch
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+        run: node scripts/ci/help-merge-gate.mjs sweep
+
+  close:
+    if: github.event_name == 'pull_request_target' && github.event.pull_request.merged == true
+    # hosted-runner: (b) public repo — standard hosted runners are free here, and GitHub advises against self-hosted runners on public repos
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: linear-robot
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Close the ticket this PR names
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: node scripts/ci/help-merge-gate.mjs close
