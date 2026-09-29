@@ -61,5 +61,17 @@ jobs:
       - name: Check self-links
         run: node scripts/ci/check-self-links.mjs
 
+      - name: Check brand casing
+        run: node scripts/ci/check-brand-casing.mjs
+
+      - name: Brand casing self-test
+        run: node scripts/ci/check-brand-casing.mjs --self-test
+
+      - name: Check em dashes
+        run: node scripts/ci/check-em-dashes.mjs
+
+      - name: Em dash self-test
+        run: node scripts/ci/check-em-dashes.mjs --self-test
+
       - name: Merge gate tests
         run: node --test scripts/ci/help-merge-gate.test.mjs
