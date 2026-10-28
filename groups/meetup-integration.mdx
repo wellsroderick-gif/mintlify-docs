@@ -63,11 +63,23 @@ Meetup controls certain fields on mirrored events. Changes you make on WR-Games 
 | Date and time | **Meetup**, syncs automatically every cycle |
 | Description | **Meetup**, syncs automatically every cycle |
 | Location / venue | **Meetup**, re-enriched on every Refresh from Meetup |
+| Event type | Fixed: always a **Custom Event** |
 | Cover image | **You**, an upload through WR-Games is never overwritten by sync |
 | Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
 | RSVP settings | **You** (side-by-side mode only; in link-out, RSVP lives on Meetup) |
-| Hosts | **You** |
+| Additional hosts | **You** (side-by-side mode only; in link-out, read-only) |
 | Games / On the Table | **You**, unless you switch on auto-pin (below) |
+
+### Can I change a Meetup event to an Open Game Night or Game Session?
+
+You can set it up to work like either one. An event that comes from Meetup always stays a Custom Event, so **Change event type** doesn't appear on it, but a Custom Event can do what the other two types do. Edit the event and choose one under **Optional features**:
+
+| If you want it to work like… | Turn on |
+| :-- | :-- |
+| An Open Game Night, where attendees add the games they're bringing and play at tables | **Enable On the Table** |
+| A Game Session, built around one game | **Pin to a specific game** |
+
+It's one or the other: turning either on switches the other off.
 
 ## Auto-Pin a Game from a BGG Link
 
