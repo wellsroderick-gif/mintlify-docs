@@ -8,6 +8,7 @@ import { describe, it } from "node:test";
 import {
   CLOSE_MARKER,
   HOLD_MARKER,
+  NO_TICKET_MARKER,
   blockerSpent,
   closeDecision,
   closedCommentBody,
@@ -18,8 +19,12 @@ import {
   judgeMergeable,
   judgePaths,
   keyFromBranch,
+  noTicketCommentBody,
+  noTicketDecision,
+  noTicketPrs,
   notHelpTicketBody,
   ticketKeyOf,
+  wakeCount,
 } from "./help-merge-gate.mjs";
 import { manifestFrom, proofFromReleases } from "./release-proof-core.mjs";
 
@@ -64,16 +69,77 @@ describe("which PRs the gate considers", () => {
     assert.deepEqual(helpCandidates([pr({})], REPO).map((p) => p.number), [10]);
     assert.deepEqual(helpCandidates([pr({ head: { ref: "admin-mcp/wr-2-y", repo: { full_name: REPO } } })], REPO).length, 1);
   });
-  it("a draft, a fork, another base, a closed PR and a non-help branch are not", () => {
+  it("a draft, a fork, another base and a closed PR are not", () => {
     assert.equal(helpCandidates([pr({ draft: true })], REPO).length, 0);
     assert.equal(helpCandidates([pr({ head: { ref: "mintlify-mcp/wr-1-x", repo: { full_name: "someone/fork" } } })], REPO).length, 0);
     assert.equal(helpCandidates([pr({ head: { ref: "mintlify-mcp/wr-1-x", repo: null } })], REPO).length, 0);
     assert.equal(helpCandidates([pr({ base: { ref: "develop" } })], REPO).length, 0);
     assert.equal(helpCandidates([pr({ state: "closed" })], REPO).length, 0);
-    assert.equal(helpCandidates([pr({ head: { ref: "claude/wr-9862-help-merge-gate", repo: { full_name: REPO } } })], REPO).length, 0);
+  });
+  // WR-26613: any one-segment prefix whose branch names a ticket, not just the two MCP prefixes.
+  it("a Mintlify editor branch that names a ticket is a candidate", () => {
+    assert.deepEqual(helpCandidates([pr({ head: { ref: "roderick/wr-123-x", repo: { full_name: REPO } } })], REPO).map((p) => p.number), [10]);
+  });
+  it("an MCP branch that names a ticket is still a candidate", () => {
+    assert.deepEqual(helpCandidates([pr({ head: { ref: "mintlify-mcp/wr-123-x", repo: { full_name: REPO } } })], REPO).map((p) => p.number), [10]);
+  });
+  it("a claude/ branch that names a ticket is now a candidate (decided widening; the path veto still applies)", () => {
+    assert.deepEqual(helpCandidates([pr({ head: { ref: "claude/wr-9862-help-merge-gate", repo: { full_name: REPO } } })], REPO).map((p) => p.number), [10]);
+  });
+  it("a branch that names no ticket is not, whatever its title says", () => {
+    assert.equal(helpCandidates([pr({ head: { ref: "roderick/update-c0e24c", repo: { full_name: REPO } }, title: "WR-123 Update" })], REPO).length, 0);
+    assert.equal(helpCandidates([pr({ head: { ref: "mintlify-mcp/whatsnew-body-fix-a0393cc", repo: { full_name: REPO } } })], REPO).length, 0);
+  });
+  it("a draft or a fork on a ticket branch is not", () => {
+    assert.equal(helpCandidates([pr({ draft: true, head: { ref: "roderick/wr-123-x", repo: { full_name: REPO } } })], REPO).length, 0);
+    assert.equal(helpCandidates([pr({ head: { ref: "roderick/wr-123-x", repo: { full_name: "someone/fork" } } })], REPO).length, 0);
   });
   it("candidates come oldest first", () => {
     assert.deepEqual(helpCandidates([pr({ number: 12 }), pr({ number: 11 })], REPO).map((p) => p.number), [11, 12]);
+  });
+});
+
+describe("the no-ticket notice (WR-26613)", () => {
+  const pr = (/** @type {any} */ over) => ({
+    number: 20,
+    state: "open",
+    draft: false,
+    base: { ref: "main" },
+    head: { ref: "roderick/update-c0e24c", repo: { full_name: REPO }, sha: "new111" },
+    ...over,
+  });
+  it("an open, ready, same-repo PR whose branch names no ticket gets one; a ticket branch does not", () => {
+    assert.deepEqual(noTicketPrs([pr({}), pr({ number: 21, head: { ref: "roderick/wr-123-x", repo: { full_name: REPO } } })], REPO).map((p) => p.number), [20]);
+  });
+  it("a draft, a fork, another base or a closed PR gets none", () => {
+    assert.equal(noTicketPrs([pr({ draft: true })], REPO).length, 0);
+    assert.equal(noTicketPrs([pr({ head: { ref: "roderick/update-c0e24c", repo: { full_name: "someone/fork" } } })], REPO).length, 0);
+    assert.equal(noTicketPrs([pr({ base: { ref: "develop" } })], REPO).length, 0);
+    assert.equal(noTicketPrs([pr({ state: "closed" })], REPO).length, 0);
+  });
+  it("no notice yet: post one", () => {
+    assert.deepEqual(noTicketDecision([], "new111"), { action: "post", commentId: null });
+    assert.equal(noTicketDecision([{ id: 1, body: `${HOLD_MARKER}\nholding` }], "new111").action, "post");
+  });
+  it("a notice naming the current head: nothing to do", () => {
+    assert.equal(noTicketDecision([{ id: 5, body: noTicketCommentBody({ headSha: "new111" }) }], "new111").action, "none");
+  });
+  it("a notice naming an old head: rewrite that comment", () => {
+    assert.deepEqual(noTicketDecision([{ id: 5, body: noTicketCommentBody({ headSha: "old000" }) }], "new111"), { action: "rewrite", commentId: 5 });
+  });
+  it("the notice leads with its own marker, names the head, and says it merges by hand", () => {
+    const b = noTicketCommentBody({ headSha: "new111" });
+    assert.equal(b.split("\n")[0], NO_TICKET_MARKER);
+    assert.notEqual(NO_TICKET_MARKER, HOLD_MARKER);
+    assert.match(b, /new111/);
+    assert.match(b, /names no ticket/);
+    assert.match(b, /by hand/);
+    assert.match(b, /WR-####/);
+  });
+  it("select's count wakes the sweep for a lone no-ticket PR needing a notice", () => {
+    assert.equal(wakeCount({ ready: 0, noticesDue: 1 }), 1);
+    assert.equal(wakeCount({ ready: 2, noticesDue: 1 }), 3);
+    assert.equal(wakeCount({ ready: 0, noticesDue: 0 }), 0);
   });
 });
 
