@@ -8,14 +8,21 @@
  * Linear key (Environment `linear-robot`, main only) can be read. The six content checks run in
  * help-pr-checks.yml, on the PR's code, with no secrets.
  *
- *   select  Count the open help PRs whose Help PR checks passed on their head. GitHub reads only,
- *           no Linear key. The sweep job, which holds the key, runs only when this is non-zero.
- *   sweep   Each open help PR: head `mintlify-mcp/` or `admin-mcp/`, from this repo, into main,
- *           not a draft. The Help PR checks must have passed on its head. It must touch nothing
- *           under `.github/` or `scripts/` (this gate's own code merges by hand). Every blocker of
- *           its ticket must be spent. GitHub must call it mergeable. Then it is squash-merged, pinned
- *           to that head (`--match-head-commit`), and its ticket is closed (below). A PR that cannot
- *           merge gets ONE sticky comment saying why, rewritten only when the reason changes.
+ *   select  Count the open help PRs whose Help PR checks passed on their head, plus the open PRs
+ *           whose branch names no ticket and whose no-ticket notice is missing or names an older
+ *           head. GitHub reads only, no Linear key. The sweep job, which holds the key, runs only
+ *           when this is non-zero.
+ *   sweep   Each open help PR: from this repo, into main, not a draft, and its head branch names a
+ *           ticket (`<prefix>/wr-<n>-...`, any one-segment prefix, WR-26613). The Help PR checks
+ *           must have passed on its head. It must touch nothing under `.github/` or `scripts/`
+ *           (this gate's own code merges by hand). Every blocker of its ticket must be spent.
+ *           GitHub must call it mergeable. Then it is squash-merged, pinned to that head
+ *           (`--match-head-commit`), and its ticket is closed (below). A PR that cannot merge gets
+ *           ONE sticky comment saying why, rewritten only when the reason changes. After the
+ *           merges, an open PR whose branch names NO ticket is never merged: it gets ONE sticky
+ *           notice saying so (merge it by hand, or reopen it from a title that starts with
+ *           `WR-####`), rewritten only when its head changes. A title key does not make a branch a
+ *           help PR.
  *   close   A merged PR (PR_NUMBER, PR_HEAD_REF, PR_TITLE, PR_MERGE_SHA, from the event through
  *           `env:`): close the ticket it names. This is for merges this robot did not make. A merge
  *           made with GITHUB_TOKEN starts no workflow, so the sweep closes its own merges itself.
@@ -49,9 +56,9 @@ import { fileURLToPath } from "node:url";
 
 import { manifestFrom, proofFromReleases } from "./release-proof-core.mjs";
 
-export const HELP_BRANCH_PREFIXES = Object.freeze(["mintlify-mcp/", "admin-mcp/"]);
 export const CHECKS_WORKFLOW = "help-pr-checks.yml";
 export const HOLD_MARKER = "<!-- wr-help-merge-gate -->";
+export const NO_TICKET_MARKER = "<!-- wr-help-merge-gate-no-ticket -->";
 export const CLOSE_MARKER = "<!-- wr-help-merge-gate-close -->";
 export const HELP_LABELS = Object.freeze(["repo:mintlify-docs", "help-content", "changelog"]);
 export const HELP_PROJECT = "Helpdesk & Support Integration";
@@ -83,22 +90,49 @@ export function ticketKeyOf({ headRef, title }) {
   return inTitle.length === 1 ? inTitle[0] : null;
 }
 
+/** Open, not a draft, into main, from this repo. @param {any} p @param {string} repo */
+function openSameRepoIntoMain(p, repo) {
+  return p?.state === "open" && p?.draft !== true && p?.base?.ref === "main" && p?.head?.repo?.full_name === repo;
+}
+
 /**
- * Open help PRs this gate may consider: into main, from this repo, not a draft, help-branch prefix.
+ * Open help PRs this gate may consider: into main, from this repo, not a draft, and a head branch
+ * that names a ticket. Only the branch counts: a title key alone leaves the PR to a human.
  * @param {any[]} prs GitHub REST `pulls` objects
  * @param {string} repo `owner/name`
  */
 export function helpCandidates(prs, repo) {
   return (prs ?? [])
-    .filter(
-      (p) =>
-        p?.state === "open" &&
-        p?.draft !== true &&
-        p?.base?.ref === "main" &&
-        p?.head?.repo?.full_name === repo &&
-        HELP_BRANCH_PREFIXES.some((pre) => String(p?.head?.ref ?? "").startsWith(pre)),
-    )
+    .filter((p) => openSameRepoIntoMain(p, repo) && keyFromBranch(p?.head?.ref) !== null)
     .sort((a, b) => Number(a.number) - Number(b.number));
+}
+
+/**
+ * The PRs the gate will never merge because their branch names no ticket: same filter, no key.
+ * @param {any[]} prs GitHub REST `pulls` objects
+ * @param {string} repo `owner/name`
+ */
+export function noTicketPrs(prs, repo) {
+  return (prs ?? [])
+    .filter((p) => openSameRepoIntoMain(p, repo) && keyFromBranch(p?.head?.ref) === null)
+    .sort((a, b) => Number(a.number) - Number(b.number));
+}
+
+/**
+ * What a no-ticket PR's notice needs: "post" (none yet), "none" (it names this head) or
+ * "rewrite" (it names an older head). Posted once, rewritten only when the head moves.
+ * @param {Array<{ id?: number, body?: string }>} comments GitHub REST `issues/<n>/comments`
+ * @param {string} headSha
+ */
+export function noTicketDecision(comments, headSha) {
+  const mine = (comments ?? []).find((c) => String(c?.body ?? "").includes(NO_TICKET_MARKER));
+  if (!mine) return { action: "post", commentId: null };
+  return String(mine.body).includes(headSha) ? { action: "none", commentId: mine.id ?? null } : { action: "rewrite", commentId: mine.id ?? null };
+}
+
+/** The number select hands the workflow: green help PRs plus no-ticket notices due. @param {{ ready: number, noticesDue: number }} a */
+export function wakeCount({ ready, noticesDue }) {
+  return ready + noticesDue;
 }
 
 /**
@@ -195,6 +229,18 @@ export function holdCommentBody({ reason, headSha, at }) {
     `**Help merge gate: holding.** ${reason[0].toUpperCase()}${reason.slice(1)}.`,
     "",
     `Head \`${headSha}\`, checked ${at}. The gate looks again when the checks finish and every hour; this comment is rewritten in place when the reason changes.`,
+  ].join("\n");
+}
+
+/** @param {{ headSha: string }} a */
+export function noTicketCommentBody({ headSha }) {
+  return [
+    NO_TICKET_MARKER,
+    "**Help merge gate: not merging this one.** Its branch names no ticket, so the gate will not merge it.",
+    "",
+    "Merge it by hand, or reopen it from a Mintlify title that starts with `WR-####` so the branch gets the key.",
+    "",
+    `Head \`${headSha}\`. This comment is rewritten only when the head changes.`,
   ].join("\n");
 }
 
@@ -409,11 +455,30 @@ async function closeTicket({ prNumber, headRef, title, mergeSha }) {
   if (!said) await comment(issue.id, closedCommentBody({ prNumber, mergeSha, repo: REPO }));
 }
 
-/** Open help PRs, each with its checks verdict. @returns {Promise<{ pr: any, checks: { ok: boolean, reason: string } }[]>} */
-async function judged() {
-  const open = await gh(`repos/${REPO}/pulls?state=open&base=main&per_page=100`);
+/** Create or rewrite the one sticky no-ticket notice on a PR. @param {any} pr */
+async function noticeNoTicket(pr) {
+  const comments = await gh(`repos/${REPO}/issues/${pr.number}/comments?per_page=100`);
+  const { action, commentId } = noTicketDecision(comments, pr.head.sha);
+  log(`  #${pr.number} ${pr.head.ref}: names no ticket, never merged here; notice ${action}`);
+  if (action === "none") return;
+  if (DRY) {
+    log(`  [dry-run] would ${action} the no-ticket notice on #${pr.number}`);
+    return;
+  }
+  const body = noTicketCommentBody({ headSha: pr.head.sha });
+  if (action === "rewrite") await gh(`repos/${REPO}/issues/comments/${commentId}`, { method: "PATCH", body: { body } });
+  else await gh(`repos/${REPO}/issues/${pr.number}/comments`, { method: "POST", body: { body } });
+}
+
+/** Open PRs into main. */
+async function openPrs() {
+  return gh(`repos/${REPO}/pulls?state=open&base=main&per_page=100`);
+}
+
+/** Open help PRs, each with its checks verdict. @param {any[]} open @returns {Promise<{ pr: any, checks: { ok: boolean, reason: string } }[]>} */
+async function judged(open) {
   const candidates = helpCandidates(open, REPO);
-  log(`help-merge-gate: ${open.length} open PR(s), ${candidates.length} help PR(s)`);
+  log(`help-merge-gate: ${open.length} open PR(s), ${candidates.length} help PR(s), ${noTicketPrs(open, REPO).length} naming no ticket`);
   const out = [];
   for (const pr of candidates) {
     const runs = await gh(`repos/${REPO}/actions/workflows/${CHECKS_WORKFLOW}/runs?head_sha=${pr.head.sha}&event=pull_request&per_page=20`);
@@ -423,19 +488,35 @@ async function judged() {
 }
 
 async function select() {
-  const ready = (await judged()).filter(({ pr, checks }) => {
+  const open = await openPrs();
+  const ready = (await judged(open)).filter(({ pr, checks }) => {
     log(`  #${pr.number} ${pr.head.ref}: ${checks.reason}`);
     return checks.ok;
   });
-  const line = `ready=${ready.length}\n`;
+  // A lone no-ticket PR must still wake the sweep, which alone can comment. An unreadable comment
+  // list counts as due: the sweep re-reads it, and it never merges a no-ticket PR either way.
+  let noticesDue = 0;
+  for (const pr of noTicketPrs(open, REPO)) {
+    let action;
+    try {
+      action = noTicketDecision(await gh(`repos/${REPO}/issues/${pr.number}/comments?per_page=100`), pr.head.sha).action;
+    } catch (e) {
+      action = `unreadable (${errText(e)}), counted as due`;
+    }
+    log(`  #${pr.number} ${pr.head.ref}: names no ticket; notice ${action}`);
+    if (action !== "none") noticesDue++;
+  }
+  log(`help PRs green: ${ready.length}; no-ticket notices due: ${noticesDue}`);
+  const line = `ready=${wakeCount({ ready: ready.length, noticesDue })}\n`;
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, line);
   log(line.trim());
 }
 
 async function sweep() {
+  const open = await openPrs();
   /** @type {Set<string> | null} */
   let merged = null;
-  for (const { pr, checks } of await judged()) {
+  for (const { pr, checks } of await judged(open)) {
     if (!checks.ok) {
       log(`  #${pr.number} ${pr.head.ref}: not yet, ${checks.reason}`);
       continue;
@@ -492,6 +573,15 @@ async function sweep() {
       await closeTicket({ prNumber: pr.number, headRef: pr.head.ref, title: pr.title, mergeSha: after.merge_commit_sha });
     } catch (e) {
       console.error(`help-merge-gate: #${pr.number} MERGED as ${after.merge_commit_sha}, but closing its ticket FAILED: ${errText(e)}`);
+      process.exitCode = 1;
+    }
+  }
+  // After the merges, so a notice that fails can never stop or delay one.
+  for (const pr of noTicketPrs(open, REPO)) {
+    try {
+      await noticeNoTicket(pr);
+    } catch (e) {
+      console.error(`help-merge-gate: #${pr.number} no-ticket notice FAILED: ${errText(e)}`);
       process.exitCode = 1;
     }
   }
