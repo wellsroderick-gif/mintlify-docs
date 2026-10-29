@@ -77,7 +77,9 @@
               "groups/meetup-integration",
               "groups/group-calendar-custom-entries",
               "groups/import-from-meetup",
-              "groups/claim-your-group-listing"
+              "groups/claim-your-group-listing",
+              "groups/leadership-transfers",
+              "groups/group-activity-policy"
             ]
           },
           {
