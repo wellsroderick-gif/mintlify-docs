@@ -1,65 +1,56 @@
 ---
-title: "Roll Call: Confirm Who's Actually Attending"
+title: "Roll Call"
 sidebarTitle: "Roll Call"
-description: "Roll Call sends a reconfirmation prompt to every Going attendee 4 hours before your event, so organizers know exactly who will show up."
+description: "About four hours before an event, Roll Call asks everyone who's Going to confirm they're still coming, so the host knows who'll show up."
 ---
 
-Roll Call is WR-Games' automatic attendance reconfirmation system. Instead of relying on RSVPs made days or weeks in advance, Roll Call reaches out to every Going attendee shortly before the event and asks them to confirm they're still coming: giving organizers a live, accurate headcount before anyone sets up a single game.
+About four hours before an event starts, WR-Games asks everyone who's Going to confirm they're still coming. Hosts get a headcount from that afternoon instead of one from days ago.
 
-## How Roll Call Works
+Roll Call runs on every published event, whether it belongs to a group or someone hosts it themselves. There's nothing to turn on. People on the waitlist are asked too, whether they're still interested.
 
-Four hours before your event starts, every attendee who has RSVP'd as Going receives a reconfirmation prompt. Attendees tap to confirm, and a green checkmark appears next to their name on the attendee list. Organizers can watch confirmations come in from the event dashboard in real time, so you always know who to expect at the table.
+## How You're Asked
 
-## Roll Call Modes
-
-WR-Games offers two Roll Call modes depending on your plan:
-
-| Mode | Plan | Delivery |
-| --- | --- | --- |
-| **Standard Roll Call** | Free | In-app notification |
-| **Advanced Roll Call with SMS** | Standard\+ | In-app notification \+ text message to your verified phone number |
-
-Standard Roll Call covers members who have the app open or push notifications enabled. Advanced Roll Call adds an SMS fallback so the prompt reaches attendees even if they haven't opened the app recently, significantly improving your confirmation rate.
+| Channel | Who gets it |
+| --- | --- |
+| In-app notification | Everyone who's asked |
+| Email | Everyone who's asked |
+| Text message | When the event's organizer is on a Standard, Pro or Commercial plan, and you've [turned on text messages](#turning-on-text-messages) |
 
 <Note>
-  Roll Call goes out automatically 4 hours before each event. You cannot trigger it early or send it manually. The timing is fixed to keep the reconfirmation as relevant as possible. The one exception is a big schedule change: moving an event by 24 hours or more re-opens Roll Call automatically.
+  Text messages depend on the **organizer's** plan, not yours. For a group event, that's the group's organizer. For an event someone hosts themselves, it's the host. You don't need a plan of your own to get Roll Call.
 </Note>
+
+## When Roll Call Opens
+
+- **About 4 hours before the start,** automatically.
+- **Earlier, if the host opens it.** Hosts can open Roll Call by hand up to 8 hours before the start.
+- **Not at all** for an event published less than 6 hours before it starts.
+
+Cancelling an event clears its Roll Call.
 
 ## For Attendees: How to Confirm Your Attendance
 
-When Roll Call arrives, confirming takes only a moment.
-
 <Steps>
-  <Step title="Receive Your Roll Call Prompt">
-    Four hours before the event, you'll get an in-app notification (and an SMS if you're on a Standard\+ plan with a verified phone number). Open the prompt from either channel.
+  <Step title="Open the Prompt">
+    Open the notification, the email or the link in the text message. Each one takes you to the event.
   </Step>
-  <Step title="Tap Confirm">
-    Press **Confirm** to let the organizer know you're on your way. A green checkmark will appear beside your name on the event's attendee list.
+  <Step title="Select Still Attending">
+    The **Roll Call** banner on the event page asks you to confirm you're still coming. Select **Still attending**, and a green check appears beside your name on the attendee list. In the email, **I'm Still Coming** does the same thing.
   </Step>
-  <Step title="Can't make it? Update your RSVP">
-    If your plans changed, don't ignore the prompt. Update your RSVP to Not Going instead. This keeps the organizer's headcount accurate and protects your Trust Score.
+  <Step title="Can't Make It? Say So">
+    Select **Can't make it** instead. The host's headcount stays accurate, and your spot goes to someone on the waitlist.
   </Step>
 </Steps>
 
-<Tip>
-  To make sure you never miss an SMS prompt, go to **Settings → Notifications** and enable SMS Roll Call. You'll need a verified phone number on your account. Standard\+ plan required.
-</Tip>
+Replying to the text message doesn't answer Roll Call. Use the link in it.
+
+If you're on the waitlist, the banner asks whether you're still interested instead, with **Still interested** and **Not interested**.
 
 ## For Organizers: Reading the Confirmed List
 
-Once Roll Call goes out, your event dashboard shows a live breakdown of responses.
+On the event's Attendees tab, everyone who confirmed has a green check beside their name. Anyone without one hasn't answered yet. They're still Going, so follow up or plan conservatively. The list updates as answers come in, right up until the event starts.
 
-<Columns cols={2}>
-  <Card title="Confirmed ✅" icon="circle-check">
-    Attendees who tapped Confirm show a green checkmark. These are your most reliable headcount. Plan your table setups around this group.
-  </Card>
-
-  <Card title="No Response" icon="circle-dashed">
-    Attendees who received the prompt but haven't confirmed yet. They're still Going but haven't reaffirmed. Follow up or plan conservatively.
-  </Card>
-</Columns>
-
-Use the confirmed list to finalise table assignments in [On the Table](/features/on-the-table), arrange seating, and decide how many copies of a game you'll need in play at once. The list updates live, so you can check it right up until doors open.
+For a read on who's likely to come before Roll Call even opens, see [Predictive Attendance](/features/predictive-attendance).
 
 ### When You Change Someone's Guests
 
@@ -69,44 +60,58 @@ The attendee isn't notified. Naming a guest they already had room for doesn't ch
 
 ## When an Event Is Rescheduled
 
-If a host moves an event by **24 hours or more**, earlier or later, Roll Call starts over. WR-Games treats the new date as a brand-new event for reconfirmation purposes:
+If a host moves an event by **24 hours or more**, earlier or later, Roll Call starts over:
 
-- **Every previous confirmation is cleared.** Anyone who already tapped Confirm loses that checkmark and gets asked again. This is deliberate: a confirmation for last Tuesday tells a host nothing about next Saturday.
-- **Hosts listed on the event are auto-confirmed** on the new date, so you don't need to reconfirm your own event.
-- **A fresh Roll Call goes out** 4 hours before the new start time, exactly as it would for any other event.
+- **Every earlier confirmation is cleared,** and everyone is asked again for the new date.
+- **Hosts listed on the event are confirmed automatically** for the new date.
+- **A fresh Roll Call opens** about 4 hours before the new start.
 
-Moves of **less than 24 hours** change nothing. Nudging a start time from 7:00 to 7:30 leaves every existing confirmation intact and sends no new prompt.
+Moves of **less than 24 hours** change nothing. Moving a start from 7:00 to 7:30 keeps every confirmation and sends no new prompt.
 
 <Note>
-  If a reschedule lands the event inside the 4-hour Roll Call window, a move that puts the new start only a couple of hours out, the fresh prompt still goes out, but on the next scheduled pass rather than the instant you save. Give it a few minutes before assuming it didn't fire.
+  If the move puts the new start less than 4 hours away, the fresh prompt goes out on the next scheduled pass rather than the moment the host saves. Give it a few minutes.
 </Note>
 
 ## Roll Call and Your Trust Score
 
-Your Trust Score reflects how reliably you follow through on commitments to the WR-Games community. Roll Call adds an important layer to that tracking.
-
 <Warning>
-  Confirming via Roll Call and then not attending the event counts as a **no-show** on your record, and carries a larger Trust Score impact than a standard unconfirmed absence. Only confirm if you genuinely plan to attend. If something comes up after you confirm, update your RSVP as soon as possible.
+  Confirming through Roll Call and then not coming counts as a **no-show**, and it weighs more on your Trust Score than not answering at all. Only confirm if you plan to be there. If something comes up after you confirm, update your RSVP or message the host as soon as you can.
 </Warning>
 
-Consistently confirming and attending boosts your reputation as a reliable community member, making other players more likely to save you a seat at their tables.
+See [Trust and Reputation](/concepts/trust-and-reputation) for how attendance affects your score.
 
-## SMS Roll Call Opt-In and Opt-Out
-
-SMS Roll Call is off by default. To manage your preference:
+## Turning On Text Messages
 
 <Steps>
-  <Step title="Open Settings">
-    Tap your profile icon and select **Settings**.
+  <Step title="Verify Your Phone">
+    In **Settings**, open the **Account** tab and verify your phone number.
   </Step>
-  <Step title="Go to Notifications">
-    Select the **Notifications** tab.
+  <Step title={"Open Privacy & Visibility"}>
+    Go to the **Privacy & Visibility** tab and find **SMS notifications**.
   </Step>
-  <Step title="Toggle SMS Roll Call">
-    Switch **SMS Roll Call** on to receive text message prompts, or off to receive in-app prompts only. Changes take effect immediately.
+  <Step title="Turn On SMS Notifications and Roll Call">
+    Turn on **SMS Notifications**, then turn on **Roll Call**. **SMS Notifications** stays greyed out until your phone is verified.
   </Step>
 </Steps>
 
-<Accordion title="What if I don't have a verified phone number?">
-  SMS Roll Call requires a verified phone number on your account. If you haven't added one yet, go to **Settings → Account → Phone Number** and complete verification. Until your number is verified, Roll Call prompts will be delivered in-app only, even on Standard\+ plans.
-</Accordion>
+Reply **STOP** to any WR-Games text to stop all texts, or turn the switches off in the same place.
+
+## Related Articles
+
+<Columns cols={2}>
+  <Card title="Predictive Attendance" icon="chart-line" href="/features/predictive-attendance">
+    Who's likely to come, from the moment people RSVP.
+  </Card>
+
+  <Card title={"RSVP & Waitlist"} icon="user-check" href="/features/rsvp-and-waitlist">
+    How RSVPs, capacity and the waitlist work together.
+  </Card>
+
+  <Card title="Notifications" icon="bell" href="/help/notifications">
+    Every way WR-Games reaches you, and how to manage it.
+  </Card>
+
+  <Card title="Trust and Reputation" icon="shield" href="/concepts/trust-and-reputation">
+    How showing up, or not, affects your score.
+  </Card>
+</Columns>
