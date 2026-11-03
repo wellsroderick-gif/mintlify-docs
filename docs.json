@@ -70,6 +70,7 @@
             "group": "Groups",
             "pages": [
               "features/managing-groups",
+              "groups/new-group-homepage",
               "features/roles-and-permissions",
               "features/group-privacy",
               "features/group-announcements",
