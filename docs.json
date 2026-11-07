@@ -126,7 +126,8 @@
             "group": "Troubleshooting",
             "pages": [
               "help/common-issues",
-              "help/contact"
+              "help/contact",
+              "help/reporting"
             ]
           }
         ]
