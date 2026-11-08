@@ -63,6 +63,7 @@
               "features/roll-call",
               "features/ranked-seating",
               "features/on-the-table",
+              "features/start-a-table",
               "features/transit"
             ]
           },
