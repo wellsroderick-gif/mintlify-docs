@@ -81,7 +81,8 @@
               "groups/import-from-meetup",
               "groups/claim-your-group-listing",
               "groups/leadership-transfers",
-              "groups/group-activity-policy"
+              "groups/group-activity-policy",
+              "features/adding-games"
             ]
           },
           {
