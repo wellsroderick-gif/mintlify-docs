@@ -89,6 +89,7 @@
               "features/discovering-events",
               "features/play-logging",
               "features/game-collection",
+              "features/game-picker",
               "features/editing-and-resubmitting-a-venue-submission"
             ]
           },
