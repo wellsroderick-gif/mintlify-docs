@@ -1,0 +1,137 @@
+---
+title: "Setting Up and Managing On the Table"
+sidebarTitle: "On the Table (Hosts)"
+description: "For hosts: every On the Table setting, plus how to remove games, fix attribution, pick table leads, add walk-in guests, and edit the list after your event."
+---
+
+On the Table is your tool as much as your attendees'. You decide how much of it runs, who can add to it, and you can fix anything on the list before, during, and after the event.
+
+## Turning It On
+
+On the Table settings live in the event wizard, under the Games section of the Details step.
+
+Open Game Nights come with On the Table already on. For other event types you'll find an **Enable On the Table** toggle, off by default. Switch it on and the rest of the settings appear.
+
+| Setting | What It Does |
+| --- | --- |
+| **Enable On the Table** | Adds the On the Table tab to your event. Turning this off hides everything below it. |
+| **Attendees can add games** | On means anyone Going can add games. Off means only you and your Co-Hosts can, and attendees just read the list. |
+| **Allow tables** | Lets people open tables for a game and claim seats. Without it, the list is just a list. |
+| **Scheduled table times** | Lets table leads put a start time on a table, for nights that run in waves. |
+| **Voting** | Adds requests and vote counts. Works with or without tables. |
+| **Ranked voting** | Turns voting into an ordered ranking and seats people automatically. Needs both Voting and Allow tables on. See [Ranked Seating](/features/ranked-seating). |
+
+<Note>
+  These travel with a recurring series. Set them once on the series and every occurrence inherits them.
+</Note>
+
+<Warning>
+  Switching **Allow tables** off on a live event cancels every table on it and notifies everyone who had a seat. You'll get a confirmation first. Turning **Enable On the Table** off and back on resets the table settings underneath it to their defaults, so check them again before you save.
+</Warning>
+
+Turning Voting off later doesn't delete anything. Requests already on the list stay, keep their badge, and can still be claimed.
+
+## What You Can Do That Members Can't
+
+<Columns cols={2}>
+  <Card title="Members Can" icon="user">
+    - Add their own games
+    - Open a table for a game they brought
+    - Join any open table
+    - Remove their own entries
+    - Vote, if voting is on
+  </Card>
+
+  <Card title="You Can" icon="shield-check">
+    - Everything above, plus:
+    - Remove anyone's game
+    - Change who's credited with bringing a game
+    - Record a table on someone else's copy
+    - Pick who leads a table
+    - Add walk-in guests
+    - Edit the list for 7 days after the event
+  </Card>
+</Columns>
+
+## Removing a Game
+
+Find the game on the Games tab and press the **✕** on its entry.
+
+If that game has a table with people already seated, you'll get a confirmation before anything happens, naming the games affected. Confirming cancels the table and tells everyone sitting there that their seat is gone. The lead is told too.
+
+<Info>
+  A member removing a **request** isn't removing a game. It just takes their vote back. The request disappears on its own once the last vote goes.
+</Info>
+
+## Fixing Who Brought What
+
+Bringing a game and running its table are two different jobs, and you can change either one.
+
+**Who brought it.** Press **Change who brought this** on the entry and pick someone. This rewrites the credit without disturbing the table or anyone's seat.
+
+**Who leads the table.** Open the table, use the **⋯** menu, and choose **Change table lead**. The new lead is seated automatically even if the table is already full, and the previous lead keeps their seat. It's a handoff, not a swap. They get a notification naming you and the game.
+
+You can pick anyone Going, and you can also pick a guest. If the person you need isn't on the list at all, **Add Someone New…** at the bottom of the picker creates a walk-in guest on the spot.
+
+<Note>
+  Reassigning only reaches games somebody is bringing. Requests don't have an owner to change.
+</Note>
+
+## Running a Table on Someone Else's Game
+
+You don't have to be the one who brought a game to get it on a table. Open a table from any game on the list, pick whose copy is being used, then pick who's actually running it. That's often not the same person, and WR-Games doesn't assume it is.
+
+The same game can also run more than once in a night. Two tables of the same title at different times is a normal evening, not a duplicate.
+
+## Adding Guests
+
+You can add people who aren't on WR-Games from a table's open seat (**Add to Table**) or from **Add Someone New…** in any picker. You'll choose one of two kinds:
+
+| Option | Who It's For |
+| --- | --- |
+| **Guest of an Attendee** | A friend coming with someone who's Going |
+| **Walk-In Guest** | Someone who came on their own. No account needed. |
+
+Either kind can be credited with bringing a game, leading a table or holding a seat. Guests show up in the pickers alongside members, labelled so you can tell them apart.
+
+### When the Attendee Has No Guest Spot Left
+
+You can still add a guest for them. Pick the attendee, and the dialog tells you that adding the guest updates their RSVP to bring one more. It happens in the same step.
+
+- **On a group event,** this can take the event past its capacity. You'll see an **Over Capacity** notice, and nobody is moved to the waitlist.
+- **On a full user-hosted Game Session,** it won't go through. You'll see that the event is full, so the attendee can't bring another guest.
+- **If the event doesn't take new guests, or it's a free user-hosted event,** the attendee is greyed out. Add a **Walk-In Guest** instead.
+
+Members can only add a guest of their own, into a guest spot already on their RSVP. If they don't have one free, they're asked to update their guests on their RSVP first.
+
+## After the Event Ends
+
+You get **7 days** from the end of an event to keep editing On the Table, games and tables alike. Use it to add the game that got pulled out at 11pm, fix attribution, or clear entries that never materialized.
+
+Inside that window you can add and remove even without an RSVP, and even on an event with an empty list. After it closes, the list is locked and becomes part of the event's permanent record.
+
+<Warning>
+  Cancelling an event clears its tables entirely. The list of games survives as an archive, but tables do not.
+</Warning>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="On the Table" icon="dices" href="/features/on-the-table">
+    The attendee side: adding, requesting, voting, and taking a seat.
+  </Card>
+
+  <Card title="Ranked Seating" icon="list-ordered" href="/features/ranked-seating">
+    What changes when you switch ranked voting on.
+  </Card>
+
+  <Card title="Creating Events" icon="calendar-plus" href="/features/creating-events">
+    Where these settings sit in the event wizard.
+  </Card>
+
+  <Card title="Group Analytics" icon="chart-column" href="/features/managing-groups">
+    What your group actually plays, brings, and asks for.
+  </Card>
+</Columns>
+
+Something not behaving the way this describes? [Contact us](/help/contact).
