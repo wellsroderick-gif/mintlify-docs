@@ -82,7 +82,9 @@
               "groups/claim-your-group-listing",
               "groups/leadership-transfers",
               "groups/group-activity-policy",
-              "features/adding-games"
+              "features/adding-games",
+              "groups/group-settings-overview",
+              "groups/lending-games"
             ]
           },
           {
