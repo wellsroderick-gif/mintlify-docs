@@ -122,10 +122,14 @@ When an event is cancelled or deleted on Meetup, WR-Games cancels its synced cop
 
 It only ever touches events that came from Meetup. Events you create on WR-Games are never affected.
 
-| Setting | When Meetup Cancels or Removes an Event |
-| :-- | :-- |
-| On | The synced copy is cancelled here and its guests are told. |
-| Off | The copy stays live on WR-Games. Organizers get a notification, "\{event title\} was cancelled or removed on Meetup", so you can cancel it here if it isn't happening. |
+<Tabs>
+  <Tab title="Auto-Cancel On">
+    When Meetup cancels or removes an event, the synced copy is cancelled here and its guests are told.
+  </Tab>
+  <Tab title="Auto-Cancel Off">
+    When Meetup cancels or removes an event, the copy stays live on WR-Games. Organizers get a notification, "\{event title\} was cancelled or removed on Meetup", so you can cancel it here if it isn't happening.
+  </Tab>
+</Tabs>
 
 Turn it back on and any synced events already cancelled or deleted on Meetup are cancelled here at the next sync, and their guests are told.
 
@@ -135,12 +139,19 @@ A kept event still changes a little: its **Attending via Meetup** list empties o
 
 Two settings on the Meetup Integration card decide how new synced events start out.
 
-| Setting | What It Does |
-| :-- | :-- |
-| **Guests per RSVP on Synced Events** | Off, or 1 to 10. New and unedited synced events allow that many guests per RSVP. Off leaves guests as they are. Starts off. |
-| **Attendee Limit from the Pinned Game** | Sets each synced event's attendee limit to its pinned game's max players. If the game has no max, no limit is set. If the pinned game changes, the limit follows it. Starts off. |
+<Columns cols={2}>
+  <Card title="Guests per RSVP on Synced Events" icon="user-plus">
+    Off, or 1 to 10. New and unedited synced events allow that many guests per RSVP. Off leaves guests as they are. Starts off.
+  </Card>
 
-Your edits win. Once you change the attendee limit, guests on or off, or guests per RSVP on a synced event, sync leaves that setting alone on that event.
+  <Card title="Attendee Limit from the Pinned Game" icon="users">
+    Sets each synced event's attendee limit to its pinned game's max players. If the game has no max, no limit is set. If the pinned game changes, the limit follows it. Starts off.
+  </Card>
+</Columns>
+
+<Check>
+  **Your edits win.** Once you change the attendee limit, guests on or off, or guests per RSVP on a synced event, sync leaves that setting alone on that event.
+</Check>
 
 Turning a default off stops further changes. It doesn't undo what's already set. In link-out the defaults still apply, though RSVP settings stay locked on WR-Games. Raising a limit lets waitlisted members in, the same as when you edit an event.
 

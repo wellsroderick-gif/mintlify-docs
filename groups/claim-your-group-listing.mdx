@@ -96,10 +96,15 @@ The confirmation box during the claim is where you tell us you're authorized to 
 
 If you link Meetup from a group you already run, and WR-Games already has a page for that Meetup group, you're asked what to do with the page before anything is linked.
 
-| Choice | What Happens |
-| :-- | :-- |
-| **Merge it into [your group]** | The page's Meetup events move to your group, the page leaves the directory, and its old link sends people to your group. |
-| **Take over that page as its own group** | You run it as a separate group, and your current group stays as it is. You confirm you're authorized, as with any claim. |
+<Columns cols={2}>
+  <Card title="Merge the Page" icon="git-merge">
+    Choose **Merge it into [your group]**. The page's Meetup events move to your group, the page leaves the directory, and its old link sends people to your group.
+  </Card>
+
+  <Card title="Take Over the Page" icon="user-check">
+    Choose **Take over that page as its own group**. You run it as a separate group, and your current group stays as it is. You confirm you're authorized, as with any claim.
+  </Card>
+</Columns>
 
 Take over isn't always offered. If the page is still being reviewed, it can only be merged. If your plan has no room for another group, you'll need room first. The Free plan allows one.
 
