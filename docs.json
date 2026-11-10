@@ -171,6 +171,11 @@
       "source": "/features/import-meetup",
       "destination": "/groups/import-from-meetup",
       "permanent": true
+    },
+    {
+      "source": "/features/bringing-list",
+      "destination": "/features/managing-on-the-table",
+      "permanent": true
     }
   ]
 }
