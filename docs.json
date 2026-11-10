@@ -110,7 +110,6 @@
             "pages": [
               "features/predictive-attendance",
               "features/recurring-series",
-              "features/bringing-list",
               "features/managing-on-the-table"
             ]
           }
