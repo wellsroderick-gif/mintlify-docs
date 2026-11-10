@@ -1,7 +1,7 @@
 ---
 title: "Recurring Event Series for Regular Game Nights"
 sidebarTitle: "Recurring Series"
-description: "Schedule repeating events on weekly, bi-weekly, or monthly cadences so your regular game nights run themselves without manual duplication."
+description: "Schedule repeating events on a daily, weekly, monthly, or yearly pattern so your regular game nights run themselves without manual duplication."
 ---
 
 If your group meets on a regular schedule (every Thursday, the first Saturday of the month, every other week), Recurring Series lets you set that cadence once and let WR-Games generate each individual event automatically. Rather than duplicating events by hand, you define the pattern and publish a series that takes care of itself.
@@ -20,17 +20,34 @@ A recurring series is a repeating event schedule that produces individual event 
   <Step title="Start a New Event">
     From your group dashboard, click **Create Event** and choose your event type: Open Game Night, Custom Event, or Game Session.
   </Step>
-  <Step title="Enable Recurring and Choose a Frequency">
-    In the schedule step, toggle **Recurring** to on. Select how often the event repeats: **weekly**, **bi-weekly**, or **monthly**.
+  <Step title="Turn On Recurring Series and Choose a Pattern">
+    Switch **Recurring Series** on. Under **Recurrence pattern**, pick **Daily**, **Weekly**, **Monthly**, or **Yearly**, then set how far apart the events fall: every week, every 2 weeks, every 3 months.
+
+    <Tabs>
+      <Tab title="Weekly">
+        Pick at least one day under **On These Days**. Until you do, you'll see **Select at least one day of the week.** and **Continue** stays off.
+      </Tab>
+      <Tab title="Monthly">
+        Choose **Same date each month** (the 15th) or **Same weekday each month** (the 2nd Tuesday).
+      </Tab>
+    </Tabs>
   </Step>
-  <Step title="Set an End Date or Occurrence Count">
-    Choose when the series should stop by either picking an end date or specifying the total number of occurrences you want to generate.
+  <Step title="Choose When the Series Ends">
+    Under **Range of recurrence**, pick one of three. They don't combine.
+
+    | Option | What It Does | What It Needs |
+    | :-- | :-- | :-- |
+    | **No end date (ongoing)** | Runs until you cancel it | Nothing |
+    | **After N occurrences** | Stops after a set number of events | A number. Leave it blank and you'll see **Enter how many times this event repeats.** |
+    | **End by** | Stops on a date you choose | A date. Leave it blank and you'll see **Choose an end date to continue** |
+
+    The **End by** date field only opens once you select **End by**, and it clears if you switch to one of the other two.
   </Step>
-  <Step title="Review the Generated Schedule">
-    WR-Games previews every occurrence date based on your settings. Scan the list and confirm the dates look right before you publish.
+  <Step title="Check the First Events">
+    **First Events** shows the dates your settings produce. Scan the list and confirm it looks right before you publish. If you picked **End by** and haven't set a date yet, the list waits until you do.
   </Step>
   <Step title="Publish the Series">
-    Click **Publish Series**. WR-Games creates individual event pages for each occurrence and makes your series landing page live.
+    Finish the remaining steps and click **Publish event**. WR-Games creates the event pages and makes your series landing page live.
   </Step>
 </Steps>
 
@@ -43,6 +60,32 @@ When you change an occurrence (the description, the time, the venue), WR-Games a
 - **All upcoming events in the series**: every occurrence still to come.
 
 Use **This event only** for one-off adjustments, like a holiday venue change, so the rest of the series isn't disturbed. The two wider scopes reach every occurrence they cover, including any you'd previously moved or edited on their own.
+
+<Info>
+  A **This event only** change is a one-off, not a lock. The next time you edit with one of the wider scopes, that date is overwritten along with the rest. You'll see a warning before you continue.
+</Info>
+
+The wider scopes also set what dates that haven't been created yet will look like, so the series keeps your change going forward. Events that have already happened are never touched by any of the three.
+
+## Changing How Many Events a Series Runs For
+
+A series set to end **After N occurrences** can be made longer, and a series that was ongoing or had an end date can be switched over to a count.
+
+- **Raise the number** and the extra dates are added after the last one. Nothing is added in the past.
+- **Switch a running series to a count** and it gets the dates that number promises.
+- **The number is the total for the whole series.** Dates you cancelled or deleted still count toward it, so 8 occurrences means 8 in all, not 8 more.
+
+<AccordionGroup>
+  <Accordion title="The Save Was Refused" icon="circle-x">
+    If you lower the number, or switch to a count smaller than the dates the series has already used, the save is refused with **This series has already used more dates than that, and cancelled or deleted dates still count. To end it sooner, cancel the dates you don't want.**
+
+    Nothing is cancelled for you. To end the series sooner, cancel the dates you don't want yourself.
+  </Accordion>
+
+  <Accordion title="It Says Dates Are Missing" icon="triangle-alert">
+    If you see **Series saved, but 2 dates are missing** in place of the usual confirmation, your settings saved but some of the new dates weren't created. Save the series again and WR-Games retries.
+  </Accordion>
+</AccordionGroup>
 
 ## Changing How Often a Series Repeats
 
@@ -97,6 +140,10 @@ You can cancel individual dates or shut down the entire series from any occurren
     End the series early by cancelling all upcoming occurrences at once. WR-Games notifies every affected attendee in a single action, and the message tells them the whole series has ended rather than naming one date.
   </Card>
 </Columns>
+
+<Note>
+  Ending the whole series takes a host of the series itself, or a group member who can manage events. If you were added as a host on one date only, **Cancel this series** and **Cancel and delete this series** won't appear for you.
+</Note>
 
 ## The Series Landing Page
 
