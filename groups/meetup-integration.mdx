@@ -9,8 +9,8 @@ If your group runs on Meetup, the WR-Games Meetup integration keeps your events 
 ## Linking Your Group to Meetup
 
 <Steps>
-  <Step title="Open Group Manage → Integrations">
-    Go to your group, tap **Manage**, then select the **Integrations** tab.
+  <Step title="Open Group Manage → Features">
+    Go to your group, tap **Manage**, then open **Features** and find the **Meetup** card.
   </Step>
   <Step title="Enter Your Meetup Group URL">
     Paste your Meetup group’s URL (e.g. `meetup.com/your-group-name`). WR-Games validates the slug and begins the initial sync.
@@ -43,11 +43,11 @@ The mode you choose determines where RSVPs live and what attendees see.
 
 ## Sync Cadence
 
-Mirrored events update automatically about every **15 minutes**: an event's title, time, and description stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
+Mirrored events update automatically on a regular schedule: an event's title, time, and description stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
 
 ## Refresh From Meetup
 
-The **Refresh from Meetup** button on the Integrations card re-polls the Meetup feed immediately and re-enriches mirrors from the Meetup event page. Use it when you’ve updated something on Meetup and don’t want to wait for the next automatic sync.
+The **Refresh from Meetup** button on the **Meetup Integration** card re-polls the Meetup feed immediately and re-enriches mirrors from the Meetup event page. Use it when you’ve updated something on Meetup and don’t want to wait for the next automatic sync.
 
 - **Cooldown:** 60 seconds between refreshes.
 - **Cover image:** Overwrites a Meetup-sourced cover with whatever is current on Meetup. If you’ve uploaded your own cover through WR-Games, it is never overwritten.
@@ -68,7 +68,7 @@ Meetup controls certain fields on mirrored events. Changes you make on WR-Games 
 | Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
 | RSVP settings | **You** (side-by-side mode only; in link-out, RSVP lives on Meetup) |
 | Additional hosts | **You** (side-by-side mode only; in link-out, read-only) |
-| Games / On the Table | **You**, unless you switch on auto-pin (below) |
+| Games / On the Table | **You**, unless auto-pin is on (below) |
 
 ### Can I change a Meetup event to an Open Game Night or Game Session?
 
@@ -85,7 +85,7 @@ It's one or the other: turning either on switches the other off.
 
 If you already put a BoardGameGeek link in your Meetup listings, WR-Games can read it and pin that game to the mirrored event for you. No extra step on Meetup, no editing the mirror afterwards.
 
-Turn it on at **Group Manage → Integrations**, or on the review step when you first import a group. It's off until you switch it on, it's set per linked group, and it works in both link-out and side-by-side.
+Auto-pin starts on for every linked group. Turn it off on the review step when you import or claim a group, or any time at **Group Manage → Features**, on the **Meetup Integration** card. It's set per linked group, and it works in both link-out and side-by-side.
 
 Once a game is pinned it shows on the event's **On the Table** tab, exactly like a game you pinned by hand. Mirrors open on Overview, so it's one tab across.
 
@@ -103,22 +103,66 @@ Once a game is pinned it shows on the event's **On the Table** tab, exactly like
 </Note>
 
 <Warning>
-  **Removing a pinned game is permanent.** Edit the event, clear the game, and it stays gone. Sync keeps running every 15 minutes and the link is still sitting in your listing, but that game won't come back. If you want it again, pin it by hand.
+  **Removing a pinned game is permanent.** Edit the event, clear the game, and it stays gone. Sync keeps running and the link is still sitting in your listing, but that game won't come back. If you want it again, pin it by hand.
 </Warning>
 
 Two more things worth knowing. If you change which game your listing links to _after_ a pin has already landed, the pin doesn't follow. Edit the event instead. And on a very long listing, a BGG link buried right at the bottom may not be seen at all, so if you want it picked up, put it somewhere reasonable in the body.
 
+## Choose a Default Host for Synced Events
+
+In side-by-side, your synced events need a host. You pick one when you switch to side-by-side, and the **Host** row on the Meetup Integration card shows who it is. That person is listed as host on new synced events and marked as going, so nobody has to RSVP on each one by hand.
+
+Select **Change** to pick someone else. Any group member can be the host. Upcoming synced events led by the current host, and any with no host, move to the new one. Events where you set a different host by hand stay as they are.
+
+If the host leaves the group, the card shows **Your Meetup Events Need a Host**. Events keep syncing with no host until you select **Pick a Host**. In link-out there's no Host row, because RSVPs live on Meetup.
+
+## Auto-Cancel Meetup-Synced Events
+
+When an event is cancelled or deleted on Meetup, WR-Games cancels its synced copy too and tells its guests. **Auto-Cancel Meetup-Synced Events** starts on. You'll find it at **Group Manage → Features**, on the Meetup Integration card, and on the review step when you import. Anyone who can manage the group's settings can change it.
+
+It only ever touches events that came from Meetup. Events you create on WR-Games are never affected.
+
+| Setting | When Meetup Cancels or Removes an Event |
+| :-- | :-- |
+| On | The synced copy is cancelled here and its guests are told. |
+| Off | The copy stays live on WR-Games. Organizers get a notification, "\{event title\} was cancelled or removed on Meetup", so you can cancel it here if it isn't happening. |
+
+Turn it back on and any synced events already cancelled or deleted on Meetup are cancelled here at the next sync, and their guests are told.
+
+A kept event still changes a little: its **Attending via Meetup** list empties once Meetup drops the event, and in link-out it still shows **RSVP on Meetup**.
+
+## Defaults for Synced Events
+
+Two settings on the Meetup Integration card decide how new synced events start out.
+
+| Setting | What It Does |
+| :-- | :-- |
+| **Guests per RSVP on Synced Events** | Off, or 1 to 10. New and unedited synced events allow that many guests per RSVP. Off leaves guests as they are. Starts off. |
+| **Attendee Limit from the Pinned Game** | Sets each synced event's attendee limit to its pinned game's max players. If the game has no max, no limit is set. If the pinned game changes, the limit follows it. Starts off. |
+
+Your edits win. Once you change the attendee limit, guests on or off, or guests per RSVP on a synced event, sync leaves that setting alone on that event.
+
+Turning a default off stops further changes. It doesn't undo what's already set. In link-out the defaults still apply, though RSVP settings stay locked on WR-Games. Raising a limit lets waitlisted members in, the same as when you edit an event.
+
 ## Sync Health
 
-The Integrations card shows the current health of your Meetup connection:
+The **Meetup Integration** card shows the current health of your Meetup connection:
 
 | Status | What It Means |
 | :-- | :-- |
 | Healthy | Syncing normally |
 | Auth revoked | Meetup access was revoked, re-link to restore |
-| Slug renamed | Your Meetup group URL changed. Update the slug in Integrations |
+| Slug renamed | Your Meetup group URL changed. Update it under **Group Manage → Features** |
 
 Other error states may appear if the feed is temporarily unreachable. Waiting for the next automatic sync or tapping **Refresh from Meetup** resolves most transient issues.
+
+## If Your Meetup Group Can't Be Reached
+
+If your Meetup group is deleted, goes private or stops responding, WR-Games keeps checking on it once a day.
+
+After 3 days, syncing stops and everyone who can manage the group's settings gets a notification: **Meetup sync stopped**. Your group isn't hidden or deleted, and events you created on WR-Games aren't touched. Whether your synced events are cancelled or kept follows your Auto-Cancel setting. If the Meetup group comes back, syncing starts again on its own.
+
+Check **Sync Health** on the Meetup Integration card to see where things stand.
 
 ## Unlinking
 
@@ -126,7 +170,7 @@ Other error states may appear if the feed is temporarily unreachable. Waiting fo
   Unlinking stops all future syncing. Before you confirm, WR-Games asks what to do with **upcoming** mirrored events. You can cancel them or leave them frozen as-is. Cancelling notifies native WR-Games RSVPs; Meetup attendees on the “Attending via Meetup” list are not emailed. Past mirrors are always retained.
 </Warning>
 
-Go to **Group Manage → Integrations** → **Disconnect Meetup** to unlink.
+Go to **Group Manage → Features** and select **Unlink From Meetup** on the Meetup Integration card.
 
 ## What Members See
 
@@ -142,7 +186,7 @@ Members don’t configure anything. Here’s how mirrored events appear to them.
 
 **“Attending via Meetup” list**, shown on every mirror in both modes. It includes a last-synced timestamp and a note that guest counts may be understated (Meetup’s API doesn’t always surface full guest totals).
 
-**Auto-cancel:** A mirror is cancelled automatically only when Meetup’s feed positively reports a cancellation. A failed or blocked fetch never triggers an auto-cancel.
+**Auto-cancel:** A mirror is cancelled when its event is cancelled or removed on Meetup, unless the group has turned Auto-Cancel off.
 
 **Sync note:** Mirror detail pages display “Event details sync automatically from Meetup.” so members know edits happen on the Meetup side.
 
