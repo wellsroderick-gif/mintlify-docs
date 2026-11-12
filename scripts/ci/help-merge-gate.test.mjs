@@ -8,21 +8,30 @@ import { describe, it } from "node:test";
 import {
   CLOSE_MARKER,
   HOLD_MARKER,
+  NEEDS_HUMAN_INPUT_STATUS_NAMES,
   NO_TICKET_MARKER,
+  PASS_LABEL,
+  REVIEW_MARKER,
+  SMOKE_STATE,
   blockerSpent,
   closeDecision,
   closedCommentBody,
   helpCandidates,
   holdCommentBody,
+  isLaneBranch,
   judgeBlockers,
   judgeChecks,
+  judgeLaneTicket,
   judgeMergeable,
   judgePaths,
   keyFromBranch,
+  laneSweepTicketGate,
+  newestReviewedSha,
   noTicketCommentBody,
   noTicketDecision,
   noTicketPrs,
   notHelpTicketBody,
+  smokeCommentBody,
   ticketKeyOf,
   wakeCount,
 } from "./help-merge-gate.mjs";
@@ -222,6 +231,62 @@ describe("blockers — spent by release proof, never by state", () => {
   });
 });
 
+describe("lane branch detection (WR-35114)", () => {
+  it("cursor/wr-<n>- is a lane branch", () => {
+    assert.equal(isLaneBranch("cursor/wr-35114-help-merge-gate"), true);
+    assert.equal(keyFromBranch("cursor/wr-35114-x"), "WR-35114");
+  });
+  it("writer and MCP branches are not lane branches", () => {
+    assert.equal(isLaneBranch("mintlify-mcp/wr-8357-changelog"), false);
+    assert.equal(isLaneBranch("roderick/wr-123-x"), false);
+  });
+});
+
+const HEAD = "a".repeat(40);
+const nhiOpts = { needsHumanInputChildNames: [...NEEDS_HUMAN_INPUT_STATUS_NAMES] };
+const laneTicket = (/** @type {any} */ over) => ({
+  state: { type: "started", name: "In Progress" },
+  labels: { nodes: [{ name: "repo:mintlify-docs" }] },
+  comments: { nodes: [] },
+  ...over,
+});
+
+describe("lane ticket merge gate (WR-35114)", () => {
+  it("a writer branch skips the lane ticket gate", () => {
+    assert.equal(laneSweepTicketGate("mintlify-mcp/wr-1-x", null, HEAD, nhiOpts).ok, true);
+  });
+  it("a lane branch without review-pass holds", () => {
+    assert.equal(judgeLaneTicket(laneTicket(), HEAD, nhiOpts).ok, false);
+    assert.match(judgeLaneTicket(laneTicket(), HEAD, nhiOpts).reason, /review-pass/);
+  });
+  it("review-pass with a stale Reviewed-SHA holds", () => {
+    const old = "b".repeat(40);
+    const t = laneTicket({
+      labels: { nodes: [{ name: "repo:mintlify-docs" }, { name: PASS_LABEL }] },
+      comments: {
+        nodes: [
+          {
+            createdAt: "2026-11-10T00:00:00Z",
+            body: `${REVIEW_MARKER}\nReviewed-SHA: ${old}`,
+          },
+        ],
+      },
+    });
+    assert.equal(judgeLaneTicket(t, HEAD, nhiOpts).ok, false);
+    assert.match(judgeLaneTicket(t, HEAD, nhiOpts).reason, /head is/);
+  });
+  it("review-pass with a matching Reviewed-SHA passes", () => {
+    const t = laneTicket({
+      labels: { nodes: [{ name: "repo:mintlify-docs" }, { name: PASS_LABEL }] },
+      comments: {
+        nodes: [{ createdAt: "2026-11-10T00:00:00Z", body: `${REVIEW_MARKER}\nReviewed-SHA: ${HEAD}` }],
+      },
+    });
+    assert.equal(judgeLaneTicket(t, HEAD, nhiOpts).ok, true);
+    assert.equal(newestReviewedSha(t.comments.nodes), HEAD);
+  });
+});
+
 describe("closing the ticket a merged PR names", () => {
   const issue = (/** @type {any} */ over) => ({ state: { type: "unstarted" }, labels: { nodes: [] }, project: null, ...over });
   it("a help ticket closes: a help label, repo:mintlify-docs, or the Helpdesk project", () => {
@@ -229,6 +294,11 @@ describe("closing the ticket a merged PR names", () => {
     assert.equal(closeDecision(issue({ labels: { nodes: [{ name: "changelog" }] } })), "close");
     assert.equal(closeDecision(issue({ labels: { nodes: [{ name: "repo:mintlify-docs" }] } })), "close");
     assert.equal(closeDecision(issue({ project: { name: "Helpdesk & Support Integration" } })), "close");
+  });
+  it("a lane help ticket moves to smoke; a writer branch still closes to Done", () => {
+    const help = issue({ labels: { nodes: [{ name: "repo:mintlify-docs" }] } });
+    assert.equal(closeDecision(help, "cursor/wr-35114-x"), "smoke");
+    assert.equal(closeDecision(help, "mintlify-mcp/wr-35114-x"), "close");
   });
   it("a WR-Games ticket is only commented on, whatever its state", () => {
     assert.equal(closeDecision(issue({ labels: { nodes: [{ name: "Bug" }] } })), "comment");
@@ -253,6 +323,11 @@ describe("comment bodies", () => {
     assert.equal(closedCommentBody({ prNumber: 7, mergeSha: "def", repo: REPO }).split("\n")[0], `${CLOSE_MARKER} #7`);
     assert.equal(notHelpTicketBody({ prNumber: 7, repo: REPO }).split("\n")[0], `${CLOSE_MARKER} #7`);
     assert.match(notHelpTicketBody({ prNumber: 7, repo: REPO }), /state is unchanged/);
+  });
+  it("the smoke comment names Ready for Smoke Test", () => {
+    const b = smokeCommentBody({ prNumber: 9, mergeSha: "abc", repo: REPO });
+    assert.match(b, new RegExp(SMOKE_STATE));
+    assert.equal(b.split("\n")[0], `${CLOSE_MARKER} #9`);
   });
 });
 

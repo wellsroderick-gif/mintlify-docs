@@ -27,6 +27,12 @@
  *           `env:`): close the ticket it names. This is for merges this robot did not make. A merge
  *           made with GITHUB_TOKEN starts no workflow, so the sweep closes its own merges itself.
  *
+ * LANE PRs (WR-35114). A head branch `cursor/wr-<n>-…` is a Cursor-builder lane PR: it merges only
+ * when the ticket carries `review-pass`, none of the review-hold labels, and the newest
+ * `<!-- wr-ca-review -->` comment's `Reviewed-SHA:` equals the PR head (same rule as command-admin).
+ * After merge the ticket moves to Ready for Smoke Test. Every other ticket-named branch (Writer,
+ * MCP, editor) keeps today's merge-on-green path and Done.
+ *
  * WHY. Linear takes no action on pull requests into `main` (a No-action branch rule since
  * 2026-09-24), so a help ticket no longer closes itself when its PR merges; this does. `main` is
  * the live help site, so a merge is a release: a help ticket goes straight to Done. A WR-Games
@@ -66,8 +72,32 @@ export const REPO_LABEL = "repo:mintlify-docs";
 export const TERMINAL_STATE_TYPES = Object.freeze(["completed", "canceled", "duplicate"]);
 /** What an auto-merged PR may never touch: the workflows, and the code this gate runs. */
 export const VETO_PREFIXES = Object.freeze([".github/", "scripts/"]);
+/** Cursor-builder lane branch shape (WR-35114). */
+export const LANE_BRANCH_RE = /^cursor\/wr-(\d+)-/i;
+export const PASS_LABEL = "review-pass";
+export const HOLD_LABELS = Object.freeze(["review-blocked", "needs-scope"]);
+export const NEEDS_HUMAN_INPUT_GROUP_NAME = "Needs Human Input";
+export const FLAT_NEEDS_HUMAN_INPUT_LABEL = "needs-human-input";
+/** Stub in offline tests; production resolves the Linear label group at I/O time. */
+export const NEEDS_HUMAN_INPUT_STATUS_NAMES = Object.freeze([
+  "unanswered",
+  "action-owed",
+  "answered",
+  "waiting-on-fix",
+]);
+export const REVIEW_MARKER = "<!-- wr-ca-review -->";
+export const SMOKE_STATE = "Ready for Smoke Test";
+const REVIEWED_SHA_RE = /^Reviewed-SHA:\s*([0-9a-f]{40})\s*$/im;
 
 // ---- pure decisions -----------------------------------------------------------------------------
+
+/**
+ * True when the head branch is a Cursor-builder lane PR (`cursor/wr-<n>-…`).
+ * @param {string | null | undefined} ref
+ */
+export function isLaneBranch(ref) {
+  return LANE_BRANCH_RE.test(String(ref ?? ""));
+}
 
 /**
  * The ticket a head branch names: `<prefix>/wr-<n>-...` for any one-segment prefix, or null.
@@ -206,19 +236,111 @@ export function judgeBlockers(blockers, ctx) {
   return live.length ? { ok: false, reason: `live blocker(s): ${live.map((r) => r.reason).join("; ")}` } : { ok: true, reason: "no live blocker" };
 }
 
+/** @param {any} issue */
+export function labelNames(issue) {
+  return (issue?.labels?.nodes ?? []).map((/** @type {any} */ l) => l?.name).filter((/** @type {any} */ n) => typeof n === "string");
+}
+
+/**
+ * `Reviewed-SHA` from the NEWEST review-gate verdict comment, or null.
+ * @param {Array<{ body?: string | null, createdAt?: string | null }>} comments
+ */
+export function newestReviewedSha(comments) {
+  const verdicts = (comments ?? [])
+    .filter((c) => String(c?.body ?? "").includes(REVIEW_MARKER))
+    .sort((a, b) => Date.parse(b?.createdAt ?? "") - Date.parse(a?.createdAt ?? ""));
+  if (verdicts.length === 0) return null;
+  const m = REVIEWED_SHA_RE.exec(String(verdicts[0].body ?? ""));
+  return m ? m[1].toLowerCase() : null;
+}
+
+/**
+ * @param {string[]} issueLabelNames
+ * @param {string[]} groupChildNames
+ */
+export function needsHumanInputHoldHits(issueLabelNames, groupChildNames) {
+  const hits = [];
+  if (issueLabelNames.includes(FLAT_NEEDS_HUMAN_INPUT_LABEL)) hits.push(FLAT_NEEDS_HUMAN_INPUT_LABEL);
+  for (const child of groupChildNames) {
+    if (issueLabelNames.includes(child)) hits.push(child);
+  }
+  return hits;
+}
+
+/**
+ * @param {any} data GraphQL `issueLabels` connection payload
+ * @returns {string[]}
+ */
+export function parseNeedsHumanInputChildNames(data) {
+  const names = (data?.issueLabels?.nodes ?? [])
+    .map((/** @type {any} */ n) => n?.name)
+    .filter((/** @type {any} */ n) => typeof n === "string");
+  if (names.length === 0) {
+    throw new Error(`label group "${NEEDS_HUMAN_INPUT_GROUP_NAME}" resolved to no labels`);
+  }
+  return names;
+}
+
+/**
+ * Lane PR ticket gate (command-admin `judgeTicket` merge mode, WR-35114). Writer and other branches
+ * skip this entirely.
+ * @param {any} issue Linear issue with state, labels, comments
+ * @param {string} headSha
+ * @param {{ needsHumanInputChildNames?: string[] | null }} [opts]
+ */
+export function judgeLaneTicket(issue, headSha, opts = {}) {
+  if (!issue) return { ok: false, reason: "ticket unreadable" };
+  const type = issue?.state?.type ?? null;
+  if (typeof type !== "string") return { ok: false, reason: "ticket state unreadable" };
+  if (TERMINAL_STATE_TYPES.includes(type)) return { ok: false, reason: `ticket is ${issue.state.name ?? type}` };
+  const names = labelNames(issue);
+  if (!names.includes(REPO_LABEL)) return { ok: false, reason: `ticket lacks ${REPO_LABEL}` };
+  const groupChildNames = opts.needsHumanInputChildNames;
+  if (!Array.isArray(groupChildNames) || groupChildNames.length === 0) {
+    return { ok: false, reason: "Needs Human Input label group unreadable" };
+  }
+  const holds = HOLD_LABELS.filter((h) => names.includes(h));
+  const nhiHolds = needsHumanInputHoldHits(names, groupChildNames);
+  const allHolds = [...holds, ...nhiHolds];
+  if (allHolds.length) return { ok: false, reason: `ticket carries ${allHolds.join(", ")}` };
+  if (!names.includes(PASS_LABEL)) return { ok: false, reason: "no review-pass yet" };
+  const reviewed = newestReviewedSha(issue?.comments?.nodes ?? []);
+  if (!reviewed) return { ok: false, reason: "no Reviewed-SHA on the newest review verdict" };
+  if (reviewed !== String(headSha ?? "").toLowerCase()) {
+    return { ok: false, reason: `review-pass is for ${reviewed.slice(0, 8)}, head is ${String(headSha).slice(0, 8)}` };
+  }
+  return { ok: true, reason: "ticket ok" };
+}
+
+/**
+ * Sweep gate for lane branches only; non-lane ticket-named branches stay merge-eligible here.
+ * @param {string | null | undefined} headRef
+ * @param {any} issue
+ * @param {string} headSha
+ * @param {{ needsHumanInputChildNames?: string[] | null }} [opts]
+ */
+export function laneSweepTicketGate(headRef, issue, headSha, opts = {}) {
+  if (!isLaneBranch(headRef)) return { ok: true, reason: "not a lane branch" };
+  return judgeLaneTicket(issue, headSha, opts);
+}
+
 /**
  * What a merged PR does to the ticket it names.
  *   "none"    no ticket (no key, or the key reads as nothing)
  *   "skip"    already completed, canceled or duplicate
- *   "close"   a help ticket (a help label, `repo:mintlify-docs`, or the Helpdesk project) -> Done
+ *   "close"   a help ticket on a non-lane branch -> Done
+ *   "smoke"   a help ticket on a `cursor/wr-<n>-` lane branch -> Ready for Smoke Test
  *   "comment" anything else -- a WR-Games ticket is never moved from here, only told, once
  * @param {any} issue Linear issue with state{type}, labels{nodes{name}}, project{name}
+ * @param {string | null | undefined} [headRef]
  */
-export function closeDecision(issue) {
+export function closeDecision(issue, headRef) {
   if (!issue) return "none";
   if (TERMINAL_STATE_TYPES.includes(issue?.state?.type)) return "skip";
   const names = (issue?.labels?.nodes ?? []).map((/** @type {any} */ l) => l?.name);
-  if (HELP_LABELS.some((l) => names.includes(l)) || issue?.project?.name === HELP_PROJECT) return "close";
+  if (HELP_LABELS.some((l) => names.includes(l)) || issue?.project?.name === HELP_PROJECT) {
+    return isLaneBranch(headRef) ? "smoke" : "close";
+  }
   return "comment";
 }
 
@@ -249,6 +371,16 @@ export function closedCommentBody({ prNumber, mergeSha, repo }) {
   return [
     `${CLOSE_MARKER} #${prNumber}`,
     `**Published.** ${repo} PR #${prNumber} merged into \`main\` as \`${mergeSha}\`. \`main\` is the live help site, so this ticket is done.`,
+  ].join("\n");
+}
+
+/** @param {{ prNumber: number, mergeSha: string, repo: string }} a */
+export function smokeCommentBody({ prNumber, mergeSha, repo }) {
+  return [
+    `${CLOSE_MARKER} #${prNumber}`,
+    `**Published.** ${repo} PR #${prNumber} merged into \`main\` as \`${mergeSha}\`. \`main\` is the live help site.`,
+    "",
+    `Moved to **${SMOKE_STATE}**. The release tick opens this ticket's Post-Build for Commander's smoke; closing that moves it to Done.`,
   ].join("\n");
 }
 
@@ -315,6 +447,32 @@ async function linearAll(query, vars, pick, maxPages = 20) {
     after = conn.pageInfo.endCursor;
   }
   return { nodes: out, truncated: true };
+}
+
+/** @type {string[] | null} */
+let cachedNeedsHumanInputChildNames = null;
+
+async function loadNeedsHumanInputChildNames() {
+  if (!cachedNeedsHumanInputChildNames) {
+    const data = await linear(
+      `query($name:String!){ issueLabels(filter:{ parent:{ name:{ eq:$name } } }, first:50){ nodes{ name } } }`,
+      { name: NEEDS_HUMAN_INPUT_GROUP_NAME },
+    );
+    cachedNeedsHumanInputChildNames = parseNeedsHumanInputChildNames(data);
+  }
+  return cachedNeedsHumanInputChildNames;
+}
+
+/** @param {string} key */
+async function readTicket(key) {
+  const d = await linear(
+    `query($id:String!){ issue(id:$id){ id identifier team{ key } state{ name type } labels{ nodes{ name } } project{ name } comments(first:50){ nodes{ body createdAt } } } }`,
+    { id: key },
+  ).catch((e) => {
+    if (/not found|entity not found/i.test(errText(e))) return null;
+    throw e;
+  });
+  return d?.issue ?? null;
 }
 
 /** Blockers are `inverseRelations` of type `blocks`: the `issue` on that edge blocks this one. @param {string} key */
@@ -429,7 +587,7 @@ async function closeTicket({ prNumber, headRef, title, mergeSha }) {
     throw e;
   });
   const issue = d?.issue ?? null;
-  const decision = closeDecision(issue);
+  const decision = closeDecision(issue, headRef);
   log(`close: #${prNumber} -> ${key}: ${decision}${issue ? ` (${issue.state?.name})` : ""}`);
   if (decision === "none" || decision === "skip" || DRY) return;
 
@@ -446,13 +604,23 @@ async function closeTicket({ prNumber, headRef, title, mergeSha }) {
     if (!said) await comment(issue.id, notHelpTicketBody({ prNumber, repo: REPO }));
     return;
   }
-  const s = await linear(`query($k:String!){ workflowStates(filter:{ team:{ key:{ eq:$k } }, name:{ eq:"Done" } }){ nodes{ id name team{ key } } } }`, { k: issue.team.key });
-  const done = (s?.workflowStates?.nodes ?? []).find((/** @type {any} */ n) => n?.name === "Done" && n?.team?.key === issue.team.key)?.id;
-  if (!done) throw new Error(`team ${issue.team.key} has no "Done" state`);
-  const u = await linear(`mutation($id:String!, $s:String!){ issueUpdate(id:$id, input:{ stateId:$s }){ success } }`, { id: issue.id, s: done });
-  if (!u?.issueUpdate?.success) throw new Error(`the move to Done did not succeed on ${key}`);
-  log(`close: ${key}: ${issue.state?.name} -> Done`);
-  if (!said) await comment(issue.id, closedCommentBody({ prNumber, mergeSha, repo: REPO }));
+  const targetState = decision === "smoke" ? SMOKE_STATE : "Done";
+  const s = await linear(
+    `query($k:String!, $n:String!){ workflowStates(filter:{ team:{ key:{ eq:$k } }, name:{ eq:$n } }){ nodes{ id name team{ key } } } }`,
+    { k: issue.team.key, n: targetState },
+  );
+  const stateId = (s?.workflowStates?.nodes ?? []).find((/** @type {any} */ n) => n?.name === targetState && n?.team?.key === issue.team.key)?.id;
+  if (!stateId) throw new Error(`team ${issue.team.key} has no "${targetState}" state`);
+  const u = await linear(`mutation($id:String!, $s:String!){ issueUpdate(id:$id, input:{ stateId:$s }){ success } }`, { id: issue.id, s: stateId });
+  if (!u?.issueUpdate?.success) throw new Error(`the move to ${targetState} did not succeed on ${key}`);
+  log(`close: ${key}: ${issue.state?.name} -> ${targetState}`);
+  if (!said) {
+    const body =
+      decision === "smoke"
+        ? smokeCommentBody({ prNumber, mergeSha, repo: REPO })
+        : closedCommentBody({ prNumber, mergeSha, repo: REPO });
+    await comment(issue.id, body);
+  }
 }
 
 /** Create or rewrite the one sticky no-ticket notice on a PR. @param {any} pr */
@@ -539,6 +707,28 @@ async function sweep() {
       }
       if (!verdict.ok) {
         await hold(pr, `${key} has ${verdict.reason}`);
+        continue;
+      }
+    }
+    if (key && isLaneBranch(pr.head.ref)) {
+      /** @type {string[]} */
+      let needsHumanInputChildNames = [];
+      try {
+        needsHumanInputChildNames = await loadNeedsHumanInputChildNames();
+      } catch (e) {
+        await hold(pr, `Needs Human Input label group unreadable (${errText(e)})`);
+        continue;
+      }
+      let ticket;
+      try {
+        ticket = await readTicket(key);
+      } catch (e) {
+        await hold(pr, `${key} could not be read (${errText(e)})`);
+        continue;
+      }
+      const lane = laneSweepTicketGate(pr.head.ref, ticket, pr.head.sha, { needsHumanInputChildNames });
+      if (!lane.ok) {
+        await hold(pr, `${key}: ${lane.reason}`);
         continue;
       }
     }
