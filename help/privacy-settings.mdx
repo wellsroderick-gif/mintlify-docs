@@ -1,7 +1,7 @@
 ---
 title: "Privacy Settings and Controls on WR-Games"
 sidebarTitle: "Privacy Settings"
-description: "Control what others see on your public profile, who can message you, and how your play data and group memberships are displayed to others."
+description: "Control what others see on your profile, who can message you, how plays link to you, your public collection, and analytics cookies."
 ---
 
 WR-Games gives you fine-grained control over what's visible on your public profile and how other members can interact with you. Privacy settings are found in **Settings → Privacy & Visibility** and apply to your public-facing profile unless otherwise noted.
@@ -38,33 +38,84 @@ These settings control which reputation and social signals are shown on your pub
 
 ## Play Data
 
-Control what play information is visible to others and how your data contributes to platform analytics.
+Control how other people's plays connect to you, and what you see in your own play history.
 
-### Play History
+### Opt Out of Play Tracking
 
-Toggle your **play history** on or off on your public profile. When hidden, other members cannot see which games you've played, when you played them, or at which events.
+When someone else logs or imports a play with you in it, that play links to your play history and you're notified. Opting out stops both. You're still named on their play. It just doesn't link to you or notify you.
 
-### Score Data
+There are two switches, and they cover different ground:
 
-If you show your play history, you can choose to hide score data within it. Your play records are still stored. Only the scores are not displayed publicly.
+<Tabs>
+  <Tab title="Everywhere">
+    **Opt Out of Play Tracking**, in **Settings → Privacy & Visibility**. Covers every group, plus plays people import from other apps. It's off to start with, so plays link to you until you turn it on.
+  </Tab>
+  <Tab title="One Group">
+    **Opt Out of Play Tracking for This Group**, in that group's settings under **My Preferences**. Covers plays logged in that group only, not imports. See [Group Settings](/groups/group-settings-overview#my-preferences).
+  </Tab>
+</Tabs>
 
-### Play Data Opt-Out
+<Info>
+  **Play tracking is in beta**, so you may not see it everywhere yet.
+</Info>
 
-By default, anonymized play data contributes to platform-wide analytics (for example, trending games in your region). You can opt out of this entirely in **Settings → Privacy & Visibility**. Opting out does not delete existing data; it stops future contributions.
+### Hide Scores in My Play History
+
+Hides the numbers when you look at your own play history. Your scores are still saved and still count in your stats.
 
 ---
 
 ## Messaging
 
-Control who can send you new direct messages on WR-Games.
+**Who can message you?** decides who can start a new conversation with you.
 
-| Setting | Who Can DM You |
+| Choice | Who Can Message You |
 | --- | --- |
-| **Open** | Any WR-Games member |
+| **Anyone (registered members)** | Any signed-in WR-Games member |
 | **Group members only** | Only members of groups you share |
-| **Nobody** | No new DMs allowed |
+| **Nobody (new conversations)** | No one can start a new conversation |
 
-Changing your DM access setting to **Nobody** does not close existing conversation threads. You can still read and reply to messages already in your inbox.
+Choosing **Nobody** doesn't close conversations you already have. You can still read and reply to those. See [Messages](/features/messages) for archiving, muting and blocking.
+
+---
+
+## Collection Visibility
+
+Turn on **Public Collection** and your profile gets a **Collection** tab other members can open. Turn it off and the tab is gone for them. You always see your own collection on your own profile, whatever you choose here.
+
+When it's on, **Which collection appears on your profile** decides what shows:
+
+| Choice | What Visitors See |
+| --- | --- |
+| **Owned games (default)** | Only the games marked owned in your library |
+| A folder | Every game in that folder |
+
+<Note>
+  Only public folders can be shown. A private folder never appears in the list. To feature one, set it to public from **Manage collections** on your Collection page.
+</Note>
+
+Sharing folders with a group is a separate setting, also on your Collection page. See [Game Collection](/features/game-collection).
+
+---
+
+## Analytics and Cookies
+
+WR-Games uses cookies for signing in and for product analytics and session recording, which help us see what's working and fix what isn't.
+
+The first time you visit, a banner asks what you'd like:
+
+| Choice | What It Does |
+| --- | --- |
+| **Got It** | Keeps analytics and session recording on |
+| **Decline** | Turns them off |
+
+Change your mind any time with **Product analytics & session recording**, under **Analytics & tracking** in **Settings → Privacy & Visibility**.
+
+<Tip>
+  This choice is saved in the browser you make it in. On another browser or device, set it there too.
+</Tip>
+
+If your browser sends a Global Privacy Control signal and you haven't chosen either way, analytics stay off. An explicit choice in the banner or in Settings always wins. The [Cookie Policy](https://wr-games.com/cookies) has the details.
 
 ---
 
