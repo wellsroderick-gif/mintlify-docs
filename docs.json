@@ -94,7 +94,9 @@
               "features/play-logging",
               "features/game-collection",
               "features/game-picker",
-              "features/editing-and-resubmitting-a-venue-submission"
+              "features/editing-and-resubmitting-a-venue-submission",
+              "features/messages",
+              "features/friends"
             ]
           },
           {
@@ -125,7 +127,8 @@
             "pages": [
               "help/profile-settings",
               "help/notifications",
-              "help/privacy-settings"
+              "help/privacy-settings",
+              "help/your-calendar-on-my-events"
             ]
           },
           {
