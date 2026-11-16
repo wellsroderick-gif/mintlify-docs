@@ -4,33 +4,43 @@ description: "If WR-Games blocked a game removal from your group library, here's
 sidebarTitle: "Can't Remove a Game?"
 ---
 
-Hit a message saying you can't remove a game from your group's library? This happens when the game is being auto-contributed. WR-Games is adding it automatically because you own it and have auto-contribute turned on for that folder.
+Seeing **This game is shared automatically** when you try to remove a game from your group's collection? The game is in one of your collection folders that syncs to this group, so WR-Games would just add it back.
 
 The game isn't stuck. You just need to go one level up.
 
 ## Why This Happens
 
-When a collection folder is linked to a group with **auto-contribute** on, every game in that folder appears in the group's library automatically. If you still own the game, WR-Games blocks a direct per-game removal. It would just come straight back the next time you sync anyway.
+Each folder you sync to a group shares its games there for you:
 
-The blocked-removal dialog routes you to the controls that actually fix it.
+- **Owned Games** shares the games you own.
+- Any other folder shares every game in it, owned or not.
+
+While a game is in a folder that syncs to this group, removing it from the group on its own would be undone straight away, so WR-Games stops you and points you to the controls that fix it.
 
 ## What to Do Instead
 
-<Steps>
-  <Step title="Turn Off Auto-Contribute for That Folder">
-    Go to your **Collection**, find the folder the game is in, and turn off **Auto-contribute** for that group. Once it's off, you can remove individual games from the group normally.
-  </Step>
-  <Step title="Unlink the Folder From the Group Entirely">
-    If you don't want any games from that folder contributing to the group, unlink the folder. This removes all auto-contributed games from that folder at once, not just the one you were targeting.
-  </Step>
-</Steps>
+<Tabs>
+  <Tab title="Stop Syncing the Folder">
+    <Steps>
+      <Step title="Open the Auto Sync Tab">
+        Select **Turn off auto-sync for this group**, or open the group's **Collection** tab, select **Contribute to This Group** and choose **Auto Sync My Collection**.
+      </Step>
+      <Step title="Switch the Folder Off">
+        Turn off the folder the game is in. Choose **Remove synced games** to take everything that folder shared out of the group, or **Keep games, stop sync** to leave them. Kept games can then be removed one at a time.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Take the Game Out of the Folder">
+    Select **Manage my collection** and remove the game from the folder. It leaves the group too, unless another folder you sync to this group still has it.
+  </Tab>
+</Tabs>
 
 <Tip>
-  If you no longer own the game on BGG, re-syncing your collection will remove it from your Owned folder, and auto-contribute will stop adding it to the group automatically.
+  If you no longer own the game on BGG, re-syncing your collection takes it out of **Owned Games**, so Owned Games stops sharing it.
 </Tip>
 
 <Note>
-  Turning off auto-contribute or unlinking a folder won't affect games you've added to the group manually. Only the auto-contributed ones are removed.
+  Switching a folder off never touches games you added to the group by hand. Only games the folder shared can be removed.
 </Note>
 
 <Columns cols={2}>

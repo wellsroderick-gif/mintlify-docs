@@ -12,7 +12,7 @@ Each BGG status you have games in gets its own folder in WR-Games. Two of them, 
 
 | BGG Status | WR-Games Folder | Visible by Default |
 | :-- | :-- | :-- |
-| Owned | All Games (your default library) | Always |
+| Owned | Owned Games | Always |
 | Want to Play | Want to Play | Yes, when populated |
 | Wishlist | Wishlist | Yes, when populated |
 | For Trade | For Trade | Hidden |
@@ -22,7 +22,7 @@ Each BGG status you have games in gets its own folder in WR-Games. Two of them, 
 | Previously Owned | Previously Owned | Hidden |
 
 <Note>
-  **Owned Games isn't a separate folder.** Your full library is **All Games**: every game in your collection, regardless of status. The **Owned** tab is a filtered view showing only games marked as owned from your BGG sync. They're the same games; one view just narrows the list.
+  **All Games isn't a folder.** It shows every game in your collection, whatever folder it's in. **Owned Games** is the folder for the games you own. Taking a game out of Owned Games marks it as no longer owned.
 </Note>
 
 ## Showing and Hiding Folders
@@ -66,13 +66,25 @@ These are two separate controls that are easy to mix up:
 
 Games you add from the WR-Games directory live in the same library and folders as your BGG-synced games. A few things work differently:
 
-- They land in **All Games** right away, but without an owned status. They won't appear in the **Owned** view until you mark them owned from the game card's folder menu.
+- They show in **All Games** right away. They're only marked as owned if you put them in **Owned Games**.
 - There's no badge or label on the card distinguishing a manually added game from a BGG-synced one.
 - BGG re-syncs never remove manually added games. Sync reconcile only touches games that originally came from BGG.
 
 ## Auto-Contribute to Groups
 
-If you've linked a collection folder to a group with auto-contribute on, games in that folder, both synced and manually added, appear in the group's library automatically. If you run into a blocked-removal dialog when trying to take a game off a group, see [Why Can't I Remove a Game from My Group?](/groups/why-cant-i-remove-a-game).
+You choose which folders to sync to each group, one switch per folder, on the **Auto Sync My Collection** tab of the group's **Contribute to This Group** window.
+
+<Columns cols={2}>
+  <Card title="Owned Games" icon="badge-check">
+    Recommended. Shares only the games you own.
+  </Card>
+
+  <Card title="Any Other Folder" icon="folder-open">
+    Shares every game in it, owned or not, whether it came from BGG or you added it yourself. WR-Games asks you to confirm first.
+  </Card>
+</Columns>
+
+For the steps, see [Adding Games to Your Collections](/features/adding-games). If a game won't come off a group, see [Why Can't I Remove a Game from My Group?](/groups/why-cant-i-remove-a-game).
 
 <Columns cols={2}>
   <Card title="BGG Sync" icon="refresh-cw" href="/features/bgg-sync">
