@@ -51,7 +51,7 @@ The **Refresh from Meetup** button on the **Meetup Integration** card re-polls t
 
 - **Cooldown:** 60 seconds between refreshes.
 - **Cover image:** Overwrites a Meetup-sourced cover with whatever is current on Meetup. If you’ve uploaded your own cover through WR-Games, it is never overwritten.
-- **Venue, map, and cancel status** always refresh regardless of how they were last set.
+- **Address, map pin, and cancel status** always refresh. The one exception is an event linked to a venue on WR-Games: it keeps the venue's address and pin (see **Linking Synced Events to a Venue** below).
 
 ## What You Can Edit on a Mirror
 
@@ -62,7 +62,8 @@ Meetup controls certain fields on mirrored events. Changes you make on WR-Games 
 | Title | **Meetup**, syncs automatically every cycle |
 | Date and time | **Meetup**, syncs automatically every cycle |
 | Description | **Meetup**, syncs automatically every cycle |
-| Location / venue | **Meetup**, re-enriched on every Refresh from Meetup |
+| Address and map pin | **Meetup**, updated on every Refresh from Meetup. A linked venue's address takes its place |
+| Venue on WR-Games | **Linked for you** when the address matches. In side-by-side, **you** can choose or remove it |
 | Event type | Fixed: always a **Custom Event** |
 | Cover image | **You**, an upload through WR-Games is never overwritten by sync |
 | Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
@@ -80,6 +81,47 @@ You can set it up to work like either one. An event that comes from Meetup alway
 | A Game Session, built around one game | **Pin to a specific game** |
 
 It's one or the other: turning either on switches the other off.
+
+## Linking Synced Events to a Venue
+
+When a synced event's Meetup address matches a venue listed on WR-Games, the event is linked to that venue for you. It shows the venue's name and address, and it appears on the venue's page under **Upcoming Events**.
+
+### When It Links, and When It Doesn't
+
+| Your Synced Event | What Happens |
+| :-- | :-- |
+| The address matches one venue on WR-Games | Linked to that venue |
+| The address matches more than one venue | Not linked. It won't guess which one you meant |
+| The address matches no venue | Not linked. The Meetup address shows as plain text |
+| It's an online event | Never linked |
+
+The street address, city, and state have to match. A suite number on one side and not the other is enough to miss.
+
+If the venue joins WR-Games after your event synced, the link is picked up on a later sync. If you move the event to a different address on Meetup, select **Refresh from Meetup**: an event that was linked for you and no longer matches is unlinked and shows the new Meetup address.
+
+### Choose or Remove the Venue Yourself
+
+In side-by-side, you can pick the venue or take it off.
+
+<Steps>
+  <Step title="Edit the Event and Open Location">
+    The **Venue on WR-Games** box sits under the address that came from Meetup.
+  </Step>
+  <Step title="Choose or Remove a Venue">
+    Select **Choose Venue** and search by venue name, then pick one. To take a venue off, select **Remove Venue**.
+  </Step>
+  <Step title="Save">
+    After you remove a venue, select **Refresh from Meetup** on the Meetup Integration card to bring back the Meetup address.
+  </Step>
+</Steps>
+
+<Check>
+  **Your choice is kept.** Once you choose or remove a venue on an event, syncing and Refresh from Meetup leave it as you set it.
+</Check>
+
+That also means a venue you chose stays put if you later move the event to another address on Meetup. Change or remove it here too.
+
+In link-out, the Location step stays read-only. Events still link to a matching venue for you.
 
 ## Auto-Pin a Game From a BGG Link
 
