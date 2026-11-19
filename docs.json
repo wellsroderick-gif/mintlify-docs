@@ -88,6 +88,13 @@
             ]
           },
           {
+            "group": "Venues",
+            "pages": [
+              "features/claiming-your-venue",
+              "features/editing-and-resubmitting-a-venue-submission"
+            ]
+          },
+          {
             "group": "Player Tools",
             "pages": [
               "features/discovering-events",
@@ -95,7 +102,6 @@
               "features/game-collection",
               "features/game-picker",
               "features/game-filters",
-              "features/editing-and-resubmitting-a-venue-submission",
               "features/messages",
               "features/friends"
             ]
