@@ -89,7 +89,9 @@
           },
           {
             "group": "Venues",
-            "pages": []
+            "pages": [
+              "features/claiming-your-venue"
+            ]
           },
           {
             "group": "Player Tools",
