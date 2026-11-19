@@ -34,6 +34,8 @@ If your game collection already lives on BGG, there is no need to rebuild it fro
   </Step>
 </Steps>
 
+No games on WR-Games yet? You can also connect from the [game picker](/features/game-picker). Select **Sync From BoardGameGeek**, enter your username, and keep picking while your collection comes in.
+
 <Tip>
   Use the **Select All** and **Clear All** buttons above the category list to configure your collections quickly without toggling each one individually.
 </Tip>
@@ -64,13 +66,24 @@ WR-Games reads up to 7 BGG collection categories. You choose which ones to inclu
 
 Once the sync completes, your games appear in your **Collection** tab, organised by the collection categories you enabled. From there you can browse by collection, search within your collection, and view each game's detail page.
 
-## Re-Syncing
+## Keeping Your Collection Up to Date
 
-Your BGG collection does not update automatically on a set schedule. After your first sync, the Integrations card switches to a **Save & Re-Sync** view: return here any time to add or remove collections, or to pull in recent BGG changes like newly acquired games and updated collection assignments.
+**Auto-sync with BGG** is a checkbox on the BGG card in **Settings → Integrations**. It starts checked, and your choice is saved when you sync. With it on, WR-Games refreshes your collection from BGG on its own in the background, so a game you add on BGG turns up here without you lifting a finger. Background refreshes don't send you a notification.
 
-<Note>
-  **Auto-sync is coming soon.** We're working on automatic BGG collection updates so you don't have to re-sync manually.
-</Note>
+Want a change to show up right now? After your first sync, the card shows **Save & Re-Sync**. Use it to add or remove collections, or to pull in your latest BGG changes straight away.
+
+### If Auto-Sync Stops
+
+When auto-sync isn't running, a line under the checkbox tells you why.
+
+| What You See | What to Do |
+| --- | --- |
+| **Auto-sync is off.** | You unchecked the box. Check it to turn auto-sync back on. |
+| **Auto-sync is paused because you haven't visited in a while.** | Check the box, or sync, and it starts again. |
+| **Auto-sync is off because we couldn't find your BGG username.** | Check the username for typos, then sync. |
+| **Auto-sync is off because BGG didn't respond for a week.** | BGG was having trouble on its end. Check the box or sync to try again. |
+
+If auto-sync turns itself off, you get one notification so it doesn't go quiet without you knowing.
 
 ## Resetting or Wiping Your Collection
 
@@ -82,7 +95,7 @@ The **Danger Zone** in **Settings → Integrations** gives you two options for c
 | Sync history & status | Cleared | Cleared |
 | Manual games | Kept | Removed |
 | Custom folders | Kept | Removed |
-| Favorites | Kept | Removed |
+| Favorites | Kept | Kept |
 | BGG username | Kept | Cleared |
 | Board Game Arena (BGA) username | Kept | Kept |
 | Auto-contribute setting | Kept on | Cleared |
@@ -95,7 +108,7 @@ The **Danger Zone** in **Settings → Integrations** gives you two options for c
 </Warning>
 
 <Danger>
-  **Wipe collection** goes further. It removes everything Reset removes, and also clears your BGG username and disconnects the integration entirely. This cannot be undone. Reconnecting and re-syncing from scratch is the only way back.
+  **Wipe collection** goes further. It removes everything Reset removes, plus your manual games and custom folders, and it clears your BGG username and disconnects the integration entirely. Your favorites stay. This cannot be undone. Reconnecting and re-syncing from scratch is the only way back.
 
   Use Wipe only if you want to completely cut ties with your current BGG link and start over from zero.
 </Danger>
