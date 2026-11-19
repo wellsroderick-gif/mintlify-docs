@@ -1,7 +1,7 @@
 ---
 title: "Setting Up and Managing On the Table"
 sidebarTitle: "On the Table (Hosts)"
-description: "For hosts: every On the Table setting, plus how to remove games, fix attribution, pick table leads, add walk-in guests, and edit the list after your event."
+description: "For hosts: every On the Table setting, plus how to remove games, fix attribution, pick table leads, add walk-in guests, save members' games, and edit the list after your event."
 ---
 
 On the Table is your tool as much as your attendees'. You decide how much of it runs, who can add to it, and you can fix anything on the list before, during, and after the event.
@@ -36,7 +36,7 @@ Turning Voting off later doesn't delete anything. Requests already on the list s
 <Columns cols={2}>
   <Card title="Members Can" icon="user">
     - Add their own games
-    - Open a table for a game they brought
+    - Start a table on a game they brought, or on a copy its owner opened to other tables
     - Join any open table
     - Remove their own entries
     - Vote, if voting is on
@@ -46,7 +46,7 @@ Turning Voting off later doesn't delete anything. Requests already on the list s
     - Everything above, plus:
     - Remove anyone's game
     - Change who's credited with bringing a game
-    - Record a table on someone else's copy
+    - Start a table on any copy, opened or not
     - Pick who leads a table
     - Add walk-in guests
     - Edit the list for 7 days after the event
@@ -79,9 +79,13 @@ You can pick anyone Going, and you can also pick a guest. If the person you need
 
 ## Running a Table on Someone Else's Game
 
-You don't have to be the one who brought a game to get it on a table. Open a table from any game on the list, pick whose copy is being used, then pick who's actually running it. That's often not the same person, and WR-Games doesn't assume it is.
+You don't have to be the one who brought a game to get it on a table. Open a table from any game on the list and pick whose copy is being used. You see every copy, including ones their owners haven't opened to other tables.
+
+The copy's owner leads the table unless you select **I'm leading this table**. To hand it to someone else, press **Change** next to **Led By** on the setup screen. After the event, the copy's owner is picked by default, and **Change** still picks anyone.
 
 The same game can also run more than once in a night. Two tables of the same title at different times is a normal evening, not a duplicate.
+
+When a table is led by someone other than its copy's owner, you can change **Keep my table if this copy stops coming** from the table while the event is live. If you mark someone not going while other people's tables use their copy, you're told which tables it would cancel before you confirm.
 
 ## Adding Guests
 
@@ -103,6 +107,45 @@ You can still add a guest for them. Pick the attendee, and the dialog tells you 
 - **If the event doesn't take new guests, or it's a free user-hosted event,** the attendee is greyed out. Add a **Walk-In Guest** instead.
 
 Members can only add a guest of their own, into a guest spot already on their RSVP. If they don't have one free, they're asked to update their guests on their RSVP first.
+
+## Saving Members' Games to the Group Collection
+
+At a group's event, anyone with the **Manage group collection** permission can save the copies members brought to the Group Collection, each one in that member's name. It works during the event and after it. See [Group Roles and Permissions](/features/roles-and-permissions) for who has the permission.
+
+When a member's copy isn't in the Group Collection, a row above the games says so, for example "Ben's copy of Clank! isn't in the Group Collection. Want to save it?" With two or more, it reads "Members brought games that aren't in the Group Collection. Want to save them?" and the button shows how many copies are waiting.
+
+<Steps>
+  <Step title="Select Save to Group Collection">
+    The picker shows one cover per copy, labelled with whose copy it is, such as **Ben's Copy**. A game two members brought is two covers.
+  </Step>
+  <Step title="Pick the Copies">
+    Choose the copies worth keeping. **Select All** and search help with a long list.
+  </Step>
+  <Step title="Save Them">
+    The button reads **Save 3 Copies**, or however many you picked.
+  </Step>
+</Steps>
+
+To save one game, use **Save** on its cover. If more than one member brought it, choose whose copies to save. Either way, the games show as those members' copies in this group, and their own collections aren't changed. Games guests brought, and requests, aren't offered.
+
+### Telling Members
+
+Every save has a switch: **Turn on to notify Ben**, or **Turn on to notify members** when the save covers several people. It starts off, and WR-Games remembers your last choice.
+
+| Notify Switch | What the Member Gets |
+| --- | --- |
+| **Off** | No notification. A note on the group's Collection tab names the games you added. |
+| **On** | A notification, plus the same note. |
+
+The same switch shows on **Assign Games** and when you add a game to On the Table in a member's name with **Add Azul to the Group Collection as Ben's copy** selected. See [Adding Games to Your Collections](/features/adding-games).
+
+### What You'll See Afterwards
+
+**Save** on a cover means a copy still isn't in the Group Collection. **Saved** shows right after you save it, until you reload the page. A game that's already in the collection has no mark.
+
+The row's **X** hides it for this event. It comes back if someone brings another copy that isn't saved yet.
+
+Your own brought games go through **Save My Games**, like everyone else's. See [On the Table](/features/on-the-table).
 
 ## After the Event Ends
 
