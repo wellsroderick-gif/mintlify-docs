@@ -90,6 +90,7 @@
           {
             "group": "Venues",
             "pages": [
+              "features/venue-pages",
               "features/claiming-your-venue",
               "features/running-your-venue",
               "features/editing-and-resubmitting-a-venue-submission",
