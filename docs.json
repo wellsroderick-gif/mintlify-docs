@@ -94,6 +94,7 @@
               "features/play-logging",
               "features/game-collection",
               "features/game-picker",
+              "features/game-filters",
               "features/editing-and-resubmitting-a-venue-submission",
               "features/messages",
               "features/friends"
