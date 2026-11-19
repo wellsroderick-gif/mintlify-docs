@@ -88,6 +88,10 @@
             ]
           },
           {
+            "group": "Venues",
+            "pages": []
+          },
+          {
             "group": "Player Tools",
             "pages": [
               "features/discovering-events",
