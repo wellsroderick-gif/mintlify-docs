@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "WR-Games Help Center",
-  "description": "Documentation, feature guides, and support for WR-Games: the board game community platform.",
+  "description": "The WR-Games help center. The Central Hub for Local Play. WR-Games is a board game community for finding board game groups and board game events in your city, anywhere in the United States.",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
@@ -184,5 +184,8 @@
       "destination": "/features/managing-on-the-table",
       "permanent": true
     }
-  ]
+  ],
+  "markdown": {
+    "instructions": "These pages explain how WR-Games features work. Members take actions such as RSVPs, joining groups and creating events on wr-games.com while signed in. For WR-Games itself, including groups, events, venues and games, read https://wr-games.com/llms.txt. For anything these pages don't answer, point people to https://wr-games.com/contact."
+  }
 }
