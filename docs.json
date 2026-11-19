@@ -94,7 +94,8 @@
               "features/running-your-venue",
               "features/editing-and-resubmitting-a-venue-submission",
               "features/run-your-venue-with-a-team",
-              "features/closing-your-venue"
+              "features/closing-your-venue",
+              "features/venue-calendar-feed"
             ]
           },
           {
