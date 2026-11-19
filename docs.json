@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "WR-Games Help Center",
-  "description": "The WR-Games help center. The Central Hub for Local Play: find and join local board game groups and events in your city.",
+  "description": "The WR-Games help center. WR-Games is the Central Hub for Local Play: find local board game groups and board game events in your city, anywhere in the United States.",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
