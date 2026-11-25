@@ -36,6 +36,9 @@ jobs:
       # Unpinned npx mintlify — always latest CLI on each run.
       # Tradeoff: reproducibility vs picking up Mintlify fixes without bumping a pin.
       # Pin to a specific version here only if CI becomes flaky across releases.
+      - name: Sync help-shots snippet from manifest
+        run: node scripts/ci/sync-help-shots-snippet.mjs
+
       - name: Mintlify validate
         run: npx mintlify validate
 
@@ -72,6 +75,15 @@ jobs:
 
       - name: Em dash self-test
         run: node scripts/ci/check-em-dashes.mjs --self-test
+
+      - name: Staged screenshots not served
+        run: node scripts/ci/check-staged-not-served.mjs
+
+      - name: Staged screenshots self-test
+        run: node scripts/ci/check-staged-not-served.mjs --self-test
+
+      - name: Help shot manifest integrity
+        run: node scripts/ci/check-shot-manifest.mjs
 
       - name: Merge gate tests
         run: node --test scripts/ci/help-merge-gate.test.mjs

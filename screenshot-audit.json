@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-25",
+  "source": "WR-32543 cursor-builder recon WR-43984 table + full corpus pass",
+  "firstSet": [
+    "quickstart",
+    "features/creating-events",
+    "features/rsvp-and-waitlist",
+    "features/roll-call",
+    "features/managing-groups",
+    "features/on-the-table",
+    "groups/group-settings-overview",
+    "account-setup"
+  ],
+  "articles": [
+    {
+      "path": "account-setup",
+      "mdx": "account-setup.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "billing/event-credits",
+      "mdx": "billing/event-credits.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "billing/manage-subscription",
+      "mdx": "billing/manage-subscription.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "billing/plans",
+      "mdx": "billing/plans.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "billing/what-happens-when-you-cancel",
+      "mdx": "billing/what-happens-when-you-cancel.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "changelog",
+      "mdx": "changelog.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "concepts/events",
+      "mdx": "concepts/events.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "concepts/groups",
+      "mdx": "concepts/groups.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "concepts/trust-and-reputation",
+      "mdx": "concepts/trust-and-reputation.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/adding-games",
+      "mdx": "features/adding-games.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/bg-stats",
+      "mdx": "features/bg-stats.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/bga",
+      "mdx": "features/bga.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/bgg-collection",
+      "mdx": "features/bgg-collection.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/bgg-sync",
+      "mdx": "features/bgg-sync.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/claiming-your-venue",
+      "mdx": "features/claiming-your-venue.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/closing-your-venue",
+      "mdx": "features/closing-your-venue.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/creating-events",
+      "mdx": "features/creating-events.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/discovering-events",
+      "mdx": "features/discovering-events.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/editing-an-event-thats-already-started",
+      "mdx": "features/editing-an-event-thats-already-started.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/editing-and-resubmitting-a-venue-submission",
+      "mdx": "features/editing-and-resubmitting-a-venue-submission.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/event-types",
+      "mdx": "features/event-types.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/friends",
+      "mdx": "features/friends.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/game-collection",
+      "mdx": "features/game-collection.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/game-filters",
+      "mdx": "features/game-filters.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/game-picker",
+      "mdx": "features/game-picker.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/group-announcements",
+      "mdx": "features/group-announcements.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/group-privacy",
+      "mdx": "features/group-privacy.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/integrations",
+      "mdx": "features/integrations.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "features/managing-groups",
+      "mdx": "features/managing-groups.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/managing-on-the-table",
+      "mdx": "features/managing-on-the-table.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/messages",
+      "mdx": "features/messages.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/on-the-table",
+      "mdx": "features/on-the-table.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/play-logging",
+      "mdx": "features/play-logging.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/predictive-attendance",
+      "mdx": "features/predictive-attendance.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/ranked-seating",
+      "mdx": "features/ranked-seating.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/recurring-series",
+      "mdx": "features/recurring-series.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/roles-and-permissions",
+      "mdx": "features/roles-and-permissions.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/roll-call",
+      "mdx": "features/roll-call.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/rsvp-and-waitlist",
+      "mdx": "features/rsvp-and-waitlist.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/run-your-venue-with-a-team",
+      "mdx": "features/run-your-venue-with-a-team.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/running-your-venue",
+      "mdx": "features/running-your-venue.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/start-a-table",
+      "mdx": "features/start-a-table.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/transit",
+      "mdx": "features/transit.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/venue-calendar-feed",
+      "mdx": "features/venue-calendar-feed.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/venue-events-and-partners",
+      "mdx": "features/venue-events-and-partners.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "features/venue-pages",
+      "mdx": "features/venue-pages.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/claim-your-group-listing",
+      "mdx": "groups/claim-your-group-listing.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/group-activity-policy",
+      "mdx": "groups/group-activity-policy.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "groups/group-calendar-custom-entries",
+      "mdx": "groups/group-calendar-custom-entries.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/group-settings-overview",
+      "mdx": "groups/group-settings-overview.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/import-from-meetup",
+      "mdx": "groups/import-from-meetup.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/leadership-transfers",
+      "mdx": "groups/leadership-transfers.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/lending-games",
+      "mdx": "groups/lending-games.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/meetup-integration",
+      "mdx": "groups/meetup-integration.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "groups/new-group-homepage",
+      "mdx": "groups/new-group-homepage.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "groups/why-cant-i-remove-a-game",
+      "mdx": "groups/why-cant-i-remove-a-game.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "help/common-issues",
+      "mdx": "help/common-issues.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "help/contact",
+      "mdx": "help/contact.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "help/email-delivery",
+      "mdx": "help/email-delivery.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "help/notifications",
+      "mdx": "help/notifications.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "help/privacy-settings",
+      "mdx": "help/privacy-settings.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "help/profile-settings",
+      "mdx": "help/profile-settings.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "help/reporting",
+      "mdx": "help/reporting.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "help/your-calendar-on-my-events",
+      "mdx": "help/your-calendar-on-my-events.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    },
+    {
+      "path": "index",
+      "mdx": "index.mdx",
+      "classification": "too volatile",
+      "notes": "Custom homepage (mode: custom); legacy JPEG panels stay outside the manifest unless explicitly migrated."
+    },
+    {
+      "path": "introduction",
+      "mdx": "introduction.mdx",
+      "classification": "text only",
+      "notes": "Mostly policy, billing, concepts, or low-ROI explainer copy."
+    },
+    {
+      "path": "quickstart",
+      "mdx": "quickstart.mdx",
+      "classification": "needs shots",
+      "notes": "UI-heavy or step-by-step flows; candidate for <Shot> once manifest entries exist."
+    }
+  ]
+}
