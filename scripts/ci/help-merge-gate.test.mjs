@@ -195,8 +195,31 @@ describe("blockers — spent by release proof, never by state", () => {
       assert.equal(proofFromReleases(c.key, [{ ...fx.release, ...c.mutate }]).proven, c.proven);
     });
   }
+  const mfx = fx.memberCases;
+  if (mfx) {
+    for (const c of mfx.cases) {
+      it(`member fixture: ${c.name}`, () => {
+        const release = { ...mfx.release, ...(c.mutate ?? {}) };
+        const parents = { ...mfx.parents, ...(c.parentsMutate ?? {}) };
+        const p = proofFromReleases(c.key, [release], parents);
+        assert.equal(p.proven, c.proven);
+        if (c.reason) assert.equal(p.reason, c.reason);
+      });
+    }
+  }
   it("a WR-Games blocker shipped in a verified release is spent", () => {
     assert.equal(blockerSpent({ identifier: "WR-7165", stateType: "completed", labels: ["Improvement"] }, ctx).spent, true);
+  });
+  it("a WR-Games batch member is spent through parents map (WR-47003)", () => {
+    const memberCtx = {
+      releases: [mfx.release],
+      mergedKeys: new Set(),
+      parents: mfx.parents,
+    };
+    assert.equal(
+      blockerSpent({ identifier: "WR-39898", stateType: "completed", labels: [] }, memberCtx).spent,
+      true,
+    );
   });
   it("a WR-Games blocker that is Done but in no verified release is NOT spent", () => {
     assert.equal(blockerSpent({ identifier: "WR-5000", stateType: "completed", labels: [] }, ctx).spent, false);

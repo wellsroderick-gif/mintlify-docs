@@ -60,7 +60,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import { manifestFrom, proofFromReleases } from "./release-proof-core.mjs";
+import { manifestFrom, membersFrom, proofFromReleases } from "./release-proof-core.mjs";
 
 export const CHECKS_WORKFLOW = "help-pr-checks.yml";
 export const HOLD_MARKER = "<!-- wr-help-merge-gate -->";
@@ -208,14 +208,14 @@ export function judgeMergeable(pr) {
  *   - any other `repo:*` label, or anything unreadable: NOT spent.
  * Canceled is never spent on either arm.
  * @param {{ identifier?: string, stateType?: string, labels?: string[] }} blocker
- * @param {{ releases: any[], mergedKeys: Set<string> }} ctx
+ * @param {{ releases: any[], mergedKeys: Set<string>, parents?: Record<string, string | null | undefined> }} ctx
  */
 export function blockerSpent(blocker, ctx) {
   const key = blocker?.identifier;
   if (!key || typeof blocker?.stateType !== "string") return { spent: false, reason: `${key ?? "?"}: unreadable` };
   const repo = (blocker.labels ?? []).filter((n) => String(n).trim().toLowerCase().startsWith("repo:"));
   if (repo.length === 0) {
-    const p = proofFromReleases(key, ctx.releases);
+    const p = proofFromReleases(key, ctx.releases, ctx.parents ?? {});
     return { spent: p.proven, reason: p.proven ? `${key}: shipped in ${p.release}` : `${key}: not in a verified WR-Games release yet (${p.reason})` };
   }
   if (repo.length === 1 && repo[0] === REPO_LABEL) {
@@ -227,7 +227,7 @@ export function blockerSpent(blocker, ctx) {
 
 /**
  * @param {{ blockers: any[], truncated: boolean } | null} blockers
- * @param {{ releases: any[], mergedKeys: Set<string> }} ctx
+ * @param {{ releases: any[], mergedKeys: Set<string>, parents?: Record<string, string | null | undefined> }} ctx
  */
 export function judgeBlockers(blockers, ctx) {
   if (!blockers) return { ok: false, reason: "its blockers could not be read" };
@@ -494,32 +494,79 @@ async function readBlockers(key) {
   };
 }
 
-/** Completed Releases whose manifest names one of `keys`, with their comments. @param {string[]} keys */
-async function readReleases(keys) {
-  if (keys.length === 0) return [];
+/** @type {{ fingerprint: string, releases: any[], parents: Record<string, string> } | null} */
+let blockerProofCache = null;
+
+/** Completed Releases project issues (no comments). Cached for the current sweep invocation. */
+async function readCompletedReleaseNodes() {
   const all = await linearAll(
     `query($after:String){ issues(filter:{ project:{ name:{ eq:"Releases" } }, state:{ type:{ eq:"completed" } } }, first:100, after:$after){ nodes{ identifier description state{ type } project{ name } } pageInfo{ hasNextPage endCursor } } }`,
     {},
     (x) => x?.issues,
   );
   if (all.truncated) throw new Error("the Releases list was truncated");
-  const out = [];
-  for (const n of all.nodes.filter((r) => keys.some((k) => manifestFrom(r.description).includes(k)))) {
-    const c = await linearAll(
-      `query($id:String!, $after:String){ issue(id:$id){ comments(first:100, after:$after){ nodes{ body } pageInfo{ hasNextPage endCursor } } } }`,
-      { id: n.identifier },
-      (x) => x?.issue?.comments,
-    );
-    if (c.truncated) throw new Error(`comments truncated on ${n.identifier}`);
-    out.push({
-      identifier: n.identifier,
-      project: n.project?.name ?? null,
-      stateType: n.state?.type ?? null,
-      description: n.description ?? "",
-      comments: c.nodes.map((/** @type {any} */ x) => x.body ?? ""),
-    });
+  return all.nodes;
+}
+
+/**
+ * WR-47003 — release proof inputs for WR-Games blockers (direct manifest + batch/consolidation members).
+ * Caches the completed-Releases scan and manifest-parent descriptions for one sweep run.
+ * @param {string[]} needsRelease blocker keys with no `repo:*` label
+ * @param {Set<string>} mergedKeys
+ */
+async function buildBlockerCtx(needsRelease, mergedKeys) {
+  const keys = [...new Set(needsRelease)];
+  if (keys.length === 0) return { releases: [], mergedKeys, parents: {} };
+  const fingerprint = keys.slice().sort().join("\n");
+  if (!blockerProofCache || blockerProofCache.fingerprint !== fingerprint) {
+    const nodes = await readCompletedReleaseNodes();
+    /** @type {Map<string, string[]>} */
+    const manifestKeysOf = new Map(nodes.map((n) => [n.identifier, manifestFrom(n.description ?? "")]));
+    const leadingManifestKeys = new Set([...manifestKeysOf.values()].flat());
+    /** @type {Record<string, string>} */
+    const parents = {};
+    for (const key of keys) {
+      const parentCandidates = await linearAll(
+        `query($contains:String!, $after:String){ issues(filter:{ description:{ contains:$contains } }, first:100, after:$after){ nodes{ identifier description } pageInfo{ hasNextPage endCursor } } }`,
+        { contains: key },
+        (x) => x?.issues,
+      );
+      if (parentCandidates.truncated) throw new Error(`parent search truncated for ${key}`);
+      for (const p of parentCandidates.nodes) {
+        if (!leadingManifestKeys.has(p.identifier)) continue;
+        const memberKeys = membersFrom(p.description ?? "");
+        if (memberKeys === null) continue;
+        if (memberKeys.includes(key)) parents[p.identifier] = p.description ?? "";
+      }
+    }
+    const releaseIds = new Set();
+    for (const key of keys) {
+      for (const n of nodes) {
+        const manifestKeys = manifestKeysOf.get(n.identifier) ?? [];
+        if (manifestKeys.includes(key)) releaseIds.add(n.identifier);
+        else if (manifestKeys.some((p) => parents[p] !== undefined)) releaseIds.add(n.identifier);
+      }
+    }
+    const releases = [];
+    for (const n of nodes) {
+      if (!releaseIds.has(n.identifier)) continue;
+      const c = await linearAll(
+        `query($id:String!, $after:String){ issue(id:$id){ comments(first:100, after:$after){ nodes{ body } pageInfo{ hasNextPage endCursor } } } }`,
+        { id: n.identifier },
+        (x) => x?.issue?.comments,
+      );
+      if (c.truncated) throw new Error(`comments truncated on ${n.identifier}`);
+      releases.push({
+        identifier: n.identifier,
+        project: n.project?.name ?? null,
+        stateType: n.state?.type ?? null,
+        description: n.description ?? "",
+        comments: c.nodes.map((/** @type {any} */ x) => x.body ?? ""),
+      });
+    }
+    blockerProofCache = { fingerprint, releases, parents };
   }
-  return out;
+  return { releases: blockerProofCache.releases, mergedKeys, parents: blockerProofCache.parents };
 }
 
 /** The ticket named by every MERGED PR into main: this repo's release record. */
@@ -701,7 +748,8 @@ async function sweep() {
         const blockers = await readBlockers(key);
         const needsRelease = blockers.blockers.filter((b) => !b.labels.some((/** @type {string} */ n) => n.startsWith("repo:"))).map((b) => b.identifier);
         if (blockers.blockers.length && !merged) merged = await mergedKeys();
-        verdict = judgeBlockers(blockers, { releases: await readReleases(needsRelease), mergedKeys: merged ?? new Set() });
+        const ctx = await buildBlockerCtx(needsRelease, merged ?? new Set());
+        verdict = judgeBlockers(blockers, ctx);
       } catch (e) {
         verdict = { ok: false, reason: `its blockers or releases could not be read (${errText(e)})` };
       }

@@ -20,5 +20,31 @@
     { "name": "a leading key written as a Linear mention link is proven (release WR-7954 lists every item this way)", "key": "WR-7590", "mutate": { "description": "## Manifest\n\n* [WR-7590](https://linear.app/wr-inc/issue/WR-7590/send-back-rail) Send-back rail\n"}, "proven": true},
     { "name": "a leading key written as an issue element (the Linear MCP serialisation) is proven", "key": "WR-7590", "mutate": { "description": "## Manifest\n\n* <issue id=\"u\" href=\"https://linear.app/wr-inc/issue/WR-7590/x\">WR-7590</issue> Send-back rail\n"}, "proven": true},
     { "name": "a mention link inside a manifest line TITLE is not proven", "key": "WR-7149", "mutate": { "description": "## Manifest\n\n* WR-7165 Probe: [WR-7149](https://linear.app/wr-inc/issue/WR-7149/x) migration lane smoke\n"}, "proven": false }
-  ]
+  ],
+  "memberCases": {
+    "_note": "WR-47001 (S1 of WR-46932) -- the member path. `release`'s manifest leading-keys WR-41663 and names WR-41000 only inside that line's title; `parents` holds WR-41663's own `## Members` block. Each case spreads `mutate` onto `release` and `parentsMutate` onto `parents`, then calls proofFromReleases(key, [release], parents).",
+    "release": {
+      "identifier": "WR-42001",
+      "project": "Releases",
+      "stateType": "completed",
+      "description": "Pinned-SHA: 49d78f25bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n\n## Manifest\n\n* WR-41663 Batch ship: covers WR-41000 follow-up\n",
+      "comments": ["**Release verified** for `49d78f25`.\n\n`release-verify` = success."]
+    },
+    "parents": {
+      "WR-41663": "## Members\n\n* WR-39898 fixture member in a list row\n* [WR-39899](https://linear.app/wr-inc/issue/WR-39899/mention-member) fixture member written as a mention\n* ~~`WR-39912`~~ fixture member the writer struck (code span inside the strike)\n* WR-39913 title mentions WR-39914, which this row does not name as its member\n| WR-39906 | consolidation-detector title cell |\n"
+    },
+    "cases": [
+      { "name": "member in a list row is proven through its parent", "key": "WR-39898", "proven": true, "reason": "verified-release-manifest-member" },
+      { "name": "member of a parent whose release has no verdict comment is not proven", "key": "WR-39898", "mutate": { "comments": [] }, "proven": false, "reason": "manifest-without-verified-completed-release" },
+      { "name": "a key named only in parent prose, never a Members row, is not proven", "key": "WR-39905", "parentsMutate": { "WR-41663": "## Summary\n\nWR-39905 is handled by this batch.\n\n## Members\n\nWR-39905 was mentioned here but never listed as a row.\n" }, "proven": false, "reason": "not-in-any-manifest" },
+      { "name": "member in a table row first cell (consolidation-detector shape) is proven", "key": "WR-39906", "proven": true, "reason": "verified-release-manifest-member" },
+      { "name": "a key only reachable as a row's second mention is not proven (the row's own member wins)", "key": "WR-39914", "proven": false, "reason": "not-in-any-manifest" },
+      { "name": "a struck row's key, inside a code span, is not proven", "key": "WR-39912", "proven": false, "reason": "not-in-any-manifest" },
+      { "name": "a parent with two Members blocks is unreadable, so its members are not proven", "key": "WR-39898", "parentsMutate": { "WR-41663": "## Members\n\n* WR-39898 one block\n\n## Notes\n\nprose\n\n## Members\n\n* WR-39898 a second block\n" }, "proven": false, "reason": "not-in-any-manifest" },
+      { "name": "a parent description absent from the parents map is not proven", "key": "WR-39898", "parentsMutate": { "WR-41663": null }, "proven": false, "reason": "not-in-any-manifest" },
+      { "name": "a parent named only in a manifest line's title is not a leading key, so its declared members are not proven", "key": "WR-39920", "parentsMutate": { "WR-41000": "## Members\n\n* WR-39920 member of a title-only parent\n" }, "proven": false, "reason": "not-in-any-manifest" },
+      { "name": "a key that is both a leading manifest key and a member keeps the direct, more specific proof", "key": "WR-39898", "mutate": { "description": "Pinned-SHA: 49d78f25bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n\n## Manifest\n\n* WR-41663 Batch ship: covers WR-41000 follow-up\n* WR-39898 Direct hit too\n" }, "proven": true, "reason": "verified-release-manifest" },
+      { "name": "a member written as a Linear mention link is proven", "key": "WR-39899", "proven": true, "reason": "verified-release-manifest-member" }
+    ]
+  }
 }

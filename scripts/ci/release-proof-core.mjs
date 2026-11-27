@@ -26,10 +26,26 @@
  *      a manifest line's TITLE (release WR-7170's manifest names `WR-7149` that way) is NOT proven,
  *   4. and which carries the verifier's `**Release verified**` comment -- the guard against a
  *      Release issue a human closed by hand.
+ *
+ * THE MEMBER PATH (WR-47001, S1 of WR-46932 D1). A batch or consolidation member never heads a
+ * manifest line itself -- its PARENT does, under `membersFrom`'s own copy of the `membersBlock`
+ * row rules (`scripts/linear/ticket-blocks.mjs:413-431`). `proofFromReleases` takes an optional
+ * `parents` map (`{ "<P>": "<P's description>" }`) and proves a member through any release whose
+ * manifest leading-keys a parent P that the four conditions already hold for, and whose `P`
+ * description's `## Members` block names the key. That map is supplied by the impure reader in
+ * each repo (`releaseProofFor` here; command-admin's and mintlify-docs' own live readers once S2 /
+ * S3 land) -- this file stays import-free and reads no Linear data itself. The parity between
+ * `membersFrom` and `membersBlock` is held by a test (`release-proof.test.mjs`), not a shared
+ * import: neither consumer repo can resolve `ticket-blocks.mjs`.
  */
 
 export const RELEASES_PROJECT = "Releases";
 export const VERIFIED_PREFIX = "**Release verified**";
+// Joined, not a single quoted literal: ticket-blocks.mjs guard 14 refuses a second string-literal
+// declaration of this exact canonical heading anywhere outside that module. This file must stay
+// import-free (vendored to command-admin and mintlify-docs, neither of which can resolve
+// ticket-blocks.mjs), so it needs its own copy of the value without re-declaring the literal.
+export const MEMBERS_HEADING = ["##", "Members"].join(" ");
 
 /**
  * The LEADING key of a manifest list item, in any of the three spellings the live corpus holds.
@@ -86,16 +102,75 @@ export function releaseProves(key, release) {
 }
 
 /**
+ * The keys a consolidation or batch parent DECLARES in its one `## Members` block. Import-free
+ * copy of `membersBlock`'s row rules (`scripts/linear/ticket-blocks.mjs:413-431`, opened WR-47001):
+ * a row is a table row or a list item, its member is the FIRST `WR-####` on it (a mention link or
+ * an `<issue>` element reads the same, since both still carry the literal digits), a row whose
+ * first key is struck (`~~`, inside or outside a code span) counts as removed, and prose lines in
+ * the block never name a member. `## Members` has no accepted alias (`TICKET_BLOCKS.MEMBERS`), so
+ * this reads only the canonical heading, on its own line.
+ *
+ * UNREADABLE IS `null`, NOT EMPTY -- a missing, doubled or empty block names no member, and a
+ * caller must not read that as "this parent has none" (`membersBlock`'s own warning, mirrored).
+ *
+ * @param {string | null | undefined} description
+ * @returns {string[] | null}
+ */
+export function membersFrom(description) {
+  const lines = typeof description === "string" ? description.split(/\r?\n/) : [];
+  const at = lines.flatMap((line, i) => (line.trim() === MEMBERS_HEADING ? [i] : []));
+  if (at.length !== 1) return null;
+  /** @type {string[]} */
+  const keys = [];
+  for (const line of lines.slice(at[0] + 1)) {
+    if (/^\s{0,3}#{1,6}\s/.test(line)) break;
+    if (!/^\s*(?:\||[-*+]\s|\d+[.)]\s)/.test(line)) continue;
+    const plain = line.replace(/`/g, "");
+    const m = /WR-\d+/.exec(plain);
+    if (!m) continue;
+    const struck = [...plain.matchAll(/~~[\s\S]*?~~/g)].some((s) => m.index >= s.index && m.index < s.index + s[0].length);
+    if (!struck && !keys.includes(m[0])) keys.push(m[0]);
+  }
+  return keys.length === 0 ? null : keys;
+}
+
+/**
+ * Is `key` a member of some parent that a verified, completed `release` lists as a LEADING
+ * manifest key, given that parent's description in `parents`? Pure.
+ * @param {string} key
+ * @param {Parameters<typeof releaseProves>[1]} release
+ * @param {Record<string, string | null | undefined>} parents
+ * @returns {string | null} the proving parent's key, or null
+ */
+function memberParentOf(key, release, parents) {
+  const manifestKeys = manifestFrom(release?.description ?? "");
+  return manifestKeys.find((p) => releaseProves(p, release) && (membersFrom(parents?.[p]) ?? []).includes(key)) ?? null;
+}
+
+/**
  * The proof over a set of Release records. Pure -- the shape every consumer tests.
+ *
+ * `parents` (WR-47001) is an optional `{ "<P>": "<P's description>" }` map, supplied by the impure
+ * reader, of every parent a candidate release's manifest leading-keys. A direct manifest hit always
+ * wins over a member hit (a key that is both keeps its own, more specific, proof).
+ *
  * @param {string} key
  * @param {Array<Parameters<typeof releaseProves>[1]>} releases
- * @returns {{ proven: boolean, release: string | null, reason: string }}
+ * @param {Record<string, string | null | undefined>} [parents]
+ * @returns {{ proven: boolean, release: string | null, reason: string, parent?: string }}
  */
-export function proofFromReleases(key, releases) {
+export function proofFromReleases(key, releases, parents = {}) {
   if (!/^WR-\d+$/.test(String(key ?? ""))) return { proven: false, release: null, reason: "malformed-key" };
   const hit = (releases ?? []).find((r) => releaseProves(key, r));
   if (hit) return { proven: true, release: hit.identifier, reason: "verified-release-manifest" };
-  const inAnyManifest = (releases ?? []).some((r) => manifestFrom(r?.description ?? "").includes(key));
+  for (const r of releases ?? []) {
+    const parent = memberParentOf(key, r, parents);
+    if (parent) return { proven: true, release: r.identifier, reason: "verified-release-manifest-member", parent };
+  }
+  const inAnyManifest = (releases ?? []).some((r) => {
+    const keys = manifestFrom(r?.description ?? "");
+    return keys.includes(key) || keys.some((p) => (membersFrom(parents?.[p]) ?? []).includes(key));
+  });
   return {
     proven: false,
     release: null,
