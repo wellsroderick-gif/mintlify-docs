@@ -39,8 +39,9 @@
  * ticket that a PR here happens to name is NEVER moved -- that is how WR-9774 was knocked out of
  * Ready for Smoke Test -- and gets one comment saying so.
  *
- * WHICH TICKET. The key in the head branch (`<prefix>/wr-<n>-...`), else the one key in the title.
- * No key means no ticket: nothing to prove and nothing to close.
+ * WHICH TICKET. The key in the head branch (`<prefix>/wr-<n>-...`), else the sole leading key the
+ * title owns (vendored `titleStrongKeys`). Batch-leading titles without a ticket branch stay
+ * ambiguous for single-ticket close/sweep. No key means no ticket: nothing to prove and nothing to close.
  *
  * RELEASE PROOF. A help ticket that is `blockedBy` WR-Games work must not publish before that work
  * is in production. `release-proof-core.mjs` beside this file is a BYTE-IDENTICAL vendored copy of
@@ -61,6 +62,7 @@ import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 
 import { manifestFrom, proofFromReleases } from "./release-proof-core.mjs";
+import { titleStrongKeys } from "./ticket-ownership-core.mjs";
 
 export const CHECKS_WORKFLOW = "help-pr-checks.yml";
 export const HOLD_MARKER = "<!-- wr-help-merge-gate -->";
@@ -109,15 +111,32 @@ export function keyFromBranch(ref) {
 }
 
 /**
- * The ticket a PR names: its branch key, else the ONE key in its title. Two keys in a title is
- * ambiguous, and ambiguous is no ticket.
+ * Ticket keys a merged help PR into `main` released: its branch key (help `keyFromBranch`) plus every
+ * leading key the title owns (`titleStrongKeys`). Same shape as command-admin `keysFromMergedPr`.
+ * @param {string | null | undefined} headRef
+ * @param {string | null | undefined} title
+ * @returns {Set<string>}
+ */
+export function keysFromMergedHelpPr(headRef, title) {
+  const keys = new Set();
+  const fromBranch = keyFromBranch(headRef);
+  if (fromBranch) keys.add(fromBranch);
+  for (const k of titleStrongKeys(title)) {
+    keys.add(k);
+  }
+  return keys;
+}
+
+/**
+ * The ticket a PR names for close/sweep: branch key first; else the sole `titleStrongKeys` result.
+ * Batch-leading titles with no ticket branch stay ambiguous (null).
  * @param {{ headRef?: string | null, title?: string | null }} pr
  */
 export function ticketKeyOf({ headRef, title }) {
   const fromBranch = keyFromBranch(headRef);
   if (fromBranch) return fromBranch;
-  const inTitle = [...new Set([...String(title ?? "").matchAll(/\bWR-(\d+)\b/gi)].map((m) => `WR-${Number(m[1])}`))];
-  return inTitle.length === 1 ? inTitle[0] : null;
+  const owned = titleStrongKeys(title);
+  return owned.length === 1 ? owned[0] : null;
 }
 
 /** Open, not a draft, into main, from this repo. @param {any} p @param {string} repo */
@@ -528,8 +547,10 @@ async function mergedKeys() {
   for (let page = 1; page <= 10; page++) {
     const prs = await gh(`repos/${REPO}/pulls?state=closed&base=main&per_page=100&page=${page}`);
     for (const p of prs) {
-      const key = p.merged_at ? ticketKeyOf({ headRef: p.head?.ref, title: p.title }) : null;
-      if (key) keys.add(key);
+      if (!p.merged_at) continue;
+      for (const k of keysFromMergedHelpPr(p.head?.ref, p.title)) {
+        keys.add(k);
+      }
     }
     if (prs.length < 100) return keys;
   }

@@ -19,6 +19,7 @@ import {
   helpCandidates,
   holdCommentBody,
   isLaneBranch,
+  keysFromMergedHelpPr,
   judgeBlockers,
   judgeChecks,
   judgeLaneTicket,
@@ -56,12 +57,37 @@ describe("which ticket a PR names", () => {
   it("the branch wins over the title", () => {
     assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/wr-5608-heading-casing-fix", title: "Heading casing (WR-3093)" }), "WR-5608");
   });
-  it("a keyless branch falls back to the ONE key in the title", () => {
-    assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/fix-life-buoy-icon", title: "Fix Contact Us card icon (WR-5438)" }), "WR-5438");
+  it("a keyless branch uses shared title grammar: one leading key, not passing mentions", () => {
+    assert.equal(
+      ticketKeyOf({ headRef: "mintlify-mcp/fix-life-buoy-icon", title: "Fix Contact Us card icon (WR-5438)" }),
+      null,
+    );
+    assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/fix", title: "fix: thing (WR-1)" }), null);
+    assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/fix", title: "WR-1: x (prep for WR-2)" }), "WR-1");
   });
-  it("two keys in the title is ambiguous, so no ticket", () => {
+  it("batch-leading titles without a ticket branch stay ambiguous for single-ticket close", () => {
+    assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/settings", title: "WR-46710, WR-46711: batch" }), null);
     assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/settings", title: "Billing sweep (WR-3628, WR-3665)" }), null);
     assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/settings", title: "Billing sweep" }), null);
+  });
+  it("WR-47684-SMK-3: lane branch still wins; titleStrongKeys sole key when no branch", () => {
+    assert.equal(ticketKeyOf({ headRef: "cursor/wr-47684-slug", title: "WR-9999: ignored" }), "WR-47684");
+    assert.equal(ticketKeyOf({ headRef: "mintlify-mcp/update", title: "WR-5438: Fix icon" }), "WR-5438");
+  });
+});
+
+describe("keysFromMergedHelpPr (WR-47608 S3 / release-proof merged set)", () => {
+  it("WR47684-SMK-2: batch title without ticket branch adds both keys", () => {
+    const keys = keysFromMergedHelpPr("mintlify-mcp/update", "WR-46710, WR-46711: batch");
+    assert.deepEqual([...keys].sort(), ["WR-46710", "WR-46711"]);
+  });
+  it("WR47684-SMK-2: passing mention in title does not add a second merged key", () => {
+    const keys = keysFromMergedHelpPr("mintlify-mcp/wr-1-x", "WR-1: x (prep for WR-2)");
+    assert.deepEqual([...keys].sort(), ["WR-1"]);
+  });
+  it("branch and title batch union (parity with command-admin keysFromMergedPr)", () => {
+    const keys = keysFromMergedHelpPr("mintlify-mcp/wr-46710-batch", "WR-46710, WR-46711: batch");
+    assert.deepEqual([...keys].sort(), ["WR-46710", "WR-46711"]);
   });
 });
 

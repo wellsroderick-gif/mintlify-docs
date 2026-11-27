@@ -1,0 +1,32 @@
+{
+  "_note": "Shared ticket-ownership fixture (WR-47608 S1 / WR-47682). CANONICAL in board-game-meetup-nexus scripts/release/__fixtures__/; carried BYTE-IDENTICAL into command-admin scripts/merge-gate/ and mintlify-docs scripts/ci/ by `npm run release-proof:vendor -- --family ticket-ownership --target <repo> --to <checkout>`, and checked nightly by the nexus custodian `ticket-ownership-pair` audit. Never edit a copy.",
+  "cases": [
+    { "name": "WR47682-SMK-1a: a leading key with a parenthetical passing mention owns only the leading key", "kind": "title", "input": "WR-1: x (prep for WR-2)", "owns": ["WR-1"], "mentions": ["WR-2"] },
+    { "name": "WR47682-SMK-1b: a leading batch list owns every member, mentions none", "kind": "title", "input": "WR-46710, WR-46711: x", "owns": ["WR-46710", "WR-46711"], "mentions": [] },
+    { "name": "WR47682-SMK-1c: a key named only in passing owns nothing", "kind": "title", "input": "fix: thing (WR-1)", "owns": [], "mentions": ["WR-1"] },
+    { "name": "a plus-joined leading list owns both members", "kind": "title", "input": "WR-1 + WR-2: x", "owns": ["WR-1", "WR-2"], "mentions": [] },
+    { "name": "the slash-number-extension form absorbs the digit into one key, not a second one (pre-existing grammar, unchanged)", "kind": "title", "input": "WR-1/2: x", "owns": ["WR-1"], "mentions": [] },
+    { "name": "a conventional scoped subject owns its parenthesised key", "kind": "title", "input": "fix(WR-7): x", "owns": ["WR-7"], "mentions": [] },
+    { "name": "a breaking-change scoped subject owns its key too", "kind": "title", "input": "feat(WR-7)!: x", "owns": ["WR-7"], "mentions": [] },
+    { "name": "a Revert-wrapped subject still owns its leading key", "kind": "title", "input": "Revert \"WR-3: x\"", "owns": ["WR-3"], "mentions": [] },
+    { "name": "the PR #2576 incident title owns only its leading key, mentions the other in passing", "kind": "title", "input": "WR-46361: step labels use .frame-label (drift gate prep for WR-45308) (#2576)", "owns": ["WR-46361"], "mentions": ["WR-45308"] },
+    { "name": "two mentions after the leading key, joined by \"and\"", "kind": "title", "input": "WR-1: see WR-2 and WR-3", "owns": ["WR-1"], "mentions": ["WR-2", "WR-3"] },
+    { "name": "a lower-case key owns nothing -- case-sensitive, like the release loop", "kind": "title", "input": "wr-9: x", "owns": [], "mentions": [] },
+    { "name": "no key at all", "kind": "title", "input": "fix the thing", "owns": [], "mentions": [] }
+  ],
+  "branchCases": [
+    { "name": "claude/<key>-<slug>", "input": "claude/wr-123-x", "key": "WR-123" },
+    { "name": "Linear's copy-button form", "input": "wellsroderick/wr-3981-y", "key": "WR-3981" },
+    { "name": "a no-dash numeric-only branch", "input": "wr3177-pr", "key": "WR-3177" },
+    { "name": "a digit run with no load-bearing terminator is NOT a key (wr123x)", "input": "wr123x-thing", "key": null },
+    { "name": "an injection string outside the charset is refused before any matching", "input": "claude/wr-1-x; rm -rf /", "key": null }
+  ],
+  "refusalCases": [
+    { "name": "owns cleanly, mentions nothing -> no refusal", "title": "WR-1: x", "ownKey": "WR-1", "reason": null },
+    { "name": "a batch member is owned -> no refusal", "title": "WR-46710, WR-46711: x", "ownKey": "WR-46711", "reason": null },
+    { "name": "does not open with the own key", "title": "fix: thing (WR-1)", "ownKey": "WR-1", "reason": "does not open with WR-1" },
+    { "name": "opens with a different key entirely", "title": "WR-2: y", "ownKey": "WR-1", "reason": "does not open with WR-1" },
+    { "name": "opens with its own key but names a second one in passing", "title": "WR-1: x (prep for WR-2)", "ownKey": "WR-1", "reason": "names WR-2 in passing" },
+    { "name": "the mentioned key itself is still refused for not opening", "title": "WR-1: x (prep for WR-2)", "ownKey": "WR-2", "reason": "does not open with WR-2" }
+  ]
+}
