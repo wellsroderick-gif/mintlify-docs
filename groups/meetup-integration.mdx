@@ -125,45 +125,26 @@ In link-out, the Location step stays read-only. Events still link to a matching 
 
 ## Set the Game From the Listing
 
-WR-Games can read each Meetup listing and set the game on its synced event for you, from a BoardGameGeek (BGG) link or from the game's name. The game shows on the event the same way as one you pin by hand, and there's nothing extra to do on Meetup.
+WR-Games can read each Meetup listing and set the game on its synced event for you. The game shows on the event the same way as one you pin by hand, and there's nothing extra to do on Meetup.
 
 You'll find **Set the Game from the Listing** at **Group Manage → Features**, on the **Meetup Integration** card, under **Sync Options**. It's also on the review step when you import or claim a group. It's set per linked group, and it works in both link-out and side-by-side. When **Sync Options** is closed, its summary shows your current choice, for example **Game matching: Auto**.
 
 | Choice | What We Look For |
 | :-- | :-- |
-| **Auto** | A BGG link, then the game's name |
+| **Auto** | A BoardGameGeek (BGG) link, or the game's name |
 | **BGG Link** | A BGG link only |
 | **Off** | Nothing. No new games are set |
 
 New links start on **Auto**, and it's the choice we recommend.
 
-### How Auto Finds the Game
+### Getting the Right Game Set
 
-Auto looks for a BGG link first. When your listing has no BGG link, it looks for the game's name in one of three ways:
+- **A BGG link is the surest way.** Put one link to the game's BGG page in your listing, near the top of the description.
+- **On Auto, the game's name works too.** A title built around the game, like "Wednesday Catan Game Night!", is the kind of listing Auto reads best.
+- **One game per listing.** We set a game only when your listing points to exactly one. If it links or names two different games, we set nothing rather than guess.
+- **Not the game you wanted, or no game at all?** Edit the event and pin the game yourself. Sync never replaces a game you pin.
 
-- **The title is the game's name.** We leave out the day, date, time, venue and words like "game night", so "Wednesday Catan Game Night!" reads as Catan.
-- **The title names the game, and the description names it again.**
-- **The description repeats a sentence from the game's own description,** such as the publisher's blurb copied from BGG.
-
-Auto sets a game only when it finds exactly one. By name, it only finds base games, never an expansion.
-
-When two games share a name, we pick the one with the most ratings on BGG. If your listing names a year or an edition, such as "second edition" or "deluxe", we pick that one instead.
-
-### When a Game Is Set, and When It Isn't
-
-A BGG link always comes first. If your listing has one, the link decides, even on **Auto**: when the link doesn't set a game, we don't go on to look for the name.
-
-| Your Listing | What Happens |
-| :-- | :-- |
-| One BGG link | We set that game |
-| The same BGG link twice | Counts as one, so we set it |
-| Two or more different BGG links | We set nothing. We won't guess which one you meant |
-| A BGG link to a game we don't have yet | We set nothing |
-| No BGG link, and Auto finds one game | On **Auto**, we set that game |
-| Two different games named | We set nothing |
-| A game whose name is an everyday word, like "Friday" or "Village" | On **Auto**, we set it only when your description repeats the game's own description |
-
-On a very long listing, we may not see a BGG link right at the bottom, so put it higher up in the description.
+If the game isn't on WR-Games yet, we set nothing.
 
 ### After a Game Is Set
 
