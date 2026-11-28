@@ -64,7 +64,7 @@
               "features/ranked-seating",
               "features/on-the-table",
               "features/start-a-table",
-              "features/event-page-on-phones",
+              "features/event-page-modules",
               "features/transit"
             ]
           },
