@@ -110,6 +110,7 @@
               "features/game-collection",
               "features/game-picker",
               "features/game-filters",
+              "features/rulebook-links",
               "features/messages",
               "features/friends"
             ]
