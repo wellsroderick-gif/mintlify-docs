@@ -4,10 +4,6 @@ description: "Create a WR-Games group by importing from Meetup: paste your group
 sidebarTitle: "Import From Meetup"
 ---
 
-<Note>
-  Meetup group import is currently available to early access users only. If you don't see the import option, your account may not yet have access.
-</Note>
-
 The Meetup import wizard creates a new WR-Games group from your existing Meetup group, bringing your group details and event feed over automatically so you're not starting from scratch.
 
 ## Before You Start
@@ -36,8 +32,13 @@ The import wizard is available from two places:
 
     - **Group name, city, and description**: pulled from Meetup; edit freely.
     - **Cover image**: imported from your Meetup group; you can replace it after.
-    - **Event display mode**: choose **Side-by-side** (native WR-Games RSVPs alongside Meetup attendance) or **Link-out** (RSVPs stay on Meetup). See [Meetup Integration](/groups/meetup-integration) for a full breakdown.
-    - **Auto-assign me as host**: optionally have yourself set as host on newly synced events automatically.
+    - **Privacy** and **Membership Approval**: choose who can find the group and whether new members need your approval.
+    - **How should this group work on WR-Games?**: choose **Side-by-side** (native WR-Games RSVPs alongside Meetup attendance) or **Link-out** (RSVPs stay on Meetup). See [Meetup Integration](/groups/meetup-integration) for a full breakdown.
+    - **You're the Host** (side-by-side only): starts on, so you're listed as host on synced events and marked as going. Turn it off to pick another member.
+    - **Set the Game from the Listing**: choose **Auto**, **BGG Link** or **Off**. Auto finds the game from your listing.
+    - **Auto-Cancel Meetup-Synced Events**: starts on, so an event cancelled on Meetup is cancelled here too.
+
+    Then select **I confirm I'm authorized to run this group**.
   </Step>
   <Step title="Create the Group">
     Confirm and the group is created. Your Meetup events begin syncing automatically.
@@ -47,7 +48,7 @@ The import wizard is available from two places:
 ## After the Import
 
 - Your new WR-Games group is live immediately.
-- Meetup events start syncing. Mirrors appear within the first sync cycle (about 15 minutes).
+- Your Meetup events start syncing and appear within about 15 minutes.
 - **Existing Meetup members are not automatically added.** They'll need to create a WR-Games account and join your group independently. Share your group invite link to get them in.
 
 ## FAQ

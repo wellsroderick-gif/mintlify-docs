@@ -43,11 +43,11 @@ The mode you choose determines where RSVPs live and what attendees see.
 
 ## Sync Cadence
 
-Mirrored events update automatically on a regular schedule: an event's title, time, and description stay current on their own. A few changes don't come through automatically and need a manual **Refresh from Meetup** (below): a cancellation where the organizer leaves the event listed on Meetup, plus venue or cover changes made after the event first mirrored.
+Synced events update on their own, about every 15 minutes: an event's title, time and description stay current without you doing anything. Changed something on Meetup and don't see it here yet, like an event you cancelled but left listed? Select **Refresh from Meetup** (below).
 
 ## Refresh From Meetup
 
-The **Refresh from Meetup** button on the **Meetup Integration** card re-polls the Meetup feed immediately and re-enriches mirrors from the Meetup event page. Use it when you’ve updated something on Meetup and don’t want to wait for the next automatic sync.
+The **Refresh from Meetup** button on the **Meetup Integration** card pulls the latest events, RSVPs and details from Meetup right away. Use it when you’ve updated something on Meetup and don’t want to wait for the next automatic sync.
 
 - **Cooldown:** 60 seconds between refreshes.
 - **Cover image:** Overwrites a Meetup-sourced cover with whatever is current on Meetup. If you’ve uploaded your own cover through WR-Games, it is never overwritten.
@@ -95,7 +95,7 @@ When a synced event's Meetup address matches a venue listed on WR-Games, the eve
 | The address matches no venue | Not linked. The Meetup address shows as plain text |
 | It's an online event | Never linked |
 
-The street address, city, and state have to match. A suite number on one side and not the other is enough to miss.
+If the address on Meetup doesn't match the venue's address on WR-Games, we don't link the event. Make the two addresses match, or in side-by-side, choose the venue yourself (below).
 
 If the venue joins WR-Games after your event synced, the link is picked up on a later sync. If you move the event to a different address on Meetup, select **Refresh from Meetup**: an event that was linked for you and no longer matches is unlinked and shows the new Meetup address.
 
@@ -216,9 +216,9 @@ Other error states may appear if the feed is temporarily unreachable. Waiting fo
 
 ## If Your Meetup Group Can't Be Reached
 
-If your Meetup group is deleted, goes private or stops responding, WR-Games keeps checking on it once a day.
+If your Meetup group is deleted, goes private or stops responding, WR-Games keeps trying to reach it.
 
-After 3 days, syncing stops and everyone who can manage the group's settings gets a notification: **Meetup sync stopped**. Your group isn't hidden or deleted, and events you created on WR-Games aren't touched. Whether your synced events are cancelled or kept follows your Auto-Cancel setting. If the Meetup group comes back, syncing starts again on its own.
+If we still can't reach it after 3 days, syncing stops and everyone who can manage the group's settings gets a notification: **Meetup sync stopped**. Your group isn't hidden or deleted, and events you created on WR-Games aren't touched. Whether your synced events are cancelled or kept follows your Auto-Cancel setting. If the Meetup group comes back, syncing starts again on its own.
 
 Check **Sync Health** on the Meetup Integration card to see where things stand.
 
@@ -242,7 +242,7 @@ Members don’t configure anything. Here’s how mirrored events appear to them.
 - Future/published event in **side-by-side** → native WR-Games RSVP as normal.
 - Past or cancelled event in either mode → “View on Meetup.”
 
-**“Attending via Meetup” list**, shown on every mirror in both modes. It includes a last-synced timestamp and a note that guest counts may be understated (Meetup’s API doesn’t always surface full guest totals).
+**“Attending via Meetup” list**, shown on every mirror in both modes. It includes a last-synced timestamp and a note that guest counts may be lower than on Meetup. We aren't able to fix that right now.
 
 **Auto-cancel:** A mirror is cancelled when its event is cancelled or removed on Meetup, unless the group has turned Auto-Cancel off.
 
