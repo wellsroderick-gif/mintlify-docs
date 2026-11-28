@@ -69,7 +69,7 @@ Meetup controls certain fields on mirrored events. Changes you make on WR-Games 
 | Capacity | **You** (side-by-side mode only; in link-out, synced from Meetup) |
 | RSVP settings | **You** (side-by-side mode only; in link-out, RSVP lives on Meetup) |
 | Additional hosts | **You** (side-by-side mode only; in link-out, read-only) |
-| Games / On the Table | **You**, unless auto-pin is on (below) |
+| Games / On the Table | **You**. **Set the Game from the Listing** can also set one for you (below) |
 
 ### Can I change a Meetup event to an Open Game Night or Game Session?
 
@@ -123,32 +123,37 @@ That also means a venue you chose stays put if you later move the event to anoth
 
 In link-out, the Location step stays read-only. Events still link to a matching venue for you.
 
-## Auto-Pin a Game From a BGG Link
+## Set the Game From the Listing
 
-If you already put a BoardGameGeek link in your Meetup listings, WR-Games can read it and pin that game to the mirrored event for you. No extra step on Meetup, no editing the mirror afterwards.
+WR-Games can read each Meetup listing and set the game on its synced event for you. The game shows on the event the same way as one you pin by hand, and there's nothing extra to do on Meetup.
 
-Auto-pin starts on for every linked group. Turn it off on the review step when you import or claim a group, or any time at **Group Manage → Features**, on the **Meetup Integration** card. It's set per linked group, and it works in both link-out and side-by-side.
+You'll find **Set the Game from the Listing** at **Group Manage → Features**, on the **Meetup Integration** card, under **Sync Options**. It's also on the review step when you import or claim a group. It's set per linked group, and it works in both link-out and side-by-side. When **Sync Options** is closed, its summary shows your current choice, for example **Game matching: Auto**.
 
-Once a game is pinned it shows on the event's **On the Table** tab, exactly like a game you pinned by hand. Mirrors open on Overview, so it's one tab across.
-
-### When It Pins, and When It Doesn't
-
-| Your Listing | What Happens |
+| Choice | What We Look For |
 | :-- | :-- |
-| One BGG link | That game gets pinned |
-| Two or more BGG links | Nothing is pinned. It won't guess which one you meant |
-| The same link twice | Still counts as one, so it pins |
-| A game we don't have yet | Nothing is pinned, and nothing is guessed from the web address |
+| **Auto** | A BoardGameGeek (BGG) link, or the game's name |
+| **BGG Link** | A BGG link only |
+| **Off** | Nothing. No new games are set |
 
-<Note>
-  Your own pin always wins. If you pin a game by hand, sync will never overwrite it, even if the listing later points at something else.
-</Note>
+New links start on **Auto**, and it's the choice we recommend.
 
-<Warning>
-  **Removing a pinned game is permanent.** Edit the event, clear the game, and it stays gone. Sync keeps running and the link is still sitting in your listing, but that game won't come back. If you want it again, pin it by hand.
-</Warning>
+### Getting the Right Game Set
 
-Two more things worth knowing. If you change which game your listing links to _after_ a pin has already landed, the pin doesn't follow. Edit the event instead. And on a very long listing, a BGG link buried right at the bottom may not be seen at all, so if you want it picked up, put it somewhere reasonable in the body.
+- **Auto finds the game from your listing.** Name the game in your Meetup title or description, like "Wednesday Catan Game Night!".
+- **A BGG link makes it even easier.** Add a link to the game's BGG page, near the top of the description.
+- **One game per listing.** We set a game only when your listing points to exactly one. If it names or links two different games, we set nothing rather than guess.
+- **Not the game you wanted, or no game at all?** Edit the event and pin the game yourself. Sync never replaces a game you pin.
+
+If the game isn't on WR-Games yet, we set nothing.
+
+### After a Game Is Set
+
+| If You… | What Happens |
+| :-- | :-- |
+| Pin a game yourself | Sync never replaces it |
+| Remove a game we set for you | We won't set that game on that event again. To bring it back, pin it by hand |
+| Change the game in your Meetup listing | The game already set stays. Edit the event to change it |
+| Switch to **BGG Link** or **Off** | Games already set stay. **Off** stops new ones |
 
 ## Choose a Default Host for Synced Events
 
