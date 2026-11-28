@@ -64,6 +64,7 @@
               "features/ranked-seating",
               "features/on-the-table",
               "features/start-a-table",
+              "features/event-quick-links-and-folding",
               "features/transit",
               "features/schedule-finder"
             ]
