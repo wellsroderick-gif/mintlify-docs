@@ -12,39 +12,54 @@ If you haven't been in Manage before, start with [Run Your Venue](/features/runn
 
 The owner, and anyone on the team whose role includes **Calendar Feed**. The **Manager** role has it to start. [Run Your Venue With a Team](/features/run-your-venue-with-a-team) covers roles.
 
-## Importing Your Calendar
+## Importing Your Calendars
+
+You can bring in more than one calendar, like your public events and a separate tournament calendar.
 
 <Steps>
   <Step title="Copy Your Calendar's Link">
     In your calendar app, find the calendar's iCal or webcal link. It usually starts with `https://` or `webcal://`, and calendar apps often list it under sharing or export settings.
   </Step>
-  <Step title="Paste It Into WR-Games">
-    In Manage, open **Calendar Feed**. Paste the link into **Calendar Link** in the **Import Your Calendar** card.
+  <Step title="Add It in WR-Games">
+    In Manage, open **Calendar Feed**. In the **Import Your Calendars** card, paste the link into **Calendar Link**. If you already have a calendar there, select **Add Calendar** first.
+  </Step>
+  <Step title="Name It and Choose Who Sees It (Optional)">
+    Give it a **Name** if you like. Select **Private** to show its events to your venue team only.
   </Step>
   <Step title="Save">
-    Select **Save Link**.
+    Select **Save Calendar**.
   </Step>
 </Steps>
 
-Your imported entries show on your venue's **Calendar** tab. Only your venue team can see the link you pasted.
+Each calendar gets its own row, with its name, the website it comes from, when it last synced and how many events it brought in. If you leave **Name** blank, the row uses the calendar's own name, or its website if it doesn't have one. Only your venue team can see the links you paste.
 
-### Keeping It Up to Date
+### Who Sees Imported Events
 
-WR-Games checks your calendar again every night. The card shows when it last synced. To pull in a change straight away, select **Sync Now**.
+| If the Calendar Is | Its Events on Your Venue's Calendar Tab |
+| :-- | :-- |
+| **Private** left off | Shown to everyone, signed in or not |
+| **Private** selected | Shown to your venue team only, marked **Private** with a lock |
 
-If a nightly sync fails, the card says why, and **Needs Attention** on the General tab shows **Your calendar feed didn't sync last night**. Select **Fix Feed** to go straight to the Calendar Feed tab. A broken or moved link is the usual cause, so paste a fresh one and save.
+### Keeping Them Up to Date
 
-### Removing the Feed
+WR-Games checks each calendar again every night. To pull in a change straight away, select **Sync Now** on that calendar's row. It syncs only that calendar.
 
-Select **Remove Feed** to stop importing.
+If a calendar's nightly sync fails, its row says **Sync failed** and why, and the events from its last good sync keep showing. WR-Games tries again the next night. **Needs Attention** on the General tab names each calendar that didn't sync. Select **Fix Feed** to go straight to the Calendar Feed tab. A broken or moved link is the usual cause, so edit the calendar and paste a fresh one.
+
+### Editing or Removing a Calendar
+
+Open the **⋯** menu on a calendar's row.
+
+- **Edit** changes its name, its link or **Private**. Select **Save Changes** when you're done. A new link replaces that calendar's imported events, and the form tells you how many before you save. Changing only the name or **Private** keeps them.
+- **Remove** asks you to confirm, then **Remove Calendar** takes it off.
 
 <Warning>
-  Removing the feed takes every imported entry off your venue calendar. Events members created at your venue on WR-Games aren't affected.
+  Removing a calendar takes its imported events off your venue calendar. Your other calendars, and events members created at your venue on WR-Games, aren't affected.
 </Warning>
 
 ## Sharing Your Subscribe Link
 
-The **Subscribe Link** card gives you a link to your venue's events on WR-Games. Anyone who adds it to their calendar app sees your events there, and the calendar keeps itself up to date.
+The **Subscribe Link** card gives you a link to your venue's events on WR-Games. Anyone who adds it to their calendar app sees your events there, and the calendar keeps itself up to date. Events imported from your own calendars aren't included.
 
 - **Copy Link** copies it so you can share it on your website, in a newsletter or anywhere else.
 - Members can find the same link themselves under **Subscribe** on your venue page's **Calendar** tab.
